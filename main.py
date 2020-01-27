@@ -36,9 +36,18 @@
 
 from trello_sample import *
 from constants import *
+from trello_script import *
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
 # get_board_by_id(TRELLO_MBL_BOARD_ID)
 # get_open_cards_by_board_id(TRELLO_MBL_BOARD_ID)
-get_card_by_id(TRELLO_CH_CARD_ID)
+# get_card_by_id(TRELLO_CH_CARD_ID)
+
+
+# SCRIPT ---------------------------------------------------------------------------------------------------------------
+# If the root path directory of phoenix down script doesn't existe yet...
+# ... creation of this directory
+create_directory(PD_SCRIPT_ROOT_PATH)
+
+trello_script()
