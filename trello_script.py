@@ -1,6 +1,9 @@
 from utilities import *
 from credentials import *
+from constants import *
 import requests
+
+application_name = "trello"
 
 
 def get_boards_id_by_member_username(username):
@@ -23,5 +26,5 @@ def trello_script():
     # ... creation of this directory
     create_directory(PD_SCRIPT_TRELLO_DIRECTORY_PATH)
     get_boards_id_by_member_username(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
-
+    file_name = create_timestamped_and_named_file(application_name)
 
