@@ -1,4 +1,3 @@
-from constants import *
 import os
 
 
@@ -7,6 +6,9 @@ def create_directory(path):
     # ... creation of this directory
     if not os.path.isdir(path):
         os.makedirs(path)
+        print("The folder " + path + " was successfully created")
+    else:
+        print("The folder " + path + " already exists")
 
     # Designation of the working directory as current directory
     os.chdir(path)

@@ -9,15 +9,12 @@ def get_boards_id_by_member_username(username):
                    "organization": "false", "organization_fields": "name,displayName",
                    "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
     response = requests.request("GET", url, params=querystring)
-    print(response.text)
     datas = response.json()
     shortlinks_with_name_boards = []
     for board in datas:
         # we get shortlinks instead ids just because the API allows this + more simple
         shortlink_board = board['shortLink']
-        print(shortlink_board)
         shortlinks_with_name_boards.append(shortlink_board)
-    print(shortlinks_with_name_boards)
     return shortlinks_with_name_boards
 
 
