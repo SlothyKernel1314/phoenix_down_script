@@ -47,8 +47,8 @@ from trello_script import *
 
 
 # SCRIPT ---------------------------------------------------------------------------------------------------------------
-# If the root path directory of phoenix down script doesn't existe yet...
+# If the root path directory of phoenix down script doesn't exist yet...
 # ... creation of this directory
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-# trello_script()
+trello_script()
