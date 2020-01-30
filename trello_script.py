@@ -21,10 +21,28 @@ def get_boards_id_by_member_username(username):
     return shortlinks_with_name_boards
 
 
+def get_open_cards_by_board_id(id):
+    url = "https://api.trello.com/1/boards/" + id + "/lists"
+    querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
+                   "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+    response = requests.request("GET", url, params=querystring)
+    datas = response.json()
+    return datas
+
+
 def trello_script():
     # If the work directory "../trello" doesn't existe yet...
     # ... creation of this directory
     create_directory(PD_SCRIPT_TRELLO_DIRECTORY_PATH)
-    get_boards_id_by_member_username(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
+
+    boards = get_boards_id_by_member_username(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
+
     file_name = create_timestamped_and_named_file(application_name)
+
+    file = open(file_name, "w", encoding="utf-8")
+
+    for board in boards:
+        datas = get_open_cards_by_board_id(board)
+        file.write(str(datas))
+        file.write("\n\n################################################################################ \n\n")
 
