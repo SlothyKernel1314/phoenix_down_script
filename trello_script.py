@@ -6,19 +6,21 @@ import requests
 application_name = "trello"
 
 
-def get_boards_id_by_member_username(username):
+def get_boards_shortlinks_as_keys_with_values(username):
     url = "https://api.trello.com/1/members/" + username + "/boards"
     querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none",
                    "organization": "false", "organization_fields": "name,displayName",
                    "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
     response = requests.request("GET", url, params=querystring)
     datas = response.json()
-    shortlinks_with_name_boards = []
+    shortlinks_as_keys_with_values = {}
     for board in datas:
         # we get shortlinks instead ids just because the API allows this + more simple
         shortlink_board = board['shortLink']
-        shortlinks_with_name_boards.append(shortlink_board)
-    return shortlinks_with_name_boards
+        name_board = board['name']
+        shortlinks_as_keys_with_values[shortlink_board] = [name_board]
+    print(shortlinks_as_keys_with_values)
+    return shortlinks_as_keys_with_values
 
 
 def get_open_cards_by_board_id(id):
@@ -35,14 +37,21 @@ def trello_script():
     # ... creation of this directory
     create_directory(PD_SCRIPT_TRELLO_DIRECTORY_PATH)
 
-    boards = get_boards_id_by_member_username(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
+    # get dictionnary with all shortlinks boards as keys, with values (name board)
+    shortlinks_as_keys_with_values = get_boards_shortlinks_as_keys_with_values(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
 
+    # creation of name for log file
     file_name = create_timestamped_and_named_file(application_name)
 
+    # creation of file with its name
     file = open(file_name, "w", encoding="utf-8")
 
-    for board in boards:
-        datas = get_open_cards_by_board_id(board)
+    # writing in log file
+    for shortlink in shortlinks_as_keys_with_values:
+        name_board = shortlinks_as_keys_with_values[shortlink]
+        file.write("##### JSON datas of " + str(name_board) + " board : \n\n")
+        datas = get_open_cards_by_board_id(shortlink)
         file.write(str(datas))
-        file.write("\n\n################################################################################ \n\n")
+        file.write("\n\n\n\n")
+
 
