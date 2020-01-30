@@ -34,3 +34,12 @@ def get_card_by_id(id):
                    "customFieldItems": "false", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
     response = requests.request("GET", url, params=querystring)
     print(response.text)
+
+
+# TODO ---> ajouter au script + filtrer par id + return
+def get_boards_by_member_username(username):
+    url = "https://api.trello.com/1/members/" + username + "/boards"
+    querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none", "organization": "false"
+        , "organization_fields": "name,displayName", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+    response = requests.request("GET", url, params=querystring)
+    print(response.text)

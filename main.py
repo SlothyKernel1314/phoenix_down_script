@@ -43,6 +43,7 @@ from trello_script import *
 # get_board_by_id(TRELLO_MBL_BOARD_ID)
 # get_open_cards_by_board_id(TRELLO_MBL_BOARD_ID)
 # get_card_by_id(TRELLO_CH_CARD_ID)
+# get_boards_by_member_username(TRELLO_MEMBER_USERNAME)
 
 
 # SCRIPT ---------------------------------------------------------------------------------------------------------------
@@ -50,4 +51,4 @@ from trello_script import *
 # ... creation of this directory
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-trello_script()
+# trello_script()
