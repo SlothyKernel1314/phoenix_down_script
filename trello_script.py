@@ -3,8 +3,12 @@ from credentials import *
 from constants import *
 import requests
 
+# VARIABLES ------------------------------------------------------------------------------------------------------------
+
 application_name = "trello"
 
+
+# FUNCTIONS ------------------------------------------------------------------------------------------------------------
 
 def get_boards_shortlinks_as_keys_with_values(username):
     url = "https://api.trello.com/1/members/" + username + "/boards"
@@ -32,6 +36,19 @@ def get_open_cards_by_board_id(id):
     return datas
 
 
+def get_card_by_id(id):
+    url = "https://api.trello.com/1/cards/" + id + ""
+    querystring = {"attachments": "false", "attachment_fields": "all", "members": "false", "membersVoted": "false",
+                   "checkItemStates": "false", "checklists": "none", "checklist_fields": "all", "board": "false",
+                   "list": "false", "pluginData": "false", "stickers": "false", "sticker_fields": "all",
+                   "customFieldItems": "false", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+    response = requests.request("GET", url, params=querystring)
+    datas = response.json()
+    return datas
+
+
+# VARIABLES ------------------------------------------------------------------------------------------------------------
+
 def trello_script():
     # If the work directory "../trello" doesn't existe yet...
     # ... creation of this directory
@@ -47,11 +64,20 @@ def trello_script():
     file = open(file_name, "w", encoding="utf-8")
 
     # writing in log file
+    # processing of boards
     for shortlink in shortlinks_as_keys_with_values:
         name_board = shortlinks_as_keys_with_values[shortlink]
         file.write("##### JSON datas of " + str(name_board) + " board : \n\n")
         datas = get_open_cards_by_board_id(shortlink)
         file.write(str(datas))
         file.write("\n\n\n\n")
+    # processing of particulary valuable cards
+    for card in PD_SCRIPT_TRELLO_CARDS_IDS:
+        datas = get_card_by_id(card)
+        name_card = datas['name']
+        file.write("##### JSON datas of " + str(name_card) + " valuable card : \n\n")
+        file.write(str(datas))
+        file.write("\n\n\n\n")
+
 
 
