@@ -79,5 +79,20 @@ def trello_script():
         file.write(str(datas))
         file.write("\n\n\n\n")
 
+    # closing the file in writing for future opening in reading
+    file.close()
+
+    # TODO : réactiver l'upload du fichier une fois l'application en prod (désactivé pour rendre les runs + rapides)
+    # # opens the file for reading only in binary format in order to upload
+    # file = open(file_name, "rb")
+    #
+    # # upload the log file to ftp server
+    # upload_file_to_server_ftp(file, file_name)
+    #
+    # # closing the file
+    # file.close()
+    # TODO : fin TODO
+
+
 
 
