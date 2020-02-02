@@ -25,12 +25,12 @@ def create_timestamped_and_named_file(application_name):
     return format_file_name
 
 
-def upload_file_to_server_ftp(file, filename):
+def upload_file_to_server_ftp(file, filename, application_name):
     ftp = FTP(SEEDBOX_DOMAIN_NAME)  # connect to host, default port
     ftp.login(user=SEEDBOX_USER_NAME, passwd=SEEDBOX_PASSWD)  # login with credentials
     # TODO: gérer une exception en cas de log impossible
     ftp.retrlines('LIST')  # LIST retrieves a list of files and information about those files
-    ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + SEEDBOX_TRELLO_PART_PATH)  # Set the current directory on the server
+    ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
     ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
     ftp.quit()
 
