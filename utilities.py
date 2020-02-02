@@ -42,3 +42,12 @@ def upload_file_to_server_ftp(file, filename, application_name):
     ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
     ftp.quit()
 
+
+def get_the_latest_file_in_a_folder(path):
+    list_of_files = os.listdir(path) # get a list of all file names in a folder
+    # get a list of absolute paths for previously recovered files
+    paths = [os.path.join(path, basename) for basename in list_of_files]
+    # return the latest (most recent modified metadata) file
+    return max(paths, key=os.path.getctime)
+
+
