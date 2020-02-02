@@ -18,6 +18,14 @@ def create_directory(path):
     os.chdir(path)
 
 
+def create_timestamped_directory():
+    current_date = time.strftime("%Y%m%d")
+    current_time = time.strftime("%H%M%S")
+    format_directory_name = current_date + "_" + current_time
+    os.mkdir(format_directory_name)
+    return format_directory_name
+
+
 def create_timestamped_and_named_file(application_name):
     current_date = time.strftime("%Y%m%d")
     current_time = time.strftime("%H%M%S")

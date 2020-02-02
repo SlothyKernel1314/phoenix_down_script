@@ -52,7 +52,7 @@ def get_card_by_id(id):
 def trello_script():
     # If the work directory "../trello" doesn't existe yet...
     # ... creation of this directory
-    create_directory(PD_SCRIPT_TRELLO_DIRECTORY_PATH)
+    create_directory(PD_SCRIPT_ROOT_PATH + "/" + application_name)
 
     # get dictionnary with all shortlinks boards as keys, with values (name board)
     shortlinks_as_keys_with_values = get_boards_shortlinks_as_keys_with_values(PD_SCRIPT_TRELLO_MEMBER_USERNAME)
