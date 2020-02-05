@@ -11,6 +11,8 @@ application_name = "firefox"
 
 # SCRIPT ---------------------------------------------------------------------------------------------------------------
 
+# goal : upload a zip archive to the server, save (large) files locally
+
 def firefox_script():
     # If the work directory "../firefox" doesn't existe yet...
     # ... creation of this directory
@@ -37,3 +39,9 @@ def firefox_script():
     # copying local "bookback_file" (firefox profile) to phoenix down script firefox directory
     shutil.copy(bookback_file, PD_SCRIPT_ROOT_PATH + "/" + application_name + "/"
                 + str(timestamped_directory))
+
+    # get all files paths in log (timestamped) diectory in order to zip theses files + server upload
+    files_paths_to_zip = get_all_file_paths(PD_SCRIPT_ROOT_PATH + "/" + application_name + "/"
+                              + str(timestamped_directory))
+
+# TODO : zip files and upload archive to server, then, delete archive

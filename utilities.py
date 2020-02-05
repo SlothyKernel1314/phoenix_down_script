@@ -3,6 +3,7 @@ from constants import *
 import os
 import time
 from ftplib import FTP
+from zipfile import ZipFile
 
 
 def create_directory(path):
@@ -51,3 +52,14 @@ def get_the_latest_file_in_a_folder(path):
     return max(paths, key=os.path.getctime)
 
 
+def get_all_file_paths(directory):
+    # initializing empty file paths list
+    file_paths = []
+    # crawling through directory and subdirectories
+    for root, directories, files in os.walk(directory):
+        for filename in files:
+            # join the two strings in order to form the full filepath.
+            filepath = os.path.join(root, filename)
+            file_paths.append(filepath)
+    # returning all file paths
+    return file_paths
