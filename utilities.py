@@ -63,3 +63,16 @@ def get_all_file_paths(directory):
             file_paths.append(filepath)
     # returning all file paths
     return file_paths
+
+
+def zip_files(file_paths_to_zip, directory_log_path, zip_name):
+    os.chdir(directory_log_path)
+    print('Following files will be zipped:')
+    for file_name in file_paths_to_zip:
+        print(file_name)
+    # writing files to a zipfile
+    with ZipFile(zip_name, 'w') as zip:
+        # writing each file one by one
+        for file in file_paths_to_zip:
+            zip.write(file)
+    print('All files zipped successfully!')
