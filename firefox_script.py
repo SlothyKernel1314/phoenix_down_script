@@ -51,4 +51,7 @@ def firefox_script():
     # upload zip to ftp server
     upload_file_to_server_ftp(opened_zip_file, zip_file.filename, application_name)
 
-# TODO : rm le zip local
+    # delete local zip file
+    os.remove(zip_file.filename)
+
+# TODO : tester l'exécution de la totalité du firefox script
