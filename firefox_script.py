@@ -49,6 +49,6 @@ def firefox_script():
     opened_zip_file = open(zip_file.filename, "rb")
 
     # upload zip to ftp server
-    # upload_file_to_server_ftp(opened_zip_file, zip_file.filename, application_name)
+    upload_file_to_server_ftp(opened_zip_file, zip_file.filename, application_name)
 
-# TODO : tester que l'upload fonctionne bien en passant un micro fichier en dur, rm le zip local
+# TODO : rm le zip local

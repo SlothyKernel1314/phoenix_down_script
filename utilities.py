@@ -2,7 +2,6 @@ from credentials import *
 from constants import *
 import os
 import time
-import zlib
 from ftplib import FTP
 from zipfile import ZipFile, ZIP_DEFLATED
 
