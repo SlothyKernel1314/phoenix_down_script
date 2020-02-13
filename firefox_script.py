@@ -53,5 +53,3 @@ def firefox_script():
 
     # delete local zip file
     os.remove(zip_file.filename)
-
-# TODO : tester l'exécution de la totalité du firefox script
