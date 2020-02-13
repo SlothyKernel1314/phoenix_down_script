@@ -82,7 +82,6 @@ def trello_script():
     # closing the file in writing for future opening in reading
     file.close()
 
-    # TODO : réactiver l'upload du fichier une fois l'application en prod (désactivé pour rendre les runs + rapides)
     # opens the file for reading only in binary format in order to upload
     file = open(file_name, "rb")
 
@@ -91,7 +90,6 @@ def trello_script():
 
     # closing the file
     file.close()
-    # TODO : fin TODO
 
 
 

@@ -43,6 +43,12 @@ def firefox_script():
     file_paths_to_zip = get_all_file_paths(directory_log_path)
 
     # zip all files
-    zip_files(file_paths_to_zip, directory_log_path, FIREFOX_ZIP_FILE_NAME)
+    zip_file = zip_files(file_paths_to_zip, directory_log_path, FIREFOX_ZIP_FILE_BASENAME)
 
-# TODO : zip files and upload archive to server, then, delete archive
+    # opens the zip file for reading only in binary format in order to upload
+    opened_zip_file = open(zip_file.filename, "rb")
+
+    # upload zip to ftp server
+    # upload_file_to_server_ftp(opened_zip_file, zip_file.filename, application_name)
+
+# TODO : tester que l'upload fonctionne bien en passant un micro fichier en dur, rm le zip local

@@ -2,8 +2,9 @@ from credentials import *
 from constants import *
 import os
 import time
+import zlib
 from ftplib import FTP
-from zipfile import ZipFile
+from zipfile import ZipFile, ZIP_DEFLATED
 
 
 def create_directory(path):
@@ -41,6 +42,7 @@ def upload_file_to_server_ftp(file, filename, application_name):
     ftp.retrlines('LIST')  # LIST retrieves a list of files and information about those files
     ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
     ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
+    print('file uploaded successfully!')
     ftp.quit()
 
 
@@ -70,9 +72,14 @@ def zip_files(file_paths_to_zip, directory_log_path, zip_name):
     print('Following files will be zipped:')
     for file_name in file_paths_to_zip:
         print(file_name)
+    # create timestamped file name
+    current_date = time.strftime("%Y%m%d")
+    current_time = time.strftime("%H%M%S")
+    zip_name = current_date + "_" + current_time + "_" + zip_name + ".zip"
     # writing files to a zipfile
-    with ZipFile(zip_name, 'w') as zip:
+    with ZipFile(zip_name, mode='w', compression=ZIP_DEFLATED, allowZip64=False) as zip:
         # writing each file one by one
         for file in file_paths_to_zip:
             zip.write(file)
     print('All files zipped successfully!')
+    return zip
