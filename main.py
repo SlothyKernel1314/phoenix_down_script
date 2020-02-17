@@ -38,6 +38,7 @@ from trello_sample import *
 from constants import *
 from trello_script import *
 from firefox_script import *
+from jdownloader_script import *
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
@@ -52,8 +53,10 @@ from firefox_script import *
 # ... creation of this directory
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-trello_script()
+# trello_script()
+#
+# firefox_script()
 
-firefox_script()
+jdownloader_script()
 
 
