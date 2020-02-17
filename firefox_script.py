@@ -24,6 +24,7 @@ def firefox_script():
     # designation of firefox profile directory as current directory
     os.chdir(FIREFOX_PROFILE_DIRECTORY_PATH)
 
+    # get the path of log directory
     directory_log_path = PD_SCRIPT_ROOT_PATH + "/" + application_name + "/" + str(timestamped_directory)
 
     # copying local places.sqlite (firefox profile) to phoenix down script firefox directory
