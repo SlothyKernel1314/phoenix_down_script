@@ -2,6 +2,7 @@ from credentials import *
 from constants import *
 import os
 import time
+import glob
 from ftplib import FTP
 from zipfile import ZipFile, ZIP_DEFLATED
 
@@ -46,11 +47,16 @@ def upload_file_to_server_ftp(file, filename, application_name):
 
 
 def get_the_latest_file_in_a_folder(path):
-    list_of_files = os.listdir(path) # get a list of all file names in a folder
+    list_of_files = os.listdir(path)  # get a list of all file names in a folder
     # get a list of absolute paths for previously recovered files
     paths = [os.path.join(path, basename) for basename in list_of_files]
     # return the latest (most recent modified metadata) file
     return max(paths, key=os.path.getctime)
+
+
+def get_max_file_name_with_wildcard(file_pattern):
+    file = max(glob.glob(file_pattern))
+    return file
 
 
 def get_all_file_paths(directory):
