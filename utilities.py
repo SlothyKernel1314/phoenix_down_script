@@ -41,6 +41,7 @@ def upload_file_to_server_ftp(file, filename, application_name):
     # TODO: gérer une exception en cas de log impossible
     ftp.retrlines('LIST')  # LIST retrieves a list of files and information about those files
     ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
+    # TODO : se placer dans le bon répertoire (ok) du serveur et créer un dossier *nom application* s'il n'existe pas
     ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
     print('file uploaded successfully!')
     ftp.quit()
