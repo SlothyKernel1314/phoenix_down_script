@@ -34,11 +34,16 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
+import logging
 from trello_sample import *
 from constants import *
 from trello_script import *
 from firefox_script import *
 from jdownloader_script import *
+
+# VARIABLES ------------------------------------------------------------------------------------------------------------
+
+log_folder_name = "log"
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
@@ -53,10 +58,20 @@ from jdownloader_script import *
 # ... creation of this directory
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-# trello_script()
-#
+# configuration of the logger
+logging.basicConfig(filename=PD_SCRIPT_ROOT_PATH + "/" + log_folder_name + '/'
+                             + create_timestamped_and_named_file("logger"),
+                    format='[%(levelname)s] : %(asctime)s %(message)s',
+                    level=logging.INFO)
+
+logging.info('Phoenix Down Script started')
+
+trello_script()
+
 # firefox_script()
 
-jdownloader_script()
+# jdownloader_script()
+
+logging.info('Phoenix Down Script finished')
 
 
