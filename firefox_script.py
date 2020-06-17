@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# !/usr/bin/env python
+
 import os
 import shutil
 from constants import *

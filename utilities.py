@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# !/usr/bin/env python
+
 from credentials import *
 from constants import *
 import os
@@ -38,10 +41,10 @@ def create_timestamped_and_named_file(application_name):
 def upload_file_to_server_ftp(file, filename, application_name):
     ftp = FTP(SEEDBOX_DOMAIN_NAME)  # connect to host, default port
     ftp.login(user=SEEDBOX_USER_NAME, passwd=SEEDBOX_PASSWD)  # login with credentials
-    # TODO: gérer une exception en cas de log impossible
+    # TODO: gerer une exception en cas de log impossible
     ftp.retrlines('LIST')  # LIST retrieves a list of files and information about those files
     ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
-    # TODO : se placer dans le bon répertoire (ok) du serveur et créer un dossier *nom application* s'il n'existe pas
+    # TODO : se placer dans le bon repertoire (ok) du serveur et creer un dossier *nom application* s'il n'existe pas
     ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
     print('file uploaded successfully!')
     ftp.quit()
@@ -89,3 +92,6 @@ def zip_files(file_paths_to_zip, directory_log_path, zip_name):
             zip.write(file)
     print('All files zipped successfully!')
     return zip
+
+
+

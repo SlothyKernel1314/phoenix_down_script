@@ -66,7 +66,7 @@ logging.basicConfig(filename=PD_SCRIPT_ROOT_PATH + "/" + log_folder_name + '/'
 
 logging.info('Phoenix Down Script started')
 
-trello_script()
+#trello_script()
 
 # firefox_script()
 
