@@ -87,10 +87,11 @@ logger.addHandler(stream_handler)
 
 # SCRIPT ---------------------------------------------------------------------------------------------------------------
 
-logging.info('Phoenix Down Script started')
+logging.info('Phoenix Down Script started !')
 
 # If the root path directory of phoenix down script doesn't exist yet...
 # ... creation of this directory
+logging.info("creation of the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
 # trello_script()
@@ -99,4 +100,4 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 
 # jdownloader_script()
 
-logging.info('Phoenix Down Script finished')
+logging.info('Phoenix Down Script finished !')

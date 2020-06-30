@@ -26,7 +26,6 @@ def get_boards_shortlinks_as_keys_with_values(username):
         shortlink_board = board['shortLink']
         name_board = board['name']
         shortlinks_as_keys_with_values[shortlink_board] = [name_board]
-    print(shortlinks_as_keys_with_values)
     return shortlinks_as_keys_with_values
 
 
