@@ -12,8 +12,6 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 
 def create_directory(path):
-    # If the work directory doesn't existe yet...
-    # ... creation of this directory
     if not os.path.isdir(path):
         os.makedirs(path)
         logging.info("the folder " + path + " was successfully created")
@@ -29,6 +27,7 @@ def create_timestamped_directory():
     current_time = time.strftime("%H%M%S")
     format_directory_name = current_date + "_" + current_time
     os.mkdir(format_directory_name)
+    # logging.info("the folder " + format_directory_name + " was created")
     return format_directory_name
 
 
@@ -36,6 +35,7 @@ def create_timestamped_and_named_file(application_name):
     current_date = time.strftime("%Y%m%d")
     current_time = time.strftime("%H%M%S")
     format_file_name = current_date + "_" + current_time + "_" + application_name + "_log_phoenix_down.txt"
+    # logging.info("the file " + format_file_name + " was created")
     return format_file_name
 
 

@@ -94,7 +94,11 @@ logging.info('Phoenix Down Script started !')
 logging.info("creation of the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-# trello_script()
+
+ts = TrelloScript()
+ts.trello_script()
+
+
 
 # firefox_script()
 
