@@ -6,8 +6,6 @@ from credentials import *
 from constants import *
 import requests
 
-# application_name = "trello"
-
 
 class TrelloScript:
     def __init__(self):

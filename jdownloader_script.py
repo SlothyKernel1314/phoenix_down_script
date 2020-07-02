@@ -5,61 +5,52 @@ from utilities import *
 import shutil
 
 
-# VARIABLES ------------------------------------------------------------------------------------------------------------
+class JdownloaderScript:
+    def __init__(self):
+        self.application_name = "jdownloader"
+        self.files_list_to_backup = []
 
-application_name = "jdownloader"
-files_list_to_backup = []
+    def jdownloader_script(self):
+        # If the work directory "../jdownloader" doesn't existe yet...
+        # ... creation of this directory
+        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
 
+        # creation of timestamped directory
+        timestamped_directory = create_timestamped_directory()
 
-# SCRIPT ---------------------------------------------------------------------------------------------------------------
+        # designation of jdownloader cfg directory as current directory
+        os.chdir(JDOWNLOADER_CFG_DIRECTORY_PATH)
 
-def jdownloader_script():
-    # If the work directory "../jdownloader" doesn't existe yet...
-    # ... creation of this directory
-    create_directory(PD_SCRIPT_ROOT_PATH + "/" + application_name)
+        # get latest downloadList*.zip file
+        dlzip_file = get_max_file_name_with_wildcard("downloadList*.zip")
 
-    # creation of timestamped directory
-    timestamped_directory = create_timestamped_directory()
+        # add downloadList*.zip file to files list to backup
+        self.files_list_to_backup.append(dlzip_file)
 
-    # designation of jdownloader cfg directory as current directory
-    os.chdir(JDOWNLOADER_CFG_DIRECTORY_PATH)
+        # get latest linkcollector*.zip file
+        lnkcoll_file = get_max_file_name_with_wildcard("linkcollector*.zip")
 
-    # get latest downloadList*.zip file
-    dlzip_file = get_max_file_name_with_wildcard("downloadList*.zip")
+        # add linkcollector*.zip file to files list to backup
+        self.files_list_to_backup.append(lnkcoll_file)
 
-    # add downloadList*.zip file to files list to backup
-    files_list_to_backup.append(dlzip_file)
+        # get the path of log directory
+        directory_log_path = PD_SCRIPT_ROOT_PATH + "/" + self.application_name + "/" + str(timestamped_directory)
 
-    # get latest linkcollector*.zip file
-    lnkcoll_file = get_max_file_name_with_wildcard("linkcollector*.zip")
+        # copying local files (in order to backup) to phoenix down script firefox directory
+        for file in self.files_list_to_backup:
+            shutil.copy(file, directory_log_path)
 
-    # add linkcollector*.zip file to files list to backup
-    files_list_to_backup.append(lnkcoll_file)
+        # get all files paths in log (timestamped) diectory in order to zip theses files + server upload
+        file_paths_to_zip = get_all_file_paths(directory_log_path)
 
-    # get the path of log directory
-    directory_log_path = PD_SCRIPT_ROOT_PATH + "/" + application_name + "/" + str(timestamped_directory)
+        # zip all files
+        zip_file = zip_files(file_paths_to_zip, directory_log_path, JDOWNLOADER_ZIP_FILE_BASENAME)
 
-    # copying local files (in order to backup) to phoenix down script firefox directory
-    for file in files_list_to_backup:
-        shutil.copy(file, directory_log_path)
+        # opens the zip file for reading only in binary format in order to upload
+        opened_zip_file = open(zip_file.filename, "rb")
 
-    # get all files paths in log (timestamped) diectory in order to zip theses files + server upload
-    file_paths_to_zip = get_all_file_paths(directory_log_path)
+        # upload zip to ftp server
+        upload_file_to_server_ftp(opened_zip_file, zip_file.filename, self.application_name)
 
-    # zip all files
-    zip_file = zip_files(file_paths_to_zip, directory_log_path, JDOWNLOADER_ZIP_FILE_BASENAME)
-
-    # opens the zip file for reading only in binary format in order to upload
-    opened_zip_file = open(zip_file.filename, "rb")
-
-    # upload zip to ftp server
-    upload_file_to_server_ftp(opened_zip_file, zip_file.filename, application_name)
-
-    # delete local zip file
-    os.remove(zip_file.filename)
-
-
-
-
-
-
+        # delete local zip file
+        os.remove(zip_file.filename)

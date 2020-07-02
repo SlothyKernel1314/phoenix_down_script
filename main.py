@@ -85,7 +85,7 @@ stream_handler.setLevel(logging.DEBUG)
 logger.addHandler(stream_handler)
 
 
-# SCRIPT ---------------------------------------------------------------------------------------------------------------
+# MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
 logging.info('Phoenix Down Script started !')
 
@@ -94,14 +94,13 @@ logging.info('Phoenix Down Script started !')
 logging.info("creation of the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-
 ts = TrelloScript()
 ts.trello_script()
 
+# fs = FirefoxScript()
+# fs.firefox_script()
 
-
-# firefox_script()
-
-# jdownloader_script()
+# js = JdownloaderScript()
+# js.jdownloader_script()
 
 logging.info('Phoenix Down Script finished !')
