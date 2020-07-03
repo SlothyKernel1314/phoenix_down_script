@@ -13,16 +13,16 @@ log_folder_name = "log"
 logger = logging.getLogger()
 
 # set level logger to DEBUG for get all traces
-logger.setLevel(logging.DEBUG)
+logger.setLevel(logging.INFO)
 
 # creation of the formatter
-formatter = logging.Formatter('[%(levelname)s] : %(asctime)s %(message)s')
+formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] : %(message)s')
 
 # creation of the first handler which redirect traces to a log file
 file_handler = RotatingFileHandler(PD_SCRIPT_ROOT_PATH + "/" + log_folder_name + '/'
                                    + create_timestamped_and_named_file("logger"), 'a', 1000000, 1)
 # set level of the first handler to DEBUG
-file_handler.setLevel(logging.DEBUG)
+file_handler.setLevel(logging.INFO)
 # use formatter for set first handler file name generation
 file_handler.setFormatter(formatter)
 # add the first handler to the logger
