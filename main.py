@@ -58,7 +58,7 @@ logging.info('Phoenix Down Script started !')
 
 # If the root path directory of phoenix down script doesn't exist yet...
 # ... creation of this directory
-logging.info("creation of the root path directory of Phoenix Down Script...")
+logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
 ts = TrelloScript()

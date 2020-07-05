@@ -45,6 +45,9 @@ class TrelloScript:
         return datas
 
     def trello_script(self):
+
+        logging.info('trello script is running...')
+
         # If the work directory "../trello" doesn't existe yet...
         # ... creation of this directory
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
@@ -54,10 +57,14 @@ class TrelloScript:
             PD_SCRIPT_TRELLO_MEMBER_USERNAME)
 
         # creation of name for log file
+        logging.info('creating Trello log file...')
+
         file_name = create_timestamped_and_named_file(self.application_name)
 
         # creation of file with its name
         file = open(file_name, "w", encoding="utf-8")
+
+        logging.info('writing in Trello log file...')
 
         # writing in log file
         # processing of boards
@@ -75,14 +82,22 @@ class TrelloScript:
             file.write(str(datas))
             file.write("\n\n\n\n")
 
+        logging.info('writing in Trello log file done')
+
         # closing the file in writing for future opening in reading
         file.close()
 
         # opens the file for reading only in binary format in order to upload
         file = open(file_name, "rb")
 
+        logging.info('sending Trello log file to the server...')
+
         # upload the log file to ftp server
         upload_file_to_server_ftp(file, file_name, self.application_name)
 
+        logging.info('trello log file uploaded')
+
         # closing the file
         file.close()
+
+        logging.info('trello script is terminated')

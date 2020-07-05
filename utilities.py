@@ -12,6 +12,7 @@ from zipfile import ZipFile, ZIP_DEFLATED
 
 
 def create_directory(path):
+    logging.info('creating the folder ' + path + "...")
     if not os.path.isdir(path):
         os.makedirs(path)
         logging.info("the folder " + path + " was successfully created")
