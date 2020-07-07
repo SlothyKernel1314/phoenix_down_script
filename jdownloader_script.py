@@ -70,7 +70,7 @@ class JdownloaderScript:
         # opens the zip file for reading only in binary format in order to upload
         opened_zip_file = open(zip_file.filename, "rb")
 
-        logging.info('uploading all files...')
+        logging.info('uploading the zip to ftp server...')
 
         # upload zip to ftp server
         upload_file_to_server_ftp(opened_zip_file, zip_file.filename, self.application_name)

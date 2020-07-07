@@ -57,7 +57,7 @@ class TrelloScript:
             PD_SCRIPT_TRELLO_MEMBER_USERNAME)
 
         # creation of name for log file
-        logging.info('creating Trello log file...')
+        logging.info('creating Trello log file')
 
         file_name = create_timestamped_and_named_file(self.application_name)
 
@@ -90,7 +90,7 @@ class TrelloScript:
         # opens the file for reading only in binary format in order to upload
         file = open(file_name, "rb")
 
-        logging.info('sending Trello log file to the server...')
+        logging.info('sending Trello log file to the ftp server...')
 
         # upload the log file to ftp server
         upload_file_to_server_ftp(file, file_name, self.application_name)
