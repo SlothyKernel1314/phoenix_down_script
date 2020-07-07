@@ -95,8 +95,6 @@ class TrelloScript:
         # upload the log file to ftp server
         upload_file_to_server_ftp(file, file_name, self.application_name)
 
-        logging.info('trello log file uploaded')
-
         # closing the file
         file.close()
 

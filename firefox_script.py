@@ -63,8 +63,6 @@ class FirefoxScript:
         # upload zip to ftp server
         upload_file_to_server_ftp(opened_zip_file, zip_file.filename, self.application_name)
 
-        logging.info('upload done')
-
         logging.info('deleting local zip file...')
 
         # delete local zip file
