@@ -44,7 +44,7 @@ class TrelloScript:
         datas = response.json()
         return datas
 
-    def trello_script(self):
+    def run_script(self):
 
         logging.info('trello script is running...')
 

@@ -54,6 +54,9 @@ from setup_logger import logger
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
+# TODO : gérer exceptions (erreurs)
+# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello)
+
 logging.info('Phoenix Down Script started !')
 
 # If the root path directory of phoenix down script doesn't exist yet...
@@ -62,12 +65,12 @@ logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
 ts = TrelloScript()
-ts.trello_script()
+ts.run_script()
 
 # fs = FirefoxScript()
-# fs.firefox_script()
+# fs.run_script()
 
-# js = JdownloaderScript()
-# js.jdownloader_script()
+js = JdownloaderScript()
+js.run_script()
 
 logging.info('Phoenix Down Script finished !')

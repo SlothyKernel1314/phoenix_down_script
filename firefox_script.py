@@ -13,7 +13,7 @@ class FirefoxScript:
     def __init__(self):
         self.application_name = "firefox"
 
-    def firefox_script(self):
+    def run_script(self):
         # if the work directory "../firefox" doesn't existe yet...
         # ... creation of this directory
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
