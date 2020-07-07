@@ -33,7 +33,7 @@ def create_timestamped_directory():
     return format_directory_name
 
 
-def create_timestamped_and_named_file(application_name):
+def create_timestamped_and_named_file_name(application_name):
     current_date = time.strftime("%Y%m%d")
     current_time = time.strftime("%H%M%S")
     format_file_name = current_date + "_" + current_time + "_" + application_name + "_log_phoenix_down.txt"
@@ -81,19 +81,20 @@ def get_all_file_paths(directory):
 
 def zip_files(file_paths_to_zip, directory_log_path, zip_name):
     os.chdir(directory_log_path)
-    print('Following files will be zipped:')
+    logging.info('following files will be zipped:')
     for file_name in file_paths_to_zip:
-        print(file_name)
+        logging.info(file_name)
     # create timestamped file name
     current_date = time.strftime("%Y%m%d")
     current_time = time.strftime("%H%M%S")
     zip_name = current_date + "_" + current_time + "_" + zip_name + ".zip"
     # writing files to a zipfile
+    logging.info('zipping files...')
     with ZipFile(zip_name, mode='w', compression=ZIP_DEFLATED, allowZip64=False) as zip:
         # writing each file one by one
         for file in file_paths_to_zip:
             zip.write(file)
-    print('All files zipped successfully!')
+    logging.info('All files zipped successfully !')
     return zip
 
 

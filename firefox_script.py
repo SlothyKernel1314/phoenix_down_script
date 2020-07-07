@@ -52,12 +52,8 @@ class FirefoxScript:
         # get all files paths in log (timestamped) diectory in order to zip theses files + server upload
         file_paths_to_zip = get_all_file_paths(directory_log_path)
 
-        logging.info('zipping all files (places, favicons, bookback)...')
-
         # zip all files
         zip_file = zip_files(file_paths_to_zip, directory_log_path, FIREFOX_ZIP_FILE_BASENAME)
-
-        logging.info('zip done')
 
         # opens the zip file for reading only in binary format in order to upload
         opened_zip_file = open(zip_file.filename, "rb")

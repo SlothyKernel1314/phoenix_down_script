@@ -59,7 +59,7 @@ class TrelloScript:
         # creation of name for log file
         logging.info('creating Trello log file')
 
-        file_name = create_timestamped_and_named_file(self.application_name)
+        file_name = create_timestamped_and_named_file_name(self.application_name)
 
         # creation of file with its name
         file = open(file_name, "w", encoding="utf-8")

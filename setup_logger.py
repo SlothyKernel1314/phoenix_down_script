@@ -20,7 +20,7 @@ formatter = logging.Formatter('[%(asctime)s] [%(levelname)s] : %(message)s')
 
 # creation of the first handler which redirect traces to a log file
 file_handler = RotatingFileHandler(PD_SCRIPT_ROOT_PATH + "/" + log_folder_name + '/'
-                                   + create_timestamped_and_named_file("logger"), 'a', 1000000, 1)
+                                   + create_timestamped_and_named_file_name("logger"), 'a', 1000000, 1)
 # set level of the first handler to DEBUG
 file_handler.setLevel(logging.INFO)
 # use formatter for set first handler file name generation
