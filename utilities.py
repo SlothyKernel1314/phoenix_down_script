@@ -27,6 +27,7 @@ def create_timestamped_directory():
     current_date = time.strftime("%Y%m%d")
     current_time = time.strftime("%H%M%S")
     format_directory_name = current_date + "_" + current_time
+    logging.info('creating the folder ' + format_directory_name + "...")
     os.mkdir(format_directory_name)
     logging.info("the folder " + format_directory_name + " was successfully created")
     return format_directory_name
