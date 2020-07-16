@@ -2,7 +2,6 @@ import logging
 from logging.handlers import RotatingFileHandler
 from utilities import *
 
-# VARIABLES ------------------------------------------------------------------------------------------------------------
 
 log_folder_name = "log"
 

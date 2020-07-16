@@ -48,25 +48,16 @@ class TrelloScript:
 
         logging.info('trello script is running...')
 
-        # If the work directory "../trello" doesn't existe yet...
-        # ... creation of this directory
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
 
-        # get dictionnary with all shortlinks boards as keys, with values (name board)
         shortlinks_as_keys_with_values = self.get_boards_shortlinks_as_keys_with_values(
             PD_SCRIPT_TRELLO_MEMBER_USERNAME)
 
-        # creation of name for log file
         logging.info('creating Trello log file')
-
         file_name = create_timestamped_and_named_file_name(self.application_name)
-
-        # creation of file with its name
         file = open(file_name, "w", encoding="utf-8")
 
         logging.info('writing in Trello log file...')
-
-        # writing in log file
         # processing of boards
         for shortlink in shortlinks_as_keys_with_values:
             name_board = shortlinks_as_keys_with_values[shortlink]
@@ -84,7 +75,6 @@ class TrelloScript:
 
         logging.info('writing in Trello log file done')
 
-        # closing the file in writing for future opening in reading
         file.close()
 
         # opens the file for reading only in binary format in order to upload
@@ -92,10 +82,8 @@ class TrelloScript:
 
         logging.info('sending Trello log file to the ftp server...')
 
-        # upload the log file to ftp server
         upload_file_to_server_ftp(file, file_name, self.application_name)
 
-        # closing the file
         file.close()
 
         logging.info('trello script is terminated')
