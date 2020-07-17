@@ -45,14 +45,11 @@ class FirefoxScript:
         # open the zip file for reading only in binary format in order to upload
         opened_zip_file = open(zip_file.filename, "rb")
 
-        logging.info('uploading the zip to ftp server...')
         upload_file_to_server_ftp(opened_zip_file, zip_file.filename, self.application_name)
 
         logging.info('deleting local zip file...')
         os.remove(zip_file.filename)
 
         logging.info('delete local zip done')
-
-        logging.info('save all files locally + upload zip files to ftp server : success !')
 
         logging.info('firefox script is terminated')

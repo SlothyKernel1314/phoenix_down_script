@@ -80,8 +80,6 @@ class TrelloScript:
         # opens the file for reading only in binary format in order to upload
         file = open(file_name, "rb")
 
-        logging.info('sending Trello log file to the ftp server...')
-
         upload_file_to_server_ftp(file, file_name, self.application_name)
 
         file.close()
