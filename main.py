@@ -37,19 +37,12 @@
 import logging
 from logging.handlers import RotatingFileHandler
 from trello_sample import *
+from twitter_sample import *
 from constants import *
 from trello_script import *
 from firefox_script import *
 from jdownloader_script import *
 from setup_logger import logger
-
-
-# SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
-
-# get_board_by_id_sample_version(TRELLO_MBL_BOARD_ID)
-# get_open_cards_by_board_id_sample_version(TRELLO_MBL_BOARD_ID)
-# get_card_by_id_sample_version(TRELLO_CH_CARD_ID)
-# get_boards_by_member_username_sample_version(TRELLO_MEMBER_USERNAME)
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
@@ -62,13 +55,23 @@ logging.info('Phoenix Down Script started !')
 logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-ts = TrelloScript()
-ts.run_script()
+# ts = TrelloScript()
+# ts.run_script()
 
 # fs = FirefoxScript()
 # fs.run_script()
 
-js = JdownloaderScript()
-js.run_script()
+# js = JdownloaderScript()
+# js.run_script()
 
 logging.info('Phoenix Down Script finished !')
+
+
+# SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
+
+# get_board_by_id_sample_version(TRELLO_MBL_BOARD_ID)
+# get_open_cards_by_board_id_sample_version(TRELLO_MBL_BOARD_ID)
+# get_card_by_id_sample_version(TRELLO_CH_CARD_ID)
+# get_boards_by_member_username_sample_version(TRELLO_MEMBER_USERNAME)
+
+get_timeline()
