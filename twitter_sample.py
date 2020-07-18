@@ -20,6 +20,9 @@ def update_status():  # also known as... tweeting
     tweet = "Bonjour, c'est pas moi qui tweete, c'est un robot, fais pas attention, je vais disparaitre d'ici peu..."
     try:
         api.update_status(tweet)
-        print("tweet posté !")
+        print("the tweet was posted !")
+    except tweepy.error.RateLimitError:
+        print("fail due to hitting Twitter’s rate limit !")
     except tweepy.error.TweepError:
-        print("échec de l'envoi du tweet !")
+        print("failed tweting !")
+
