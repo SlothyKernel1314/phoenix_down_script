@@ -15,3 +15,11 @@ def get_timeline():
     for tweet in public_tweets:
         print(tweet.text)
 
+
+def update_status():  # also known as... tweeting
+    tweet = "Bonjour, c'est pas moi qui tweete, c'est un robot, fais pas attention, je vais disparaitre d'ici peu..."
+    try:
+        api.update_status(tweet)
+        print("tweet posté !")
+    except tweepy.error.TweepError:
+        print("échec de l'envoi du tweet !")

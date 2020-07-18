@@ -74,4 +74,5 @@ logging.info('Phoenix Down Script finished !')
 # get_card_by_id_sample_version(TRELLO_CH_CARD_ID)
 # get_boards_by_member_username_sample_version(TRELLO_MEMBER_USERNAME)
 
-get_timeline()
+# get_timeline()
+# update_status()
