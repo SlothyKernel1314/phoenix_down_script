@@ -53,4 +53,8 @@ def get_all_tweets_for_a_user(user_id):
     print(count)
 
 
+def get_rate_limit_status():
+    rate_limit_status = api.rate_limit_status()
+    print(rate_limit_status)
+
 
