@@ -44,4 +44,13 @@ def get_friends_id(user_id):
     print(len(user_friends))
 
 
+# WARNING : very long processing time
+def get_all_tweets_for_a_user(user_id):
+    count = 0
+    for tweet in tweepy.Cursor(api.user_timeline, id=user_id).items():
+        print(tweet)
+        count += 1
+    print(count)
+
+
 

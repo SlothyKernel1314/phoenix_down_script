@@ -78,4 +78,5 @@ logging.info('Phoenix Down Script finished !')
 # update_status()
 # get_user_by_id(TWITTER_USER_ID)
 # get_followers_id(TWITTER_USER_ID)
-get_friends_id(TWITTER_USER_ID)
+# get_friends_id(TWITTER_USER_ID)
+# get_all_tweets_for_a_user(TWITTER_USER_ID) # WARNING : very long processing time
