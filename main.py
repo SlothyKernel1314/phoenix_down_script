@@ -76,3 +76,4 @@ logging.info('Phoenix Down Script finished !')
 
 # get_timeline()
 # update_status()
+get_user(TWITTER_USER_ID)

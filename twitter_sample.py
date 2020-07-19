@@ -26,3 +26,10 @@ def update_status():  # also known as... tweeting
     except tweepy.error.TweepError:
         print("failed tweting !")
 
+
+def get_user(user_id):
+    user_information = api.get_user(user_id)
+    print(user_information)
+
+
+
