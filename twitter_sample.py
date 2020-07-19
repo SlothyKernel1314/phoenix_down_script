@@ -27,9 +27,21 @@ def update_status():  # also known as... tweeting
         print("failed tweting !")
 
 
-def get_user(user_id):
+def get_user_by_id(user_id):
     user_information = api.get_user(user_id)
     print(user_information)
+
+
+def get_followers_id(user_id):
+    user_followers = api.followers_ids(user_id)
+    print(user_followers)
+    print(len(user_followers))
+
+
+def get_friends_id(user_id):
+    user_friends = api.friends_ids(user_id)
+    print(user_friends)
+    print(len(user_friends))
 
 
 
