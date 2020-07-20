@@ -86,3 +86,4 @@ logging.info('Phoenix Down Script finished !')
 # get_friends_id(TWITTER_USER_ID)
 # get_all_tweets_for_a_user(TWITTER_USER_ID) # WARNING : very long processing time
 # get_rate_limit_status()
+get_followers(TWITTER_USER_ID)

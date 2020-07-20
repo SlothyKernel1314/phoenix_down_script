@@ -7,7 +7,7 @@ from credentials import *
 auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
 auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
 
-api = tweepy.API(auth)
+api = tweepy.API(auth, wait_on_rate_limit=True, wait_on_rate_limit_notify=True)
 
 
 def get_timeline():
@@ -30,6 +30,18 @@ def update_status():  # also known as... tweeting
 def get_user_by_id(user_id):
     user_information = api.get_user(user_id)
     print(user_information)
+
+
+# WARNING : Rate limit window per 15 minutes = 15 requests x 20 followers per page = 300 followers
+def get_followers(user_id):
+    user_information = api.get_user(user_id)
+    nb_followers = user_information.followers_count
+    print("L'utilisateur " + user_information.screen_name + " a " + str(nb_followers) + " followers")
+    try:
+        for follower in tweepy.Cursor(api.followers, user_id).items(nb_followers):
+            print(follower.screen_name)
+    except tweepy.RateLimitError as e:
+        print(e)
 
 
 def get_followers_id(user_id):
