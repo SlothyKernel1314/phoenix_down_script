@@ -42,6 +42,7 @@ from constants import *
 from trello_script import *
 from firefox_script import *
 from jdownloader_script import *
+from twitter_script import *
 from setup_logger import logger
 
 
@@ -55,14 +56,18 @@ logging.info('Phoenix Down Script started !')
 logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_PATH)
 
-# ts = TrelloScript()
-# ts.run_script()
+# tlls = TrelloScript()
+# tlls.run_script()
 
 # fs = FirefoxScript()
 # fs.run_script()
 
 # js = JdownloaderScript()
 # js.run_script()
+
+# twts = TwitterScript(api)
+# twts.run_script()
+
 
 logging.info('Phoenix Down Script finished !')
 
@@ -80,4 +85,4 @@ logging.info('Phoenix Down Script finished !')
 # get_followers_id(TWITTER_USER_ID)
 # get_friends_id(TWITTER_USER_ID)
 # get_all_tweets_for_a_user(TWITTER_USER_ID) # WARNING : very long processing time
-get_rate_limit_status()
+# get_rate_limit_status()
