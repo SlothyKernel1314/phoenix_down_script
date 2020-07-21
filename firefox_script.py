@@ -10,6 +10,7 @@ from utilities import *
 
 
 class FirefoxScript:
+
     def __init__(self):
         self.application_name = "firefox"
 

@@ -8,6 +8,7 @@ import requests
 
 
 class TrelloScript:
+
     def __init__(self):
         self.application_name = "trello"
 
@@ -53,11 +54,11 @@ class TrelloScript:
         shortlinks_as_keys_with_values = self.get_boards_shortlinks_as_keys_with_values(
             PD_SCRIPT_TRELLO_MEMBER_USERNAME)
 
-        logging.info('creating Trello log file')
+        logging.info('creating trello log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
         file = open(file_name, "w", encoding="utf-8")
 
-        logging.info('writing in Trello log file...')
+        logging.info('writing in trello log file...')
         # processing of boards
         for shortlink in shortlinks_as_keys_with_values:
             name_board = shortlinks_as_keys_with_values[shortlink]
@@ -73,8 +74,7 @@ class TrelloScript:
             file.write(str(datas))
             file.write("\n\n\n\n")
 
-        logging.info('writing in Trello log file done')
-
+        logging.info('writing in trello log file done')
         file.close()
 
         # opens the file for reading only in binary format in order to upload

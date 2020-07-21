@@ -65,8 +65,8 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 # js = JdownloaderScript()
 # js.run_script()
 
-# twts = TwitterScript(api)
-# twts.run_script()
+twts = TwitterScript()
+twts.run_script()
 
 
 logging.info('Phoenix Down Script finished !')
@@ -86,4 +86,5 @@ logging.info('Phoenix Down Script finished !')
 # get_friends_id(TWITTER_USER_ID)
 # get_all_tweets_for_a_user(TWITTER_USER_ID) # WARNING : very long processing time
 # get_rate_limit_status()
-get_followers(TWITTER_USER_ID)
+# WARNING : Rate limit window per 15 minutes = 15 requests x 20 followers per page = 300 followers
+# get_followers(TWITTER_USER_ID)

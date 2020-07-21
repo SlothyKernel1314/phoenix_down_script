@@ -49,9 +49,6 @@ def upload_file_to_server_ftp(file, filename, application_name):
         logging.info('ftp connection succeed !')
         try:
             # TODO : se placer dans le bon repertoire (ok) du serveur et creer un dossier *nom application* s'il n'existe pas
-            ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH)
-            ftp.mkd(SEEDBOX_ROOT_PD_SCRIPT_PATH)
-            ftp.mkd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)
             ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
             logging.info('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
             ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
