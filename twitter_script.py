@@ -23,6 +23,10 @@ class TwitterScript:
         user_followers = api.followers_ids(user_id)
         return user_followers
 
+    def get_friends_id(self, user_id, api):
+        user_friends = api.friends_ids(user_id)
+        return user_friends
+
     def run_script(self):
 
         logging.info('twitter script is running...')
@@ -34,6 +38,8 @@ class TwitterScript:
         user = self.get_user_by_id(TWITTER_USER_ID, api)
 
         followers = self.get_followers_id(TWITTER_USER_ID, api)
+
+        friends = self.get_friends_id(TWITTER_USER_ID, api)
 
         logging.info('creating twitter log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -48,8 +54,13 @@ class TwitterScript:
             file.write(str(follower))
             file.write("\n")
         file.write("\n\n\n\n")
-
-        # TODO : créer la fonction pour récupérer les follows
+        # processing of friends
+        file.write(user.screen_name + " twitter user have " + str(len(friends)) + " friends")
+        file.write("\n\n")
+        file.write("List of friends' ids of " + user.screen_name + " : \n")
+        for friend in friends:
+            file.write(str(friend))
+            file.write("\n")
 
         logging.info('writing in twitter log file done')
         file.close()
