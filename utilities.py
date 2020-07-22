@@ -61,6 +61,26 @@ def upload_file_to_server_ftp(file, filename, application_name):
     ftp.quit()
 
 
+def upload_file_to_server_ftp_without_logging_messages(file, filename, application_name):
+    ftp = FTP(SEEDBOX_DOMAIN_NAME)  # connect to host, default port
+    try:
+        print("trying to connect the ftp server...")
+        ftp.login(user=SEEDBOX_USER_NAME, passwd=SEEDBOX_PASSWD)  # login with credentials
+        print('ftp connection succeed !')
+        try:
+            # TODO : se placer dans le bon repertoire (ok) du serveur et creer un dossier *nom application* s'il n'existe pas
+            ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
+            print('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
+            ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
+            print(filename + ' uploaded successfully!')
+            ftp.retrlines('LIST') # TODO : remove in prod
+        except ftplib.all_errors:
+            print('unable to make directories')
+    except ftplib.all_errors:
+        print('unable to connect to ftp server')
+    ftp.quit()
+
+
 def get_the_latest_file_in_a_folder(path):
     list_of_files = os.listdir(path)  # get a list of all file names in a folder
     # get a list of absolute paths for previously recovered files

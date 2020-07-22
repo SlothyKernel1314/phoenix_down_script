@@ -43,7 +43,7 @@ from trello_script import *
 from firefox_script import *
 from jdownloader_script import *
 from twitter_script import *
-from setup_logger import logger
+from setup_logger import *
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
@@ -68,8 +68,9 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 twts = TwitterScript()
 twts.run_script()
 
-
 logging.info('Phoenix Down Script finished !')
+
+logger_script()
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
