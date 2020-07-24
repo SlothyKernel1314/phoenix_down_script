@@ -43,6 +43,7 @@ from trello_script import *
 from firefox_script import *
 from jdownloader_script import *
 from twitter_script import *
+from steam_sample import *
 from setup_logger import *
 
 
@@ -65,8 +66,8 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 # js = JdownloaderScript()
 # js.run_script()
 
-twts = TwitterScript()
-twts.run_script()
+# twts = TwitterScript()
+# twts.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -89,3 +90,5 @@ logger_script()
 # get_rate_limit_status()
 # WARNING : Rate limit window per 15 minutes = 15 requests x 20 followers per page = 300 followers
 # get_followers(TWITTER_USER_ID)
+
+get_friend_list()
