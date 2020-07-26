@@ -10,21 +10,21 @@ def get_user_name(id):
     url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + STEAM_API_KEY + \
           "&steamids=" + id
     response = requests.request("GET", url)
-    users = response.json()
-    # Steam API returns a list of ONE user when we call GetPlayerSummaries API method...
-    # ... so we must parse this list, even if there is only one user in it
-    for user in users['response']['players']:
-        user_name = user['personaname']
-        print(user_name)
+    datas = response.json()
+    users = datas['response']
+    user = users['players']
+    # Steam API returns a list of ONE user when we call GetPlayerSummaries API method, so...
+    user_name = user[0]['personaname']
     return user_name
 
 
-def get_friend_list():
-    url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
-          "&steamid=" + STEAM_USER_ID + "&relationship=friend"
-
-    response = requests.request("GET", url)
-    friends = response.json()
-    for friend in friends['friendslist']['friends']:
-        friend_id = friend['steamid']
-        print(friend_id)
+# def get_friend_list():
+#     url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
+#           "&steamid=" + STEAM_USER_ID + "&relationship=friend"
+#
+#     response = requests.request("GET", url)
+#     friends = response.json()
+#     for friend in friends['friendslist']['friends']:
+#         friend_id = friend['steamid']
+#         friend_user_name = get_user_name(friend_id)
+#         print(friend_id + " --- " + friend_user_name)
