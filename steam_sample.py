@@ -11,4 +11,7 @@ def get_friend_list():
           "&steamid=" + STEAM_USER_ID + "&relationship=friend"
 
     response = requests.request("GET", url)
-    print(response.text)
+    friends = response.json()
+    for friend in friends['friendslist']['friends']:
+        friend_id = friend['steamid']
+        print(friend_id)
