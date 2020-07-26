@@ -18,13 +18,13 @@ def get_user_name(id):
     return user_name
 
 
-# def get_friend_list():
-#     url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
-#           "&steamid=" + STEAM_USER_ID + "&relationship=friend"
-#
-#     response = requests.request("GET", url)
-#     friends = response.json()
-#     for friend in friends['friendslist']['friends']:
-#         friend_id = friend['steamid']
-#         friend_user_name = get_user_name(friend_id)
-#         print(friend_id + " --- " + friend_user_name)
+def get_friend_list():
+    url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
+          "&steamid=" + STEAM_USER_ID + "&relationship=friend"
+
+    response = requests.request("GET", url)
+    friends = response.json()
+    for friend in friends['friendslist']['friends']:
+        friend_id = friend['steamid']
+        friend_user_name = get_user_name(friend_id)
+        print(friend_id + " --- " + friend_user_name)

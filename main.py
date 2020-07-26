@@ -94,5 +94,5 @@ logger_script()
 # get_followers(TWITTER_USER_ID)
 
 # STEAM SAMPLE
-# get_friend_list()
 get_user_name(STEAM_USER_ID)
+get_friend_list()
