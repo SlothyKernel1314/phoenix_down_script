@@ -76,11 +76,13 @@ logger_script()
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
 
+# TRELLO SAMPLE
 # get_board_by_id_sample_version(TRELLO_MBL_BOARD_ID)
 # get_open_cards_by_board_id_sample_version(TRELLO_MBL_BOARD_ID)
 # get_card_by_id_sample_version(TRELLO_CH_CARD_ID)
 # get_boards_by_member_username_sample_version(TRELLO_MEMBER_USERNAME)
 
+# TWITTER SAMPLE
 # get_timeline()
 # update_status()
 # get_user_by_id(TWITTER_USER_ID)
@@ -91,4 +93,6 @@ logger_script()
 # WARNING : Rate limit window per 15 minutes = 15 requests x 20 followers per page = 300 followers
 # get_followers(TWITTER_USER_ID)
 
+# STEAM SAMPLE
 get_friend_list()
+get_user_name(STEAM_USER_ID)
