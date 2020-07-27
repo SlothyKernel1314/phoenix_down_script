@@ -95,5 +95,6 @@ logger_script()
 
 # STEAM SAMPLE
 # get_user_name(STEAM_USER_ID)
+get_game_name_by_id(546560) # Half-Life : Alyx AppId
 # get_friend_list()
-get_owned_games()
+# get_owned_games()

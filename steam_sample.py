@@ -18,6 +18,18 @@ def get_user_name(id):
     return user_name
 
 
+def get_game_name_by_id(id):
+    game_name = ""
+    url = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"  # returns ALL Steam games
+    response = requests.request("GET", url)
+    datas = response.json()
+    games_list = datas['applist']['apps']
+    for game in games_list:
+        if game['appid'] == id:
+            game_name = game['name']
+    return game_name
+
+
 def get_friend_list():
     url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
           "&steamid=" + STEAM_USER_ID + "&relationship=friend"
