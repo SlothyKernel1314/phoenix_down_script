@@ -50,3 +50,26 @@ def get_owned_games():
     for game in games:
         game_id = game['appid']
         print(game_id)
+
+
+def get_wishlist():
+    # we set an arbitrarily high number of pages because...
+    # ...the shitty Steam API doesn't provide methods to correctly get the wishlist of steam users
+    number_of_pages_limit = 20
+    current_page = 0
+    number_of_games_in_wishlist = 0
+    while current_page < number_of_pages_limit:
+        url = "https://store.steampowered.com/wishlist/profiles/" + STEAM_USER_ID +\
+              "/wishlistdata/?p=" + str(current_page) + ""
+        response = requests.request("GET", url)
+        datas = response.json()
+        current_page += 1
+        if len(datas) > 0:
+            print(datas)
+            print(len(datas))
+            number_of_games_in_wishlist += len(datas)
+        else:
+            break
+    print("Number of games in the wishlist : " + str(number_of_games_in_wishlist))
+
+
