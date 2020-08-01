@@ -18,6 +18,8 @@ def get_user_name(id):
     return user_name
 
 
+# WARNING : intensive time-based function because shitty Steam API provides a buggy GetGlobalStatsForGame method...
+# ... so we must use a trick, we get instead all Steam games list, and pick the desired game inside.
 def get_game_name_by_id(id):
     game_name = ""
     url = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"  # returns ALL Steam games
@@ -46,6 +48,7 @@ def get_owned_games():
           "&steamid=" + STEAM_USER_ID + "&format=json"
     response = requests.request("GET", url)
     datas = response.json()
+    print(datas)
     games = datas['response']['games']
     for game in games:
         game_id = game['appid']

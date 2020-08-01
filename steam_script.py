@@ -34,6 +34,13 @@ class SteamScript:
             friends_dictionnary[friend_id] = friend_user_name
         return friends_dictionnary
 
+    def get_all_steam_games(self):
+        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
+              "&steamid=" + STEAM_USER_ID + "&format=json"
+        response = requests.request("GET", url)
+        datas = response.json()
+        return datas
+
     def run_script(self):
 
         logging.info('steam script is running...')
@@ -58,3 +65,7 @@ class SteamScript:
         file.write("\n\n")
         file.write(user + " steam user have " + str(len(friends)) + " friends on steam")
         file.write("\n\n\n\n")
+        # processing of owned games
+        file.write(user + " owned games :")
+        file.write("\n\n")
+
