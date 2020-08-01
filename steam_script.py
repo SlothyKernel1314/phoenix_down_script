@@ -34,15 +34,27 @@ class SteamScript:
             friends_dictionnary[friend_id] = friend_user_name
         return friends_dictionnary
 
-
     def run_script(self):
 
         logging.info('steam script is running...')
 
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
 
+        user = self.get_user_name(STEAM_USER_ID)
+
+        friends = self.get_friend_list()
+
         logging.info('creating steam log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
         file = open(file_name, "w", encoding="utf-8")
 
         logging.info('writing in steam log file...')
+        # processing of friends
+        file.write("Friends list of " + user + " steam user :")
+        file.write("\n\n")
+        for key, value in friends.items():
+            file.write(key + " --- " + value)
+            file.write("\n")
+        file.write("\n\n")
+        file.write(user + " steam user have " + str(len(friends)) + " friends on steam")
+        file.write("\n\n\n\n")
