@@ -41,6 +41,18 @@ class SteamScript:
         datas = response.json()
         return datas
 
+    def get_owned_games_id(self):
+        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
+              "&steamid=" + STEAM_USER_ID + "&format=json"
+        my_games_id = []
+        response = requests.request("GET", url)
+        datas = response.json()
+        my_games = datas['response']['games']
+        for game in my_games:
+            game_id = game['appid']
+            my_games_id.append(game_id)
+        return my_games
+
     def run_script(self):
 
         logging.info('steam script is running...')
@@ -50,6 +62,8 @@ class SteamScript:
         user = self.get_user_name(STEAM_USER_ID)
 
         friends = self.get_friend_list()
+
+        all_steam_games_in_json_file = self.get_all_steam_games()
 
         logging.info('creating steam log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -68,4 +82,5 @@ class SteamScript:
         # processing of owned games
         file.write(user + " owned games :")
         file.write("\n\n")
+        self.get_owned_games_id()
 
