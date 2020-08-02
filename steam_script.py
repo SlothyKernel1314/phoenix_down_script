@@ -112,4 +112,16 @@ class SteamScript:
             file.write("\n\n")
         file.write(user + " steam user have " + str(wishlist[1]) + " games in his wishlist")
 
+        logging.info('writing in steam log file done')
+        file.close()
+
+        # opens the file for reading only in binary format in order to upload
+        file = open(file_name, "rb")
+
+        upload_file_to_server_ftp(file, file_name, self.application_name)
+
+        file.close()
+
+        logging.info('steam script is terminated')
+
 
