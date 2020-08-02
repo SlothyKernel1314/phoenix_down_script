@@ -34,24 +34,17 @@ class SteamScript:
             friends_dictionnary[friend_id] = friend_user_name
         return friends_dictionnary
 
-    def get_all_steam_games(self):
+    def get_owned_games_ids(self):
         url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
               "&steamid=" + STEAM_USER_ID + "&format=json"
-        response = requests.request("GET", url)
-        datas = response.json()
-        return datas
-
-    def get_owned_games_id(self):
-        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
-              "&steamid=" + STEAM_USER_ID + "&format=json"
-        my_games_id = []
+        my_games_ids = []
         response = requests.request("GET", url)
         datas = response.json()
         my_games = datas['response']['games']
         for game in my_games:
             game_id = game['appid']
-            my_games_id.append(game_id)
-        return my_games_id
+            my_games_ids.append(game_id)
+        return my_games_ids
 
     def run_script(self):
 
@@ -63,7 +56,7 @@ class SteamScript:
 
         friends = self.get_friend_list()
 
-        all_steam_games_in_json_file = self.get_all_steam_games()
+        my_games_ids = self.get_owned_games_ids()
 
         logging.info('creating steam log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -71,7 +64,9 @@ class SteamScript:
 
         logging.info('writing in steam log file...')
         # processing of friends
-        file.write("Friends list of " + user + " steam user :")
+        file.write("##### Friends list of " + user + " steam user :")
+        file.write("\n\n")
+        file.write(str(friends))
         file.write("\n\n")
         for key, value in friends.items():
             file.write(key + " --- " + value)
@@ -80,7 +75,14 @@ class SteamScript:
         file.write(user + " steam user have " + str(len(friends)) + " friends on steam")
         file.write("\n\n\n\n")
         # processing of owned games
-        file.write(user + " owned games :")
+        file.write("##### " + user + " owned games ids :")
         file.write("\n\n")
-        self.get_owned_games_id()
+        file.write(str(my_games_ids))
+        file.write("\n\n")
+        for game_id in my_games_ids:
+            file.write(str(game_id))
+            file.write("\n")
+        file.write("\n\n")
+        file.write(user + " steam user have " + str(len(my_games_ids)) + " games on steam")
+
 
