@@ -5,6 +5,7 @@ from utilities import *
 from credentials import *
 from constants import *
 import requests
+import os
 
 
 class SteamScript:
@@ -41,10 +42,27 @@ class SteamScript:
         response = requests.request("GET", url)
         datas = response.json()
         my_games = datas['response']['games']
-        for game in my_games:
-            game_id = game['appid']
-            my_games_ids.append(game_id)
         return my_games_ids
+
+    def get_wishlist(self):
+        # we set an arbitrarily high number of pages because...
+        # ...the shitty Steam API doesn't provide methods to correctly get the wishlist of steam users
+        number_of_pages_limit = 20
+        current_page = 0
+        number_of_games_in_wishlist = 0
+        custom_wishlist_datas = []
+        while current_page < number_of_pages_limit:
+            url = "https://store.steampowered.com/wishlist/profiles/" + STEAM_USER_ID + \
+                  "/wishlistdata/?p=" + str(current_page) + ""
+            response = requests.request("GET", url)
+            datas = response.json()
+            current_page += 1
+            if len(datas) > 0:
+                custom_wishlist_datas.append("Page " + str(current_page) + " : " + str(datas))
+                number_of_games_in_wishlist += len(datas)
+            else:
+                break
+        return custom_wishlist_datas, number_of_games_in_wishlist
 
     def run_script(self):
 
@@ -57,6 +75,9 @@ class SteamScript:
         friends = self.get_friend_list()
 
         my_games_ids = self.get_owned_games_ids()
+
+        wishlist = self.get_wishlist()
+        custom_wishlist_datas = wishlist[0]
 
         logging.info('creating steam log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -84,5 +105,13 @@ class SteamScript:
             file.write("\n")
         file.write("\n\n")
         file.write(user + " steam user have " + str(len(my_games_ids)) + " games on steam")
+        file.write("\n\n\n\n")
+        # processing of wishlist
+        file.write("##### " + user + " wishlist :")
+        file.write("\n\n")
+        for page in custom_wishlist_datas:
+            file.write(str(page))
+            file.write("\n\n")
+        file.write(user + " steam user have " + str(wishlist[1]) + " games in his wishlist")
 
 
