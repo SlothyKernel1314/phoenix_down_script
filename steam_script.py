@@ -51,7 +51,7 @@ class SteamScript:
         for game in my_games:
             game_id = game['appid']
             my_games_id.append(game_id)
-        return my_games
+        return my_games_id
 
     def run_script(self):
 
