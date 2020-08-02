@@ -42,6 +42,8 @@ class SteamScript:
         response = requests.request("GET", url)
         datas = response.json()
         my_games = datas['response']['games']
+        for game in my_games:
+            my_games_ids.append(game['appid'])
         return my_games_ids
 
     def get_wishlist(self):
@@ -92,17 +94,13 @@ class SteamScript:
         for key, value in friends.items():
             file.write(key + " --- " + value)
             file.write("\n")
-        file.write("\n\n")
+        file.write("\n")
         file.write(user + " steam user have " + str(len(friends)) + " friends on steam")
         file.write("\n\n\n\n")
         # processing of owned games
         file.write("##### " + user + " owned games ids :")
         file.write("\n\n")
         file.write(str(my_games_ids))
-        file.write("\n\n")
-        for game_id in my_games_ids:
-            file.write(str(game_id))
-            file.write("\n")
         file.write("\n\n")
         file.write(user + " steam user have " + str(len(my_games_ids)) + " games on steam")
         file.write("\n\n\n\n")
