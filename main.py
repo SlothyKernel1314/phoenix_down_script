@@ -108,6 +108,7 @@ logger_script()
 #REDDIT SAMPLE
 # reddit_request_token()
 # get_my_identity()
-get_saved_posts()
+# get_saved_posts()
+get_subscribed_subreddits()
 
 

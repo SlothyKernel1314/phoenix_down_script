@@ -38,3 +38,14 @@ def get_saved_posts():
     datas = response.json()
     return datas
 
+
+def get_subscribed_subreddits():
+    # TODO : pagination + recursive
+    my_token = reddit_request_token()
+    url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80"
+    headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+    response = requests.get(url, headers=headers)
+    datas = response.json()
+    print(datas)
+    return datas
+
