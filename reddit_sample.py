@@ -39,13 +39,26 @@ def get_saved_posts():
     return datas
 
 
-def get_subscribed_subreddits():
-    # TODO : pagination + recursive
+def get_subscribed_subreddits(after_pagination=None, subreddits_count=0):
     my_token = reddit_request_token()
-    url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80"
+    if after_pagination is None:
+        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80"
+        print(url)
+    else:
+        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80&&after=" + after_pagination
+        print(url)
     headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
     response = requests.get(url, headers=headers)
     datas = response.json()
     print(datas)
-    return datas
+    after_pagination = datas['data']['after']
+    print(after_pagination)
+    subreddits_current_dist = datas['data']['dist']
+    print(subreddits_current_dist)
+    subreddits_count += subreddits_current_dist
+    print(subreddits_count)
+    if after_pagination is not None:
+        return get_subscribed_subreddits(after_pagination, subreddits_count)
+    else:
+        return datas
 
