@@ -39,26 +39,25 @@ def get_saved_posts():
     return datas
 
 
-def get_subscribed_subreddits(after_pagination=None, subreddits_count=0):
+def get_subscribed_subreddits(after_pagination=None, subreddits_count=0, all_datas=None):
+    if all_datas is None:
+        all_datas = []
     my_token = reddit_request_token()
     if after_pagination is None:
-        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80"
-        print(url)
+        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100"
     else:
-        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=80&&after=" + after_pagination
-        print(url)
+        url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100&after=" + after_pagination
     headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
     response = requests.get(url, headers=headers)
-    datas = response.json()
-    print(datas)
-    after_pagination = datas['data']['after']
-    print(after_pagination)
-    subreddits_current_dist = datas['data']['dist']
-    print(subreddits_current_dist)
+    current_datas = response.json()
+    all_datas.append(current_datas)
+    after_pagination = current_datas['data']['after']
+    subreddits_current_dist = current_datas['data']['dist']
     subreddits_count += subreddits_current_dist
-    print(subreddits_count)
     if after_pagination is not None:
-        return get_subscribed_subreddits(after_pagination, subreddits_count)
+        return get_subscribed_subreddits(after_pagination, subreddits_count, all_datas)
     else:
-        return datas
+        print(all_datas)
+        print(subreddits_count)
+        return all_datas, subreddits_count
 
