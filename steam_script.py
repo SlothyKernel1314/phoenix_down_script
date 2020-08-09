@@ -67,7 +67,6 @@ class SteamScript:
         return custom_wishlist_datas, number_of_games_in_wishlist
 
     def run_script(self):
-
         logging.info('steam script is running...')
 
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)

@@ -31,8 +31,9 @@ def get_my_identity():
 
 
 def get_saved_posts():
+    # TODO : recursivité
     my_token = reddit_request_token()
-    url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved"
+    url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
     headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
     response = requests.get(url, headers=headers)
     datas = response.json()

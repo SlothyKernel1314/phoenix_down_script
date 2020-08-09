@@ -46,6 +46,7 @@ from twitter_script import *
 from steam_sample import *
 from steam_script import *
 from reddit_sample import *
+from reddit_script import *
 from setup_logger import *
 
 
@@ -73,6 +74,9 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 
 # stms = SteamScript()
 # stms.run_script()
+
+# rs = RedditScript()
+# rs.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -108,7 +112,7 @@ logger_script()
 #REDDIT SAMPLE
 # reddit_request_token()
 # get_my_identity()
-# get_saved_posts()
-get_subscribed_subreddits()
+get_saved_posts()
+# get_subscribed_subreddits()
 
 
