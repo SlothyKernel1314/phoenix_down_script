@@ -5,7 +5,6 @@ from utilities import *
 from credentials import *
 from constants import *
 import requests
-import requests
 import requests.auth
 
 # Oath2 Reddit quick start : https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example
@@ -42,7 +41,8 @@ class RedditScript:
         if after_pagination is None:
             url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
         else:
-            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100&after=" + after_pagination
+            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() \
+                  + "/saved?limit=100&after=" + after_pagination
         headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
         current_datas = response.json()
@@ -55,6 +55,26 @@ class RedditScript:
         else:
             return all_datas, saved_posts_count
 
+    def get_subscribed_subreddits(self, after_pagination=None, subreddits_count=0, all_datas=None):
+        if all_datas is None:
+            all_datas = []
+        my_token = self.reddit_request_token()
+        if after_pagination is None:
+            url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100"
+        else:
+            url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100&after=" + after_pagination
+        headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+        response = requests.get(url, headers=headers)
+        current_datas = response.json()
+        all_datas.append(current_datas)
+        after_pagination = current_datas['data']['after']
+        subreddits_current_dist = current_datas['data']['dist']
+        subreddits_count += subreddits_current_dist
+        if after_pagination is not None:
+            return self.get_subscribed_subreddits(after_pagination, subreddits_count, all_datas)
+        else:
+            return all_datas, subreddits_count
+
     def run_script(self):
         logging.info('reddit script is running...')
 
@@ -64,6 +84,8 @@ class RedditScript:
 
         saved_posts = self.get_saved_posts()
 
+        suscribed_subreddits = self.get_subscribed_subreddits()
+
         logging.info('creating reddit log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
         file = open(file_name, "w", encoding="utf-8")
@@ -72,11 +94,23 @@ class RedditScript:
         # processing of saved posts
         file.write("##### Saved posts of " + username + " reddit user (JSON) :")
         file.write("\n\n")
+        file.write(username + " reddit user have " + str(saved_posts[1]) + " saved posts")
+        file.write("\n\n")
         for json in saved_posts[0]:
             file.write(str(json))
             file.write("\n\n\n\n")
-        file.write("\n\n")
-        file.write(username + " reddit user have " + str(saved_posts[1]) + " saved posts")
-        file.write("\n\n\n\n")
         # processing of subreddits
         file.write("##### Suscribed subreddits of " + username + " reddit user (list) :")
+        file.write("\n\n")
+        file.write(username + " reddit user have " + str(suscribed_subreddits[1]) + " suscribed subreddits")
+        file.write("\n\n")
+        for json in suscribed_subreddits[0]:
+            children = json['data']['children']
+            for subreddit in children:
+                file.write(subreddit['data']['display_name_prefixed'])
+                file.write("\n")
+        file.write("\n\n")
+
+
+
+
