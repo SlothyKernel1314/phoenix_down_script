@@ -110,6 +110,23 @@ class RedditScript:
                 file.write(subreddit['data']['display_name_prefixed'])
                 file.write("\n")
         file.write("\n\n")
+        file.write("##### Suscribed subreddits of " + username + " reddit user (JSON) :")
+        file.write("\n\n")
+        for json in suscribed_subreddits[0]:
+            file.write(str(json))
+            file.write("\n\n\n\n")
+
+        logging.info('writing in reddit log file done')
+        file.close()
+
+        # opens the file for reading only in binary format in order to upload
+        file = open(file_name, "rb")
+
+        upload_file_to_server_ftp(file, file_name, self.application_name)
+
+        file.close()
+
+        logging.info('reddit script is terminated')
 
 
 
