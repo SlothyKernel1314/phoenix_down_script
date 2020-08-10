@@ -35,6 +35,26 @@ class RedditScript:
         username = datas['name']
         return username
 
+    def get_saved_posts(self, after_pagination=None, saved_posts_count=0,  all_datas=None):
+        if all_datas is None:
+            all_datas = []
+        my_token = self.reddit_request_token()
+        if after_pagination is None:
+            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
+        else:
+            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100&after=" + after_pagination
+        headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+        response = requests.get(url, headers=headers)
+        current_datas = response.json()
+        all_datas.append(current_datas)
+        after_pagination = current_datas['data']['after']
+        saved_posts_current_dist = current_datas['data']['dist']
+        saved_posts_count += saved_posts_current_dist
+        if after_pagination is not None:
+            return self.get_saved_posts(after_pagination, saved_posts_count, all_datas)
+        else:
+            return all_datas, saved_posts_count
+
     def run_script(self):
         logging.info('reddit script is running...')
 
@@ -42,10 +62,21 @@ class RedditScript:
 
         username = self.get_username()
 
+        saved_posts = self.get_saved_posts()
+
         logging.info('creating reddit log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
         file = open(file_name, "w", encoding="utf-8")
 
         logging.info('writing in reddit log file...')
         # processing of saved posts
-        file.write("##### Saved posts of " + username + " reddit user :")
+        file.write("##### Saved posts of " + username + " reddit user (JSON) :")
+        file.write("\n\n")
+        for json in saved_posts[0]:
+            file.write(str(json))
+            file.write("\n\n\n\n")
+        file.write("\n\n")
+        file.write(username + " reddit user have " + str(saved_posts[1]) + " saved posts")
+        file.write("\n\n\n\n")
+        # processing of subreddits
+        file.write("##### Suscribed subreddits of " + username + " reddit user (list) :")

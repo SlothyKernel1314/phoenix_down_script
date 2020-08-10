@@ -75,8 +75,8 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 # stms = SteamScript()
 # stms.run_script()
 
-# rs = RedditScript()
-# rs.run_script()
+rs = RedditScript()
+rs.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -112,7 +112,7 @@ logger_script()
 #REDDIT SAMPLE
 # reddit_request_token()
 # get_my_identity()
-get_saved_posts()
+# get_saved_posts()
 # get_subscribed_subreddits()
 
 
