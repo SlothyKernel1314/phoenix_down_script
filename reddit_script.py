@@ -49,4 +49,3 @@ class RedditScript:
         logging.info('writing in reddit log file...')
         # processing of saved posts
         file.write("##### Saved posts of " + username + " reddit user :")
-        print(saved_posts)

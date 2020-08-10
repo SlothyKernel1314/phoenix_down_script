@@ -30,14 +30,25 @@ def get_my_identity():
     return datas
 
 
-def get_saved_posts():
-    # TODO : recursivité
+def get_saved_posts(after_pagination=None, saved_posts_count=0,  all_datas=None):
+    if all_datas is None:
+        all_datas = []
     my_token = reddit_request_token()
-    url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
+    if after_pagination is None:
+        url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
+    else:
+        url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100&after=" + after_pagination
     headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
     response = requests.get(url, headers=headers)
-    datas = response.json()
-    return datas
+    current_datas = response.json()
+    all_datas.append(current_datas)
+    after_pagination = current_datas['data']['after']
+    saved_posts_current_dist = current_datas['data']['dist']
+    saved_posts_count += saved_posts_current_dist
+    if after_pagination is not None:
+        return get_saved_posts(after_pagination, saved_posts_count, all_datas)
+    else:
+        return all_datas, saved_posts_count
 
 
 def get_subscribed_subreddits(after_pagination=None, subreddits_count=0, all_datas=None):
@@ -58,7 +69,5 @@ def get_subscribed_subreddits(after_pagination=None, subreddits_count=0, all_dat
     if after_pagination is not None:
         return get_subscribed_subreddits(after_pagination, subreddits_count, all_datas)
     else:
-        print(all_datas)
-        print(subreddits_count)
         return all_datas, subreddits_count
 
