@@ -47,6 +47,7 @@ from steam_sample import *
 from steam_script import *
 from reddit_sample import *
 from reddit_script import *
+from pocket_sample import *
 from setup_logger import *
 
 
@@ -62,21 +63,21 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 
 # tlls = TrelloScript()
 # tlls.run_script()
-
+#
 # fs = FirefoxScript()
 # fs.run_script()
-
+#
 # js = JdownloaderScript()
 # js.run_script()
-
+#
 # twts = TwitterScript()
 # twts.run_script()
-
+#
 # stms = SteamScript()
 # stms.run_script()
 
-rs = RedditScript()
-rs.run_script()
+# rs = RedditScript()
+# rs.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -109,10 +110,12 @@ logger_script()
 # get_owned_games()
 # get_wishlist()
 
-#REDDIT SAMPLE
+# REDDIT SAMPLE
 # reddit_request_token()
 # get_my_identity()
 # get_saved_posts()
 # get_subscribed_subreddits()
 
+# POCKET SAMPLE
+pocket_request_token()
 
