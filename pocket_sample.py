@@ -24,13 +24,17 @@ def authorize_app():
           + code + "&redirect_uri=pocketapp1234:authorizationFinished"
     print(url)
 
+# TODO : implements step 4 of Oauth process pocket documentation, with skipping browser (webbrowser library ?)
 
-# def get_pocket_access_token():
-#     code = pocket_request_token()
-#     print(code)
-#     url = "https://getpocket.com/v3/oauth/authorize"
-#     payload = {"consumer_key": POCKET_CONSUMER_KEY,
-#                "code": code}
-#     response = requests.request("POST", url, params=payload)
-#     print(response)
+
+def get_pocket_access_token():
+    code = pocket_request_token()
+    print(code)
+    url = "https://getpocket.com/v3/oauth/authorize"
+    payload = {"consumer_key": POCKET_CONSUMER_KEY,
+               "code": code}
+    response = requests.request("POST", url, params=payload)
+    print(response)
+    print(response.text)
+    print(response.headers)
 

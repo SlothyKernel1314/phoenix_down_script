@@ -117,8 +117,8 @@ logger_script()
 # get_subscribed_subreddits()
 
 # POCKET SAMPLE
-pocket_request_token()
+# pocket_request_token()
 # authorize_app()
-# get_pocket_access_token()
+get_pocket_access_token()
 
 
