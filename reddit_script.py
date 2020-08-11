@@ -7,9 +7,6 @@ from constants import *
 import requests
 import requests.auth
 
-# Oath2 Reddit quick start : https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example
-# Oath2 Reddit documentation : https://github.com/reddit-archive/reddit/wiki/OAuth2
-
 
 class RedditScript:
     def __init__(self):

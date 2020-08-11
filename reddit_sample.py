@@ -6,9 +6,6 @@ from constants import *
 import requests
 import requests.auth
 
-# Oath2 Reddit quick start : https://github.com/reddit-archive/reddit/wiki/OAuth2-Quick-Start-Example
-# Oath2 Reddit documentation : https://github.com/reddit-archive/reddit/wiki/OAuth2
-
 
 def reddit_request_token():
     client_auth = requests.auth.HTTPBasicAuth(REDDIT_APP_CLIENT_KEY, REDDIT_API_SECRET_KEY)
