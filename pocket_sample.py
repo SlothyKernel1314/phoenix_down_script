@@ -12,5 +12,6 @@ def pocket_request_token():
     payload = {"consumer_key": POCKET_CONSUMER_KEY,
                "redirect_uri":"pocketapp1234:authorizationFinished"}
     response = requests.request("POST", url, params=payload)
-    return response
+    token = response.text
+    return token
 
