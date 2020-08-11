@@ -118,4 +118,7 @@ logger_script()
 
 # POCKET SAMPLE
 pocket_request_token()
+# authorize_app()
+# get_pocket_access_token()
+
 

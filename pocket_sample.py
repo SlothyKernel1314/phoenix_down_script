@@ -12,6 +12,25 @@ def pocket_request_token():
     payload = {"consumer_key": POCKET_CONSUMER_KEY,
                "redirect_uri":"pocketapp1234:authorizationFinished"}
     response = requests.request("POST", url, params=payload)
-    token = response.text
-    return token
+    datas = response.text
+    split_datas = datas.split("=")
+    request_token = split_datas[1]
+    return request_token
+
+
+def authorize_app():
+    code = pocket_request_token()
+    url = "https://getpocket.com/auth/authorize?request_token=" \
+          + code + "&redirect_uri=pocketapp1234:authorizationFinished"
+    print(url)
+
+
+# def get_pocket_access_token():
+#     code = pocket_request_token()
+#     print(code)
+#     url = "https://getpocket.com/v3/oauth/authorize"
+#     payload = {"consumer_key": POCKET_CONSUMER_KEY,
+#                "code": code}
+#     response = requests.request("POST", url, params=payload)
+#     print(response)
 
