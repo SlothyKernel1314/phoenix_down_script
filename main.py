@@ -13,19 +13,6 @@
 # |I|A|m|T|e|r|r|o|r|
 # +-+-+-+-+-+-+-+-+-+
 
-# Licence :
-# Everyone is permitted to copy and distribute verbatim or modified
-# copies of this license document, and changing it is allowed as long
-# as the name is changed.
-#
-#            DO WHAT THE FUCK YOU WANT TO PUBLIC LICENSE
-#   TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-#
-#  0. You just DO WHAT THE FUCK YOU WANT TO.
-
-# Notes :
-# Python script tested on Ubuntu Linux. It can run on Windows with minor adjustements.
-
 
 ########################################################################################################################
 
@@ -48,6 +35,7 @@ from steam_script import *
 from reddit_sample import *
 from reddit_script import *
 from pocket_sample import *
+from pocket_script import *
 from setup_logger import *
 
 
@@ -78,6 +66,9 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 
 # rs = RedditScript()
 # rs.run_script()
+
+ps = PocketScript()
+ps.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -121,6 +112,6 @@ logger_script()
 # authorize_app()
 # get_pocket_access_token()
 # authorize_app_and_get_access_token()
-get_user_datas()
+# get_user_datas()
 
 
