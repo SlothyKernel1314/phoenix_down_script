@@ -120,6 +120,7 @@ logger_script()
 # pocket_request_token()
 # authorize_app()
 # get_pocket_access_token()
-authorize_app_and_get_access_token()
+# authorize_app_and_get_access_token()
+get_user_datas()
 
 

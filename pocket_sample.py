@@ -13,7 +13,7 @@ import sys
 def pocket_request_token():
     url = "https://getpocket.com/v3/oauth/request"
     payload = {"consumer_key": POCKET_CONSUMER_KEY,
-               "redirect_uri":"pocketapp1234:authorizationFinished"}
+               "redirect_uri": "pocketapp1234:authorizationFinished"}
     response = requests.request("POST", url, params=payload)
     datas = response.text
     split_datas = datas.split("=")
@@ -48,5 +48,16 @@ def authorize_app_and_get_access_token():
     split_datas = datas.replace('=', ' ').replace('&', ' ').split()
     access_token = split_datas[1]
     return access_token
+
+
+def get_user_datas():
+    access_token = authorize_app_and_get_access_token()
+    url = "https://getpocket.com/v3/get"
+    payload = {"consumer_key": POCKET_CONSUMER_KEY,
+               "access token": access_token}
+    response = requests.request("POST", url, params=payload)
+    datas = response.text
+    return datas
+
 
 
