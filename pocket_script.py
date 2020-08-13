@@ -7,6 +7,7 @@ import os
 from selenium.webdriver.firefox.firefox_binary import FirefoxBinary
 from selenium import webdriver
 import sys
+import pandas
 
 
 class PocketScript:
@@ -55,7 +56,7 @@ class PocketScript:
         url = "https://getpocket.com/v3/get"
         payload = {"consumer_key": POCKET_CONSUMER_KEY, "access token": access_token}
         response = requests.request("POST", url, params=payload)
-        datas = response.text
+        datas = response.json()
         return datas
 
     def run_script(self):
@@ -63,13 +64,18 @@ class PocketScript:
 
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
 
-        user = self.get_user_datas()
+        user_datas = self.get_user_datas()
 
         logging.info('creating pocket log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
         file = open(file_name, "w", encoding="utf-8")
 
-        logging.info('writing in reddit log file...')
+        logging.info('writing in pocket log file...')
         # processing of saved articles
-        file.write("##### Saved articles of " + user + " reddit user (JSON) :")
+        file.write("##### Saved articles of BigBossFF pocket user (list) :")
         file.write("\n\n")
+
+        dataframe = pandas.DataFrame(user_datas['list'])
+        dataframe = dataframe.transpose()
+        print(dataframe)
+

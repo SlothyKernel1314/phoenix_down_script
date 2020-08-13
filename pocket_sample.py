@@ -56,7 +56,7 @@ def get_user_datas():
     payload = {"consumer_key": POCKET_CONSUMER_KEY,
                "access token": access_token}
     response = requests.request("POST", url, params=payload)
-    datas = response.text
+    datas = response.json()
     return datas
 
 
