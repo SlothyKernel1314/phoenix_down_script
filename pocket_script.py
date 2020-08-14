@@ -74,8 +74,15 @@ class PocketScript:
         # processing of saved articles
         file.write("##### Saved articles of BigBossFF pocket user (list) :")
         file.write("\n\n")
-
+        pandas.set_option('max_rows', None)  # return ALL rows setting
         dataframe = pandas.DataFrame(user_datas['list'])
         dataframe = dataframe.transpose()
-        print(dataframe)
+        articles_counter = 0
+        for row in dataframe.itertuples():
+            articles_counter += 1
+            file.write(str(articles_counter) + " --- " + row.item_id
+                       + " --- " + row.given_title + " --- " + row.given_url)
+            file.write("\n")
+        file.write("\n\n")
+        file.write("BigBossFF Pocket user have " + str(articles_counter) + " saved articles")
 
