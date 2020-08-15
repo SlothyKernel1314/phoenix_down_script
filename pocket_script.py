@@ -93,3 +93,12 @@ class PocketScript:
         logging.info('writing in pocket log file done')
         file.close()
 
+        # opens the file for reading only in binary format in order to upload
+        file = open(file_name, "rb")
+
+        upload_file_to_server_ftp(file, file_name, self.application_name)
+
+        file.close()
+
+        logging.info('pocket script is terminated')
+
