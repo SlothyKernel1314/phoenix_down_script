@@ -85,4 +85,11 @@ class PocketScript:
             file.write("\n")
         file.write("\n\n")
         file.write("BigBossFF Pocket user have " + str(articles_counter) + " saved articles")
+        file.write("\n\n\n\n")
+        file.write("##### Saved articles of BigBossFF pocket user (JSON) :")
+        file.write("\n\n")
+        file.write(str(user_datas))
+
+        logging.info('writing in pocket log file done')
+        file.close()
 
