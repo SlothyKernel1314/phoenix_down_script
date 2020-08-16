@@ -19,6 +19,7 @@ def get_authenticated_service():
     api_version = "v3"
     client_secrets_file = "/mnt/C26C9CBE6C9CAF23/OUTER_HEAVEN/projects/sysscripts/" \
                           "phoenix_down_script/client_secret.json"
+    # TODO : transformer en constante pour déploiement plus facile
     credential_path = os.path.join('./', 'credential_sample.json')
     store = Storage(credential_path)
     credentials = store.get()
@@ -40,13 +41,16 @@ def get_channel_details_by_channel_id(channel_id):
     return response
 
 
-def get_my_subscriptions():
+def get_my_subscriptions(next_token=None, saved_posts_count=0, all_datas=None):
+    if all_datas is None:
+        all_datas = []
     youtube = get_authenticated_service()
     request = youtube.subscriptions().list(
-        part="snippet,contentDetails",
-        maxResults=50,
-        mine=True
-    )
+            part="snippet,contentDetails",
+            maxResults=50,
+            mine=True,
+            pageToken=None if next_token is None else next_token
+        )
     response = request.execute()
     print(response)
     return response
