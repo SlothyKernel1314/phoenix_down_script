@@ -29,11 +29,23 @@ def get_authenticated_service():
                                            credentials=credentials, cache_discovery=False)
 
 
-def get_channel_by_id(channel_id):
+def get_channel_details_by_channel_id(channel_id):
     youtube = get_authenticated_service()
     request = youtube.channels().list(
         part="snippet,contentDetails,statistics",
         id=channel_id
+    )
+    response = request.execute()
+    print(response)
+    return response
+
+
+def get_my_subscriptions():
+    youtube = get_authenticated_service()
+    request = youtube.subscriptions().list(
+        part="snippet,contentDetails",
+        maxResults=50,
+        mine=True
     )
     response = request.execute()
     print(response)

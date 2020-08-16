@@ -116,7 +116,8 @@ logger_script()
 # get_user_datas()
 
 # YOUTUBE SAMPLE
-get_channel_by_id(YOUTUBE_USER_ID)
+# get_channel_details_by_channel_id(YOUTUBE_USER_ID)
+get_my_subscriptions()
 
 
 
