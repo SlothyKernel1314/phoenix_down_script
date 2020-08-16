@@ -41,7 +41,7 @@ def get_channel_details_by_channel_id(channel_id):
     return response
 
 
-def get_my_subscriptions(next_token=None, saved_posts_count=0, all_datas=None):
+def get_my_subscriptions(next_page_token=None, all_datas=None):
     if all_datas is None:
         all_datas = []
     youtube = get_authenticated_service()
@@ -49,8 +49,15 @@ def get_my_subscriptions(next_token=None, saved_posts_count=0, all_datas=None):
             part="snippet,contentDetails",
             maxResults=50,
             mine=True,
-            pageToken=None if next_token is None else next_token
+            pageToken=None if next_page_token is None else next_page_token
         )
     response = request.execute()
-    print(response)
-    return response
+    all_datas.append(response)
+    if 'nextPageToken' in response:
+        next_page_token = response['nextPageToken']
+    nb_suscriptions = response['pageInfo']['totalResults']
+    if 'nextPageToken' in response and next_page_token is not None:
+        get_my_subscriptions(next_page_token, all_datas)
+    else:
+        print(all_datas)
+        return all_datas
