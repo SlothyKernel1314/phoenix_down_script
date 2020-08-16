@@ -28,11 +28,12 @@ def get_authenticated_service():
     return googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
 
 
-def get_channel_by_id():
+def get_channel_by_id(channel_id):
     youtube = get_authenticated_service()
     request = youtube.channels().list(
         part="snippet,contentDetails,statistics",
-        id="UC_x5XG1OV2P6uZZ5FSM9Ttw"
+        id=channel_id
     )
     response = request.execute()
     print(response)
+    return response
