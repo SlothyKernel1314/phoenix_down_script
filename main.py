@@ -116,7 +116,7 @@ logger_script()
 # get_user_datas()
 
 # YOUTUBE SAMPLE
-main()
+get_channel_by_id()
 
 
 
