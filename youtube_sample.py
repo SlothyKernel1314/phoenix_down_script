@@ -60,4 +60,17 @@ def get_my_subscriptions(next_page_token=None, all_datas=None):
         get_my_subscriptions(next_page_token, all_datas)
     else:
         print(all_datas)
-        return all_datas
+        return all_datas, nb_suscriptions
+
+
+def get_playlists_by_channel_id(channel_id):
+    youtube = get_authenticated_service()
+    request = youtube.channels().list(
+        part="snippet,contentDetails,statistics",
+        id=channel_id
+    )
+    response = request.execute()
+    items = response['items'][0]
+    dictionnary_of_playlists_names_with_their_ids = items['contentDetails']['relatedPlaylists']
+    print(dictionnary_of_playlists_names_with_their_ids)
+
