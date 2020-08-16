@@ -73,4 +73,5 @@ def get_playlists_by_channel_id(channel_id):
     items = response['items'][0]
     dictionnary_of_playlists_names_with_their_ids = items['contentDetails']['relatedPlaylists']
     print(dictionnary_of_playlists_names_with_their_ids)
+    return dictionnary_of_playlists_names_with_their_ids
 
