@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+# !/usr/bin/env python
+
 from utilities import *
 from constants import *
 from credentials import *

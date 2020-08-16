@@ -36,6 +36,7 @@ from reddit_sample import *
 from reddit_script import *
 from pocket_sample import *
 from pocket_script import *
+from youtube_sample import *
 from setup_logger import *
 
 
@@ -67,8 +68,8 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 # rs = RedditScript()
 # rs.run_script()
 
-ps = PocketScript()
-ps.run_script()
+# ps = PocketScript()
+# ps.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -113,5 +114,9 @@ logger_script()
 # get_pocket_access_token()
 # authorize_app_and_get_access_token()
 # get_user_datas()
+
+# YOUTUBE SAMPLE
+main()
+
 
 
