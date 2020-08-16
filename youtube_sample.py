@@ -25,7 +25,8 @@ def get_authenticated_service():
     if not credentials or credentials.invalid:
         flow = client.flow_from_clientsecrets(client_secrets_file, scopes)
         credentials = tools.run_flow(flow, store)
-    return googleapiclient.discovery.build(api_service_name, api_version, credentials=credentials)
+    return googleapiclient.discovery.build(api_service_name, api_version,
+                                           credentials=credentials, cache_discovery=False)
 
 
 def get_channel_by_id(channel_id):
