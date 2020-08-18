@@ -11,6 +11,7 @@ import googleapiclient.errors
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
+from constants import *
 
 
 def get_authenticated_service():
@@ -74,4 +75,17 @@ def get_playlists_by_channel_id(channel_id):
     dictionnary_of_playlists_names_with_their_ids = items['contentDetails']['relatedPlaylists']
     print(dictionnary_of_playlists_names_with_their_ids)
     return dictionnary_of_playlists_names_with_their_ids
+
+
+def get_playlist_items_by_playlist_id():
+    youtube = get_authenticated_service()
+    request = youtube.playlistItems().list(
+        part="snippet,contentDetails",
+        maxResults=10,
+        playlistId=YOUTUBE_USER_PLAYLIST_FAVORITES_ID
+    )
+    response = request.execute()
+    print(response)
+    return response
+
 

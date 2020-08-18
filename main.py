@@ -118,7 +118,8 @@ logger_script()
 # YOUTUBE SAMPLE
 # get_channel_details_by_channel_id(YOUTUBE_USER_ID)
 # get_my_subscriptions()
-get_playlists_by_channel_id(YOUTUBE_USER_ID)
+# get_playlists_by_channel_id(YOUTUBE_USER_ID)
+get_playlist_items_by_playlist_id()
 
 
 
