@@ -38,11 +38,12 @@ from pocket_sample import *
 from pocket_script import *
 from youtube_sample import *
 from setup_logger import *
+from youtube_script import *
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
-# TODO : gérer exceptions (erreurs)
+# TODO : gérer exceptions (erreurs) + logs en conséquence
 # TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello)
 
 logging.info('Phoenix Down Script started !')
@@ -70,6 +71,9 @@ create_directory(PD_SCRIPT_ROOT_PATH)
 
 # ps = PocketScript()
 # ps.run_script()
+
+ys = YoutubeScript()
+ys.run_script()
 
 logging.info('Phoenix Down Script finished !')
 
@@ -119,7 +123,7 @@ logger_script()
 # get_channel_details_by_channel_id(YOUTUBE_USER_ID)
 # get_my_subscriptions()
 # get_playlists_by_channel_id(YOUTUBE_USER_ID)
-get_playlist_items_by_playlist_id(YOUTUBE_USER_PLAYLIST_FAVORITES_ID)
+# get_playlist_items_by_playlist_id(YOUTUBE_USER_PLAYLIST_FAVORITES_ID)
 
 
 

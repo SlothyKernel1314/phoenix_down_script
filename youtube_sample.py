@@ -1,10 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 
-# Sample Python code for youtube.channels.list
-# See instructions for running these code samples locally:
-# https://developers.google.com/explorer-help/guides/code_samples#python
-
 import os
 import googleapiclient.discovery
 import googleapiclient.errors
@@ -18,8 +14,7 @@ def get_authenticated_service():
     scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
     api_service_name = "youtube"
     api_version = "v3"
-    client_secrets_file = "/mnt/C26C9CBE6C9CAF23/OUTER_HEAVEN/projects/sysscripts/" \
-                          "phoenix_down_script/client_secret.json"
+    client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
     # TODO : transformer en constante pour déploiement plus facile
     credential_path = os.path.join('./', 'credential_sample.json')
     store = Storage(credential_path)
