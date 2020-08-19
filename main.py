@@ -119,7 +119,7 @@ logger_script()
 # get_channel_details_by_channel_id(YOUTUBE_USER_ID)
 # get_my_subscriptions()
 # get_playlists_by_channel_id(YOUTUBE_USER_ID)
-get_playlist_items_by_playlist_id()
+get_playlist_items_by_playlist_id(YOUTUBE_USER_PLAYLIST_FAVORITES_ID)
 
 
 

@@ -77,15 +77,26 @@ def get_playlists_by_channel_id(channel_id):
     return dictionnary_of_playlists_names_with_their_ids
 
 
-def get_playlist_items_by_playlist_id():
+def get_playlist_items_by_playlist_id(playlist_id, next_page_token=None, all_datas=None):
+    if all_datas is None:
+        all_datas = []
     youtube = get_authenticated_service()
     request = youtube.playlistItems().list(
         part="snippet,contentDetails",
-        maxResults=10,
-        playlistId=YOUTUBE_USER_PLAYLIST_FAVORITES_ID
+        maxResults=50,
+        playlistId=playlist_id,
+        pageToken=None if next_page_token is None else next_page_token
     )
     response = request.execute()
-    print(response)
-    return response
+    all_datas.append(response)
+    if 'nextPageToken' in response:
+        next_page_token = response['nextPageToken']
+    nb_suscriptions = response['pageInfo']['totalResults']
+    if 'nextPageToken' in response and next_page_token is not None:
+        get_playlist_items_by_playlist_id(playlist_id, next_page_token, all_datas)
+    else:
+        print(all_datas)
+        return all_datas, nb_suscriptions
+
 
 
