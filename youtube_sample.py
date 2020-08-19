@@ -58,7 +58,7 @@ def get_my_subscriptions(next_page_token=None, all_datas=None):
         next_page_token = response['nextPageToken']
     nb_suscriptions = response['pageInfo']['totalResults']
     if 'nextPageToken' in response and next_page_token is not None:
-        get_my_subscriptions(next_page_token, all_datas)
+        return get_my_subscriptions(next_page_token, all_datas)
     else:
         print(all_datas)
         return all_datas, nb_suscriptions
@@ -93,7 +93,7 @@ def get_playlist_items_by_playlist_id(playlist_id, next_page_token=None, all_dat
         next_page_token = response['nextPageToken']
     nb_suscriptions = response['pageInfo']['totalResults']
     if 'nextPageToken' in response and next_page_token is not None:
-        get_playlist_items_by_playlist_id(playlist_id, next_page_token, all_datas)
+        return get_playlist_items_by_playlist_id(playlist_id, next_page_token, all_datas)
     else:
         print(all_datas)
         return all_datas, nb_suscriptions
