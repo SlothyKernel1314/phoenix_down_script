@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
+import json
 
 from utilities import *
 from constants import *
@@ -20,6 +21,7 @@ class YoutubeScript:
         api_service_name = "youtube"
         api_version = "v3"
         client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
+        # TODO : modifier le chemin + constante
         credential_path = os.path.join('./', 'credential_sample.json')
         store = Storage(credential_path)
         credentials = store.get()
@@ -28,15 +30,6 @@ class YoutubeScript:
             credentials = tools.run_flow(flow, store)
         return googleapiclient.discovery.build(api_service_name, api_version,
                                                credentials=credentials, cache_discovery=False)
-
-    def get_channel_details_by_channel_id(self, channel_id):
-        youtube = self.get_authenticated_service()
-        request = youtube.channels().list(
-            part="snippet,contentDetails,statistics",
-            id=channel_id
-        )
-        response = request.execute()
-        return response
 
     def get_my_subscriptions(self, next_page_token=None, all_datas=None):
         if all_datas is None:
@@ -63,9 +56,9 @@ class YoutubeScript:
 
         create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
 
-        user_datas = self.get_channel_details_by_channel_id()
-
         my_subscriptions = self.get_my_subscriptions()
+        my_subscriptions_all_datas = my_subscriptions[0]
+        my_subscriptions_count = my_subscriptions[1]
 
         logging.info('creating youtube log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -75,3 +68,25 @@ class YoutubeScript:
         # processing of youtube subscriptions
         file.write("##### Youtube subscriptions of BigBossFF user (list) :")
         file.write("\n\n")
+        for json in my_subscriptions_all_datas:
+            items = json['items']
+            for item in items:
+                channel_id = item['snippet']['resourceId']['channelId']
+                channel_title = item['snippet']['title']
+                file.write(channel_id + " ----- " + channel_title)
+                file.write("\n")
+        file.write("\n\n")
+        file.write("BigBossFF Youtube user have " + str(my_subscriptions_count) + " suscribed channels")
+        file.write("\n\n\n\n")
+        file.write("##### Youtube subscriptions of BigBossFF user (JSON) :")
+        for json in my_subscriptions_all_datas:
+            file.write(str(json))
+            file.write("\n\n\n\n")
+        file.write("\n\n\n\n")
+
+
+
+
+
+
+
