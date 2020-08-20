@@ -123,6 +123,16 @@ class YoutubeScript:
             file.write(str(json))
             file.write("\n\n\n\n")
         file.write("\n\n\n\n")
+        file.write("##### Youtube playlists of BigBossFF user :")
+        print(my_playlists)
+        for playlist in my_playlists:
+            print(playlist)
+            print(my_playlists[playlist])
+            file.write("\n\n")
+            file.write("### Playlist : " + playlist + " (list)")
+            file.write("\n\n")
+            playlist_content = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
+
 
 
 
