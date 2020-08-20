@@ -148,7 +148,17 @@ class YoutubeScript:
                        " videos in " + playlist.capitalize() + " playlist")
             file.write("\n\n\n\n")
 
+        logging.info('writing in youtube log file done')
+        file.close()
 
+        # opens the file for reading only in binary format in order to upload
+        file = open(file_name, "rb")
+
+        upload_file_to_server_ftp(file, file_name, self.application_name)
+
+        file.close()
+
+        logging.info('youtube script is terminated')
 
 
 
