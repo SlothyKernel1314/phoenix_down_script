@@ -119,19 +119,36 @@ class YoutubeScript:
         file.write("BigBossFF Youtube user have " + str(my_subscriptions_count) + " suscribed channels")
         file.write("\n\n\n\n")
         file.write("##### Youtube subscriptions of BigBossFF user (JSON) :")
+        file.write("\n\n")
         for json in my_subscriptions_all_datas:
             file.write(str(json))
             file.write("\n\n\n\n")
         file.write("\n\n\n\n")
+        # processing of youtube playlists
         file.write("##### Youtube playlists of BigBossFF user :")
-        print(my_playlists)
         for playlist in my_playlists:
-            print(playlist)
-            print(my_playlists[playlist])
             file.write("\n\n")
             file.write("### Playlist : " + playlist + " (list)")
             file.write("\n\n")
-            playlist_content = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
+            playlist_content_all_datas = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
+            for json in playlist_content_all_datas[0]:
+                items = json['items']
+                for item in items:
+                    item_id = item['snippet']['resourceId']['videoId']
+                    item_title = item['snippet']['title']
+                    file.write(item_id + " ----- " + item_title)
+                    file.write("\n")
+            file.write("\n\n")
+            file.write("### Playlist : " + playlist + " (JSON)")
+            for json in playlist_content_all_datas[0]:
+                file.write("\n\n")
+                file.write(str(json))
+                file.write("\n\n")
+            file.write("There are " + str(playlist_content_all_datas[1]) +
+                       " videos in " + playlist.capitalize() + " playlist")
+            file.write("\n\n\n\n")
+
+
 
 
 
