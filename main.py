@@ -49,7 +49,7 @@ from youtube_script import *
 logging.info('Phoenix Down Script started !')
 
 logging.info("creating the root path directory of Phoenix Down Script...")
-create_directory(PD_SCRIPT_ROOT_PATH)
+create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 
 # tlls = TrelloScript()
 # tlls.run_script()

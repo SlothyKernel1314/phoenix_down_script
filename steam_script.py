@@ -69,7 +69,7 @@ class SteamScript:
     def run_script(self):
         logging.info('steam script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         user = self.get_user_name(STEAM_USER_ID)
 

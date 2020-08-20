@@ -31,7 +31,7 @@ class TwitterScript:
 
         logging.info('twitter script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         api = self.api
 

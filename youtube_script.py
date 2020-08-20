@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
-import json
 
 from utilities import *
 from constants import *
@@ -22,7 +21,7 @@ class YoutubeScript:
         api_version = "v3"
         client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
         # TODO : modifier le chemin + constante
-        credential_path = os.path.join('./', 'credential_sample.json')
+        credential_path = os.path.join(PD_SCRIPT_ROOT_APP_PATH + '/', 'credential_sample.json')
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
@@ -92,7 +91,7 @@ class YoutubeScript:
     def run_script(self):
         logging.info('youtube script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         my_subscriptions = self.get_my_subscriptions()
         my_subscriptions_all_datas = my_subscriptions[0]

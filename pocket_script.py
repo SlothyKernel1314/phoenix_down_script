@@ -65,7 +65,7 @@ class PocketScript:
     def run_script(self):
         logging.info('pocket script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         user_datas = self.get_user_datas()
 

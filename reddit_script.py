@@ -75,7 +75,7 @@ class RedditScript:
     def run_script(self):
         logging.info('reddit script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         username = self.get_username()
 

@@ -49,7 +49,7 @@ class TrelloScript:
 
         logging.info('trello script is running...')
 
-        create_directory(PD_SCRIPT_ROOT_PATH + "/" + self.application_name)
+        create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         shortlinks_as_keys_with_values = self.get_boards_shortlinks_as_keys_with_values(
             PD_SCRIPT_TRELLO_MEMBER_USERNAME)
