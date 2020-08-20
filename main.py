@@ -39,7 +39,6 @@ from pocket_script import *
 from youtube_sample import *
 from youtube_script import *
 from setup_logger import *
-from discord_sample import *
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
@@ -66,13 +65,13 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 #
 # stms = SteamScript()
 # stms.run_script()
-
+#
 # rs = RedditScript()
 # rs.run_script()
-
+#
 # ps = PocketScript()
 # ps.run_script()
-
+#
 # ys = YoutubeScript()
 # ys.run_script()
 
@@ -125,10 +124,6 @@ logger_script()
 # get_my_subscriptions()
 # get_playlists_by_channel_id(YOUTUBE_USER_ID)
 # get_playlist_items_by_playlist_id(YOUTUBE_USER_PLAYLIST_FAVORITES_ID)
-
-# DISCORD SAMPLE
-get_token()
-# get_current_user()
 
 
 
