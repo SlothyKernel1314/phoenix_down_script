@@ -83,10 +83,10 @@ logger_script()
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------
 
 # TRELLO SAMPLE
-# get_board_by_id_sample_version(TRELLO_MBL_BOARD_ID)
-# get_open_cards_by_board_id_sample_version(TRELLO_MBL_BOARD_ID)
-# get_card_by_id_sample_version(TRELLO_CH_CARD_ID)
-# get_boards_by_member_username_sample_version(TRELLO_MEMBER_USERNAME)
+# get_board_by_id(TRELLO_MBL_BOARD_ID)
+# get_open_cards_by_board_id(TRELLO_MBL_BOARD_ID)
+# get_card_by_id(TRELLO_CH_CARD_ID)
+# get_boards_by_member_username(TRELLO_MEMBER_USERNAME)
 
 # TWITTER SAMPLE
 # get_timeline()

@@ -5,7 +5,7 @@ from credentials import *
 import requests
 
 
-def get_board_by_id_sample_version(id):
+def get_board_by_id(id):
     url = "https://api.trello.com/1/boards/" + id + "/"
     querystring = {"actions": "all", "boardStars": "none", "cards": "none", "card_pluginData": "false",
                    "checklists": "none",
@@ -19,7 +19,7 @@ def get_board_by_id_sample_version(id):
     print(response.text)
 
 
-def get_open_cards_by_board_id_sample_version(id):
+def get_open_cards_by_board_id(id):
     url = "https://api.trello.com/1/boards/" + id + "/lists"
     querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
                    "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
@@ -27,7 +27,7 @@ def get_open_cards_by_board_id_sample_version(id):
     print(response.text)
 
 
-def get_card_by_id_sample_version(id):
+def get_card_by_id(id):
     url = "https://api.trello.com/1/cards/" + id + ""
     querystring = {"attachments": "false", "attachment_fields": "all", "members": "false", "membersVoted": "false",
                    "checkItemStates": "false", "checklists": "none", "checklist_fields": "all", "board": "false",
@@ -37,7 +37,7 @@ def get_card_by_id_sample_version(id):
     print(response.text)
 
 
-def get_boards_by_member_username_sample_version(username):
+def get_boards_by_member_username(username):
     url = "https://api.trello.com/1/members/" + username + "/boards"
     querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none", "organization": "false",
                    "organization_fields": "name,displayName", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
