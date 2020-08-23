@@ -47,18 +47,29 @@ def get_boards_by_member_username(username):
     print(response.text)
 
 
-# def post_card():
-#     url = "https://api.trello.com/1/cards"
-#     name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
-#     description = "TEST_description"
-#     position = "top"
-#     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "des": description,
-#                    "pos": position, "idList": pass}
-#     response = requests.request("POST", url, params=querystring)
-#     print(response.text)
-
-def get_list_on_a_board(board_id):
+def get_lists_on_a_board(board_id):
     url = "https://api.trello.com/1/boards/" + board_id + "/lists"
     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
     response = requests.request("GET", url, params=querystring)
     print(response.text)
+
+
+def get_labels_on_a_board(board_id):
+    url = "https://api.trello.com/1/boards/" + board_id + "/labels"
+    querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+    response = requests.request("GET", url, params=querystring)
+    print(response.text)
+
+
+# def create_a_new_card(list_id):
+#     url = "https://api.trello.com/1/cards"
+#     name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
+#     description = "TEST_description"
+#     position = "top"
+#     labels = []
+#     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "des": description,
+#                    "pos": position, "idList": list_id, "idLabels": labels}
+#     response = requests.request("POST", url, params=querystring)
+#     print(response.text)
+
+
