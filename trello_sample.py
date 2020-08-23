@@ -2,7 +2,9 @@
 # !/usr/bin/env python
 
 from credentials import *
+from constants import *
 import requests
+import time
 
 
 def get_board_by_id(id):
@@ -41,5 +43,22 @@ def get_boards_by_member_username(username):
     url = "https://api.trello.com/1/members/" + username + "/boards"
     querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none", "organization": "false",
                    "organization_fields": "name,displayName", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+    response = requests.request("GET", url, params=querystring)
+    print(response.text)
+
+
+# def post_card():
+#     url = "https://api.trello.com/1/cards"
+#     name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
+#     description = "TEST_description"
+#     position = "top"
+#     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "des": description,
+#                    "pos": position, "idList": pass}
+#     response = requests.request("POST", url, params=querystring)
+#     print(response.text)
+
+def get_list_on_a_board(board_id):
+    url = "https://api.trello.com/1/boards/" + board_id + "/lists"
+    querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
     response = requests.request("GET", url, params=querystring)
     print(response.text)

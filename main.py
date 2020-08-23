@@ -87,6 +87,7 @@ logger_script()
 # get_open_cards_by_board_id(TRELLO_MBL_BOARD_ID)
 # get_card_by_id(TRELLO_CH_CARD_ID)
 # get_boards_by_member_username(TRELLO_MEMBER_USERNAME)
+get_list_on_a_board(TRELLO_MBL_BOARD_ID)
 
 # TWITTER SAMPLE
 # get_timeline()

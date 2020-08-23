@@ -52,7 +52,7 @@ class TrelloScript:
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         shortlinks_as_keys_with_values = self.get_boards_shortlinks_as_keys_with_values(
-            PD_SCRIPT_TRELLO_MEMBER_USERNAME)
+            TRELLO_MEMBER_USERNAME)
 
         logging.info('creating trello log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
@@ -67,7 +67,7 @@ class TrelloScript:
             file.write(str(datas))
             file.write("\n\n\n\n")
         # processing of particulary valuable cards
-        for card in PD_SCRIPT_TRELLO_CARDS_IDS:
+        for card in TRELLO_CARDS_IDS:
             datas = self.get_card_by_id(card)
             name_card = datas['name']
             file.write("##### JSON datas of " + str(name_card) + " valuable card : \n\n")
