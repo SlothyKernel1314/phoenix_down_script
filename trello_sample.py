@@ -61,15 +61,15 @@ def get_labels_on_a_board(board_id):
     print(response.text)
 
 
-# def create_a_new_card(list_id):
-#     url = "https://api.trello.com/1/cards"
-#     name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
-#     description = "TEST_description"
-#     position = "top"
-#     labels = []
-#     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "des": description,
-#                    "pos": position, "idList": list_id, "idLabels": labels}
-#     response = requests.request("POST", url, params=querystring)
-#     print(response.text)
+def create_a_new_card(list_id, labels_id):
+    url = "https://api.trello.com/1/cards"
+    name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
+    description = "TEST_description"
+    position = "top"
+    labels = []
+    querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "desc": description,
+                   "pos": position, "idList": list_id, "idLabels": labels_id}
+    response = requests.request("POST", url, params=querystring)
+    print(response.text)
 
 
