@@ -66,7 +66,6 @@ def create_a_new_card(list_id, labels_id):
     name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
     description = "TEST_description"
     position = "top"
-    labels = []
     querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "desc": description,
                    "pos": position, "idList": list_id, "idLabels": labels_id}
     response = requests.request("POST", url, params=querystring)
