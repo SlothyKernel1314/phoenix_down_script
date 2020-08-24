@@ -43,19 +43,27 @@ class AlertScript:
         response = requests.request("POST", url, params=querystring)
 
     def parse_logger_file_and_create_alert_mail_message(self, logger_file_to_parse):
+        alert_mail_message = ""
         warnings_count = 0
         errors_count = 0
         # opens the file for reading only
         file = open(logger_file_to_parse, "r")
         for line in file.readlines():
+            print(line)
             if "[WARNING]" in line:
                 print(line + "oh un warning")
+                warnings_count += 1
             if "[ERROR]" in line:
                 print(line + "oh un error")
+                errors_count += 1
         file.close()
+        print(str(warnings_count) + "---" + str(errors_count))
+        return alert_mail_message
 
     def run_script(self):
         logger_file_to_parse = get_the_latest_file_in_a_folder(PD_SCRIPT_ROOT_LOGS_PATH + self.logger_sub_path)
+
+        print(logger_file_to_parse)
 
         self.parse_logger_file_and_create_alert_mail_message(logger_file_to_parse)
 
