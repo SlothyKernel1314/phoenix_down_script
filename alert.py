@@ -11,6 +11,13 @@ from utilities import *
 class AlertScript:
     def __init__(self):
         self.logger_sub_path = "/logger"
+        self.warnings_count = 0
+        self.errors_count = 0
+        self.alert_mail_message = "During the last execution of Phoenix Down Script, " \
+                                  "the logger returned " + str(self.warnings_count) + \
+                                  " warning messages, and " \
+                                  + str(self.errors_count) + " error messages. " \
+                                                             "Please check that the script is working properly !"
 
     def get_board_by_id(self, id):
         url = "https://api.trello.com/1/boards/" + id + "/"
@@ -43,12 +50,9 @@ class AlertScript:
         response = requests.request("POST", url, params=querystring)
 
     def parse_logger_file_and_create_alert_mail_message(self, logger_file_to_parse):
-        warnings_count = 0
-        errors_count = 0
-        alert_mail_message = "During the last execution of Phoenix Down Script, " \
-                             "the logger returned " + str(warnings_count) + \
-                             " warning messages, and " \
-                             + str(errors_count) + " error messages. Please check that the script is working properly"
+        warnings_count = self.warnings_count
+        errors_count = self.errors_count
+        alert_mail_message = self.alert_mail_message
     # opens the file for reading only
         file = open(logger_file_to_parse, "r")
         for line in file.readlines():
@@ -58,6 +62,7 @@ class AlertScript:
             if "[ERROR]" in line:
                 errors_count += 1
         file.close()
+        print(alert_mail_message)
         return alert_mail_message
 
     def run_script(self):
