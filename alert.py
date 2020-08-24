@@ -11,13 +11,6 @@ from utilities import *
 class AlertScript:
     def __init__(self):
         self.logger_sub_path = "/logger"
-        self.warnings_count = 0
-        self.errors_count = 0
-        self.alert_mail_message = "During the last execution of Phoenix Down Script, " \
-                                  "the logger returned " + str(self.warnings_count) + \
-                                  " warning messages, and " \
-                                  + str(self.errors_count) + " error messages. " \
-                                                             "Please check that the script is working properly !"
 
     def get_board_by_id(self, id):
         url = "https://api.trello.com/1/boards/" + id + "/"
@@ -43,17 +36,16 @@ class AlertScript:
 
     def create_a_new_card_with_alert_message(self, list_id, labels_id, alert_message):
         url = "https://api.trello.com/1/cards"
-        name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "TEST_card"
+        name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "Phoenix_Down_Script_ALERT"
         position = "top"
         querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "desc": alert_message,
                        "pos": position, "idList": list_id, "idLabels": labels_id}
         response = requests.request("POST", url, params=querystring)
 
     def parse_logger_file_and_create_alert_mail_message(self, logger_file_to_parse):
-        warnings_count = self.warnings_count
-        errors_count = self.errors_count
-        alert_mail_message = self.alert_mail_message
-    # opens the file for reading only
+        warnings_count = 0
+        errors_count = 0
+        # opens the file for reading only
         file = open(logger_file_to_parse, "r")
         for line in file.readlines():
             print(line)
@@ -62,14 +54,20 @@ class AlertScript:
             if "[ERROR]" in line:
                 errors_count += 1
         file.close()
-        print(alert_mail_message)
-        return alert_mail_message
+        alert_mail_message = "During the last execution of Phoenix Down Script, " \
+                             "the logger returned " + str(warnings_count) + \
+                             " warning messages, and " \
+                             + str(errors_count) + " error messages. " \
+                                                   "Please check that the script is working properly !"
+        return alert_mail_message, warnings_count, errors_count
 
     def run_script(self):
         logger_file_to_parse = get_the_latest_file_in_a_folder(PD_SCRIPT_ROOT_LOGS_PATH + self.logger_sub_path)
 
-        print(logger_file_to_parse)
+        callback_alert_infos = self.parse_logger_file_and_create_alert_mail_message(logger_file_to_parse)
 
-        self.parse_logger_file_and_create_alert_mail_message(logger_file_to_parse)
-
-
+        if callback_alert_infos[1] > 0 or callback_alert_infos[2] > 0:
+            self.create_a_new_card_with_alert_message(TRELLO_ALERT_BOARD_ALERT_LIST_ID,
+                                                      TRELLO_ALERT_URGENT_CUSTOM_LABEL_ID, callback_alert_infos[0])
+            self.create_a_new_card_with_alert_message(TRELLO_MBL_BOARD_ADMIN_LIST_ID,
+                                                      TRELLO_MBL_URGENT_CUSTOM_LABEL_ID, callback_alert_infos[0])
