@@ -38,13 +38,14 @@ from pocket_sample import *
 from pocket_script import *
 from youtube_sample import *
 from youtube_script import *
+from alert import *
 from setup_logger import *
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
 # TODO : gérer exceptions (erreurs) + logs en conséquence
-# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello)
+# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello), !200 warning
 
 logging.info('Phoenix Down Script started !')
 
@@ -78,6 +79,9 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 logging.info('Phoenix Down Script finished !')
 
 logger_script()
+
+als = AlertScript()
+als.run_script()
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------

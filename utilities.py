@@ -55,9 +55,9 @@ def upload_file_to_server_ftp(file, filename, application_name):
             logging.info(filename + ' uploaded successfully!')
             ftp.retrlines('LIST') # TODO : remove in prod
         except ftplib.all_errors:
-            logging.warning('unable to make directories')
+            logging.error('unable to make directories')
     except ftplib.all_errors:
-        logging.warning('unable to connect to ftp server')
+        logging.error('unable to connect to ftp server')
     ftp.quit()
 
 

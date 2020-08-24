@@ -6,6 +6,7 @@ import shutil
 from constants import *
 from utilities import *
 
+
 # goal : upload a zip archive to the server, save (large) files locally
 
 
@@ -15,7 +16,6 @@ class FirefoxScript:
         self.application_name = "firefox"
 
     def run_script(self):
-
         logging.info('firefox script is running...')
 
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
