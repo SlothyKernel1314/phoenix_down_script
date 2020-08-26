@@ -48,7 +48,6 @@ class AlertScript:
         # opens the file for reading only
         file = open(logger_file_to_parse, "r")
         for line in file.readlines():
-            print(line)
             if "[WARNING]" in line:
                 warnings_count += 1
             if "[ERROR]" in line:
