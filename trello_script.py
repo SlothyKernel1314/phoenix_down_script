@@ -18,21 +18,32 @@ class TrelloScript:
                        "organization": "false", "organization_fields": "name,displayName",
                        "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
         response = requests.request("GET", url, params=querystring)
-        datas = response.json()
-        shortlinks_as_keys_with_values = {}
-        for board in datas:
-            # we get shortlinks instead ids just because the API allows this + more simple
-            shortlink_board = board['shortLink']
-            name_board = board['name']
-            shortlinks_as_keys_with_values[shortlink_board] = [name_board]
+        try:
+            response.raise_for_status()
+            datas = response.json()
+            shortlinks_as_keys_with_values = {}
+            for board in datas:
+                # we get shortlinks instead ids just because the API allows this + more simple
+                shortlink_board = board['shortLink']
+                name_board = board['name']
+                shortlinks_as_keys_with_values[shortlink_board] = [name_board]
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            shortlinks_as_keys_with_values = ""
         return shortlinks_as_keys_with_values
+
 
     def get_open_cards_by_board_id(self, id):
         url = "https://api.trello.com/1/boards/" + id + "/lists"
         querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
                        "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
         response = requests.request("GET", url, params=querystring)
-        datas = response.json()
+        try:
+            response.raise_for_status()
+            datas = response.json()
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            datas = ""
         return datas
 
     def get_card_by_id(self, id):
