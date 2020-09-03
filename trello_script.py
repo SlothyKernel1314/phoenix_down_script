@@ -32,7 +32,6 @@ class TrelloScript:
             shortlinks_as_keys_with_values = ""
         return shortlinks_as_keys_with_values
 
-
     def get_open_cards_by_board_id(self, id):
         url = "https://api.trello.com/1/boards/" + id + "/lists"
         querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
@@ -53,11 +52,15 @@ class TrelloScript:
                        "list": "false", "pluginData": "false", "stickers": "false", "sticker_fields": "all",
                        "customFieldItems": "false", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
         response = requests.request("GET", url, params=querystring)
-        datas = response.json()
+        try:
+            response.raise_for_status()
+            datas = response.json()
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            datas = ""
         return datas
 
     def run_script(self):
-
         logging.info('trello script is running...')
 
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
@@ -80,10 +83,11 @@ class TrelloScript:
         # processing of particulary valuable cards
         for card in TRELLO_CARDS_IDS:
             datas = self.get_card_by_id(card)
-            name_card = datas['name']
-            file.write("##### JSON datas of " + str(name_card) + " valuable card : \n\n")
-            file.write(str(datas))
-            file.write("\n\n\n\n")
+            if 'name' in datas and len(datas['name']) > 0:
+                name_card = datas['name']
+                file.write("##### JSON datas of " + str(name_card) + " valuable card : \n\n")
+                file.write(str(datas))
+                file.write("\n\n\n\n")
 
         logging.info('writing in trello log file done')
         file.close()
