@@ -52,27 +52,34 @@ logging.info('Phoenix Down Script started !')
 logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 
-tlls = TrelloScript()
-tlls.run_script()
+# tlls = TrelloScript()
+# tlls.run_script()
 #
+# TODO : EXCEPTIONS
 # fs = FirefoxScript()
 # fs.run_script()
 #
+# TODO : EXCEPTIONS
 # js = JdownloaderScript()
 # js.run_script()
 #
+# TODO : EXCEPTIONS
 # twts = TwitterScript()
 # twts.run_script()
 #
+# TODO : EXCEPTIONS
 # stms = SteamScript()
 # stms.run_script()
 #
+# TODO : EXCEPTIONS
 # rs = RedditScript()
 # rs.run_script()
 #
-# ps = PocketScript()
-# ps.run_script()
+# TODO : EXCEPTIONS
+ps = PocketScript()
+ps.run_script()
 #
+# TODO : EXCEPTIONS
 # ys = YoutubeScript()
 # ys.run_script()
 

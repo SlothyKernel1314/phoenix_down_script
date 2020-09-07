@@ -21,9 +21,14 @@ class PocketScript:
         url = "https://getpocket.com/v3/oauth/request"
         payload = {"consumer_key": POCKET_CONSUMER_KEY, "redirect_uri": "pocketapp1234:authorizationFinished"}
         response = requests.request("POST", url, params=payload)
-        datas = response.text
-        split_datas = datas.split("=")
-        request_token = split_datas[1]
+        try:
+            response.raise_for_status()
+            datas = response.text
+            split_datas = datas.split("=")
+            request_token = split_datas[1]
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            request_token = ""
         return request_token
 
     def authorize_app_and_get_access_token(self):
@@ -49,9 +54,14 @@ class PocketScript:
         url = "https://getpocket.com/v3/oauth/authorize"
         payload = {"consumer_key": POCKET_CONSUMER_KEY, "code": code}
         response = requests.request("POST", url, params=payload)
-        datas = response.text
-        split_datas = datas.replace('=', ' ').replace('&', ' ').split()
-        access_token = split_datas[1]
+        try:
+            response.raise_for_status()
+            datas = response.text
+            split_datas = datas.replace('=', ' ').replace('&', ' ').split()
+            access_token = split_datas[1]
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            access_token = ""
         return access_token
 
     def get_user_datas(self):
@@ -59,7 +69,12 @@ class PocketScript:
         url = "https://getpocket.com/v3/get"
         payload = {"consumer_key": POCKET_CONSUMER_KEY, "access token": access_token}
         response = requests.request("POST", url, params=payload)
-        datas = response.json()
+        try:
+            response.raise_for_status()
+            datas = response.json()
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            datas = ""
         return datas
 
     def run_script(self):
@@ -77,21 +92,22 @@ class PocketScript:
         # processing of saved articles
         file.write("##### Saved articles of BigBossFF pocket user (list) :")
         file.write("\n\n")
-        pandas.set_option('max_rows', None)  # return ALL rows setting
-        dataframe = pandas.DataFrame(user_datas['list'])
-        dataframe = dataframe.transpose()
-        articles_counter = 0
-        for row in dataframe.itertuples():
-            articles_counter += 1
-            file.write(str(articles_counter) + " --- " + row.item_id
-                       + " --- " + row.given_title + " --- " + row.given_url)
-            file.write("\n")
-        file.write("\n\n")
-        file.write("BigBossFF Pocket user have " + str(articles_counter) + " saved articles")
-        file.write("\n\n\n\n")
-        file.write("##### Saved articles of BigBossFF pocket user (JSON) :")
-        file.write("\n\n")
-        file.write(str(user_datas))
+        if len(user_datas) > 0:
+            pandas.set_option('max_rows', None)  # return ALL rows setting
+            dataframe = pandas.DataFrame(user_datas['list'])
+            dataframe = dataframe.transpose()
+            articles_counter = 0
+            for row in dataframe.itertuples():
+                articles_counter += 1
+                file.write(str(articles_counter) + " --- " + row.item_id
+                           + " --- " + row.given_title + " --- " + row.given_url)
+                file.write("\n")
+            file.write("\n\n")
+            file.write("BigBossFF Pocket user have " + str(articles_counter) + " saved articles")
+            file.write("\n\n\n\n")
+            file.write("##### Saved articles of BigBossFF pocket user (JSON) :")
+            file.write("\n\n")
+            file.write(str(user_datas))
 
         logging.info('writing in pocket log file done')
         file.close()
