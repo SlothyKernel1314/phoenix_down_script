@@ -16,11 +16,16 @@ class SteamScript:
         url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + STEAM_API_KEY + \
               "&steamids=" + id
         response = requests.request("GET", url)
-        datas = response.json()
-        users = datas['response']
-        user = users['players']
-        # Steam API returns a list of ONE user when we call GetPlayerSummaries API method, so...
-        user_name = user[0]['personaname']
+        try:
+            response.raise_for_status()
+            datas = response.json()
+            users = datas['response']
+            user = users['players']
+            # Steam API returns a list of ONE user when we call GetPlayerSummaries API method, so...
+            user_name = user[0]['personaname']
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            user_name = ""
         return user_name
 
     def get_friend_list(self):
@@ -71,7 +76,7 @@ class SteamScript:
 
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
-        user = self.get_user_name(STEAM_USER_ID)
+        username = self.get_user_name(STEAM_USER_ID)
 
         friends = self.get_friend_list()
 
@@ -86,7 +91,7 @@ class SteamScript:
 
         logging.info('writing in steam log file...')
         # processing of friends
-        file.write("##### Friends list of " + user + " steam user :")
+        file.write("##### Friends list of " + username + " steam user :")
         file.write("\n\n")
         file.write(str(friends))
         file.write("\n\n")
@@ -94,22 +99,22 @@ class SteamScript:
             file.write(key + " --- " + value)
             file.write("\n")
         file.write("\n")
-        file.write(user + " steam user have " + str(len(friends)) + " friends on steam")
+        file.write(username + " steam user have " + str(len(friends)) + " friends on steam")
         file.write("\n\n\n\n")
         # processing of owned games
-        file.write("##### " + user + " owned games ids :")
+        file.write("##### " + username + " owned games ids :")
         file.write("\n\n")
         file.write(str(my_games_ids))
         file.write("\n\n")
-        file.write(user + " steam user have " + str(len(my_games_ids)) + " games on steam")
+        file.write(username + " steam user have " + str(len(my_games_ids)) + " games on steam")
         file.write("\n\n\n\n")
         # processing of wishlist
-        file.write("##### " + user + " wishlist :")
+        file.write("##### " + username + " wishlist :")
         file.write("\n\n")
         for page in custom_wishlist_datas:
             file.write(str(page))
             file.write("\n\n")
-        file.write(user + " steam user have " + str(wishlist[1]) + " games in his wishlist")
+        file.write(username + " steam user have " + str(wishlist[1]) + " games in his wishlist")
 
         logging.info('writing in steam log file done')
         file.close()

@@ -61,13 +61,12 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # js = JdownloaderScript()
 # js.run_script()
 #
-# TODO : EXCEPTIONS
-twts = TwitterScript()
-twts.run_script()
+# twts = TwitterScript()
+# twts.run_script()
 #
 # TODO : EXCEPTIONS
-# stms = SteamScript()
-# stms.run_script()
+stms = SteamScript()
+stms.run_script()
 #
 # TODO : EXCEPTIONS
 # rs = RedditScript()
