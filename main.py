@@ -45,7 +45,7 @@ from setup_logger import *
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
 # TODO : gérer exceptions (erreurs) + logs en conséquence
-# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello), !200 warning
+# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello), !200 (4xx & 5xx) warning
 
 logging.info('Phoenix Down Script started !')
 
@@ -55,17 +55,15 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # tlls = TrelloScript()
 # tlls.run_script()
 #
-# TODO : EXCEPTIONS
 # fs = FirefoxScript()
 # fs.run_script()
 #
-# TODO : EXCEPTIONS
 # js = JdownloaderScript()
 # js.run_script()
 #
 # TODO : EXCEPTIONS
-# twts = TwitterScript()
-# twts.run_script()
+twts = TwitterScript()
+twts.run_script()
 #
 # TODO : EXCEPTIONS
 # stms = SteamScript()
@@ -75,9 +73,8 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # rs = RedditScript()
 # rs.run_script()
 #
-# TODO : EXCEPTIONS
-ps = PocketScript()
-ps.run_script()
+# ps = PocketScript()
+# ps.run_script()
 #
 # TODO : EXCEPTIONS
 # ys = YoutubeScript()

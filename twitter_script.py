@@ -16,7 +16,11 @@ class TwitterScript:
         self.api = tweepy.API(self.auth)
 
     def get_user_by_id(self, user_id, api):
-        user_information = api.get_user(user_id)
+        try:
+            user_information = api.get_user(user_id)
+        except tweepy.TweepError as e:
+            logging.warning("Error: " + str(e))
+            user_information = ""
         return user_information
 
     def get_followers_id(self, user_id, api):
@@ -47,17 +51,19 @@ class TwitterScript:
 
         logging.info('writing in twitter log file...')
         # processing of followers
-        file.write(user.screen_name + " twitter user have " + str(len(followers)) + " followers")
-        file.write("\n\n")
-        file.write("List of followers' ids of " + user.screen_name + " : \n")
+        if len(str(user)) > 0:
+            file.write(user.screen_name + " twitter user have " + str(len(followers)) + " followers")
+            file.write("\n\n")
+            file.write("List of followers' ids of " + user.screen_name + " : \n")
         for follower in followers:
             file.write(str(follower))
             file.write("\n")
         file.write("\n\n\n\n")
         # processing of friends
-        file.write(user.screen_name + " twitter user have " + str(len(friends)) + " friends")
-        file.write("\n\n")
-        file.write("List of friends' ids of " + user.screen_name + " : \n")
+        if len(str(user)) > 0:
+            file.write(user.screen_name + " twitter user have " + str(len(friends)) + " friends")
+            file.write("\n\n")
+            file.write("List of friends' ids of " + user.screen_name + " : \n")
         for friend in friends:
             file.write(str(friend))
             file.write("\n")
