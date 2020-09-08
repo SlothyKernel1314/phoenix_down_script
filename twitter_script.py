@@ -24,11 +24,19 @@ class TwitterScript:
         return user_information
 
     def get_followers_id(self, user_id, api):
-        user_followers = api.followers_ids(user_id)
+        try:
+            user_followers = api.followers_ids(user_id)
+        except tweepy.TweepError as e:
+            logging.warning("Error: " + str(e))
+            user_followers = ""
         return user_followers
 
     def get_friends_id(self, user_id, api):
-        user_friends = api.friends_ids(user_id)
+        try:
+            user_friends = api.friends_ids(user_id)
+        except tweepy.TweepError as e:
+            logging.warning("Error: " + str(e))
+            user_friends = ""
         return user_friends
 
     def run_script(self):
@@ -51,7 +59,7 @@ class TwitterScript:
 
         logging.info('writing in twitter log file...')
         # processing of followers
-        if len(str(user)) > 0:
+        if len(str(user)) > 0 and len(str(followers)) > 0:
             file.write(user.screen_name + " twitter user have " + str(len(followers)) + " followers")
             file.write("\n\n")
             file.write("List of followers' ids of " + user.screen_name + " : \n")
