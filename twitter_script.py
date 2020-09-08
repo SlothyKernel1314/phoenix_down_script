@@ -68,7 +68,7 @@ class TwitterScript:
             file.write("\n")
         file.write("\n\n\n\n")
         # processing of friends
-        if len(str(user)) > 0:
+        if len(str(user)) > 0 and len(str(friends)) > 0:
             file.write(user.screen_name + " twitter user have " + str(len(friends)) + " friends")
             file.write("\n\n")
             file.write("List of friends' ids of " + user.screen_name + " : \n")
