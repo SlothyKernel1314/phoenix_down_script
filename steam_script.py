@@ -5,7 +5,6 @@ from utilities import *
 from credentials import *
 from constants import *
 import requests
-import os
 
 
 class SteamScript:
@@ -70,13 +69,15 @@ class SteamScript:
             url = "https://store.steampowered.com/wishlist/profiles/" + STEAM_USER_ID + \
                   "/wishlistdata/?p=" + str(current_page) + ""
             response = requests.request("GET", url)
-            datas = response.json()
-            current_page += 1
-            if len(datas) > 0:
-                custom_wishlist_datas.append("Page " + str(current_page) + " : " + str(datas))
-                number_of_games_in_wishlist += len(datas)
-            else:
-                break
+            try:
+                response.raise_for_status()
+                datas = response.json()
+                current_page += 1
+                if len(datas) > 0:
+                    custom_wishlist_datas.append("Page " + str(current_page) + " : " + str(datas))
+                    number_of_games_in_wishlist += len(datas)
+            except requests.exceptions.HTTPError as e:
+                logging.warning("Error: " + str(e))
         return custom_wishlist_datas, number_of_games_in_wishlist
 
     def run_script(self):
