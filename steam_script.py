@@ -49,10 +49,14 @@ class SteamScript:
               "&steamid=" + STEAM_USER_ID + "&format=json"
         my_games_ids = []
         response = requests.request("GET", url)
-        datas = response.json()
-        my_games = datas['response']['games']
-        for game in my_games:
-            my_games_ids.append(game['appid'])
+        try:
+            response.raise_for_status()
+            datas = response.json()
+            my_games = datas['response']['games']
+            for game in my_games:
+                my_games_ids.append(game['appid'])
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
         return my_games_ids
 
     def get_wishlist(self):
