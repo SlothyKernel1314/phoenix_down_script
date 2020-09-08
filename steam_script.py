@@ -33,11 +33,15 @@ class SteamScript:
               "&steamid=" + STEAM_USER_ID + "&relationship=friend"
         friends_dictionnary = {}
         response = requests.request("GET", url)
-        friends = response.json()
-        for friend in friends['friendslist']['friends']:
-            friend_id = friend['steamid']
-            friend_user_name = self.get_user_name(friend_id)
-            friends_dictionnary[friend_id] = friend_user_name
+        try:
+            response.raise_for_status()
+            friends = response.json()
+            for friend in friends['friendslist']['friends']:
+                friend_id = friend['steamid']
+                friend_user_name = self.get_user_name(friend_id)
+                friends_dictionnary[friend_id] = friend_user_name
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
         return friends_dictionnary
 
     def get_owned_games_ids(self):
