@@ -64,13 +64,12 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # twts = TwitterScript()
 # twts.run_script()
 #
-# TODO : EXCEPTIONS
-stms = SteamScript()
-stms.run_script()
+# stms = SteamScript()
+# stms.run_script()
 #
 # TODO : EXCEPTIONS
-# rs = RedditScript()
-# rs.run_script()
+rs = RedditScript()
+rs.run_script()
 #
 # ps = PocketScript()
 # ps.run_script()

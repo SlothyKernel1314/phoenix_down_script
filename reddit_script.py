@@ -18,29 +18,32 @@ class RedditScript:
         headers = {"User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.post("https://www.reddit.com/api/v1/access_token",
                              auth=client_auth, data=post_data, headers=headers)
-        datas = response.json()
-        token = datas['access_token']
+        try:
+            response.raise_for_status()
+            datas = response.json()
+            token = datas['access_token']
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
+            token = ""
         return token
 
-    def get_username(self):
-        my_token = self.reddit_request_token()
+    def get_username(self, token):
         url = "https://oauth.reddit.com/api/v1/me"
-        headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+        headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
         datas = response.json()
         username = datas['name']
         return username
 
-    def get_saved_posts(self, after_pagination=None, saved_posts_count=0,  all_datas=None):
+    def get_saved_posts(self, token, after_pagination=None, saved_posts_count=0,  all_datas=None):
         if all_datas is None:
             all_datas = []
-        my_token = self.reddit_request_token()
         if after_pagination is None:
             url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
         else:
             url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() \
                   + "/saved?limit=100&after=" + after_pagination
-        headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+        headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
         current_datas = response.json()
         all_datas.append(current_datas)
@@ -48,19 +51,18 @@ class RedditScript:
         saved_posts_current_dist = current_datas['data']['dist']
         saved_posts_count += saved_posts_current_dist
         if after_pagination is not None:
-            return self.get_saved_posts(after_pagination, saved_posts_count, all_datas)
+            return self.get_saved_posts(token, after_pagination, saved_posts_count, all_datas)
         else:
             return all_datas, saved_posts_count
 
-    def get_subscribed_subreddits(self, after_pagination=None, subreddits_count=0, all_datas=None):
+    def get_subscribed_subreddits(self, token, after_pagination=None, subreddits_count=0, all_datas=None):
         if all_datas is None:
             all_datas = []
-        my_token = self.reddit_request_token()
         if after_pagination is None:
             url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100"
         else:
             url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100&after=" + after_pagination
-        headers = {"Authorization": "bearer " + my_token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
+        headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
         current_datas = response.json()
         all_datas.append(current_datas)
@@ -68,7 +70,7 @@ class RedditScript:
         subreddits_current_dist = current_datas['data']['dist']
         subreddits_count += subreddits_current_dist
         if after_pagination is not None:
-            return self.get_subscribed_subreddits(after_pagination, subreddits_count, all_datas)
+            return self.get_subscribed_subreddits(token, after_pagination, subreddits_count, all_datas)
         else:
             return all_datas, subreddits_count
 
@@ -77,11 +79,13 @@ class RedditScript:
 
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
-        username = self.get_username()
+        token = self.reddit_request_token()
 
-        saved_posts = self.get_saved_posts()
+        username = self.get_username(token)
 
-        suscribed_subreddits = self.get_subscribed_subreddits()
+        saved_posts = self.get_saved_posts(token)
+
+        suscribed_subreddits = self.get_subscribed_subreddits(token)
 
         logging.info('creating reddit log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
