@@ -16,13 +16,17 @@ class RedditScript:
         client_auth = requests.auth.HTTPBasicAuth(REDDIT_APP_CLIENT_KEY, REDDIT_API_SECRET_KEY)
         post_data = {"grant_type": "password", "username": REDDIT_USERNAME, "password": REDDIT_PASSWORD}
         headers = {"User-Agent": "phoenix-down/0.1 by IAmTerror"}
-        response = requests.post("https://www.reddit.com/api/v1/access_token",
-                                 auth=client_auth, data=post_data, headers=headers)
         try:
-            response.raise_for_status()
-            datas = response.json()
-            token = datas['access_token']
-        except requests.exceptions.HTTPError as e:
+            response = requests.post("https://www.reddit.com/api/v1/access_token",
+                                     auth=client_auth, data=post_data, headers=headers)
+            try:
+                response.raise_for_status()
+                datas = response.json()
+                token = datas['access_token']
+            except requests.exceptions.HTTPError as e:
+                logging.warning("Error: " + str(e))
+                token = ""
+        except Exception as e:
             logging.warning("Error: " + str(e))
             token = ""
         return token
@@ -73,15 +77,19 @@ class RedditScript:
             url = "https://oauth.reddit.com/subreddits/mine/subscriber?limit=100&after=" + after_pagination
         headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
-        current_datas = response.json()
-        all_datas.append(current_datas)
-        after_pagination = current_datas['data']['after']
-        subreddits_current_dist = current_datas['data']['dist']
-        subreddits_count += subreddits_current_dist
-        if after_pagination is not None:
-            return self.get_subscribed_subreddits(token, after_pagination, subreddits_count, all_datas)
-        else:
-            return all_datas, subreddits_count
+        try:
+            response.raise_for_status()
+            current_datas = response.json()
+            all_datas.append(current_datas)
+            after_pagination = current_datas['data']['after']
+            subreddits_current_dist = current_datas['data']['dist']
+            subreddits_count += subreddits_current_dist
+            if after_pagination is not None:
+                return self.get_subscribed_subreddits(token, after_pagination, subreddits_count, all_datas)
+            else:
+                return all_datas, subreddits_count
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
 
     def run_script(self):
         logging.info('reddit script is running...')
@@ -115,19 +123,20 @@ class RedditScript:
             # processing of subreddits
             file.write("##### Suscribed subreddits of " + username + " reddit user (list) :")
             file.write("\n\n")
-            file.write(username + " reddit user have " + str(suscribed_subreddits[1]) + " suscribed subreddits")
-            file.write("\n\n")
-            for json in suscribed_subreddits[0]:
-                children = json['data']['children']
-                for subreddit in children:
-                    file.write(subreddit['data']['display_name_prefixed'])
-                    file.write("\n")
-            file.write("\n\n")
-            file.write("##### Suscribed subreddits of " + username + " reddit user (JSON) :")
-            file.write("\n\n")
-            for json in suscribed_subreddits[0]:
-                file.write(str(json))
-                file.write("\n\n\n\n")
+            if suscribed_subreddits is not None:
+                file.write(username + " reddit user have " + str(suscribed_subreddits[1]) + " suscribed subreddits")
+                file.write("\n\n")
+                for json in suscribed_subreddits[0]:
+                    children = json['data']['children']
+                    for subreddit in children:
+                        file.write(subreddit['data']['display_name_prefixed'])
+                        file.write("\n")
+                file.write("\n\n")
+                file.write("##### Suscribed subreddits of " + username + " reddit user (JSON) :")
+                file.write("\n\n")
+                for json in suscribed_subreddits[0]:
+                    file.write(str(json))
+                    file.write("\n\n\n\n")
 
             logging.info('writing in reddit log file done')
             file.close()
