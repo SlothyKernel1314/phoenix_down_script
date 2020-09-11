@@ -50,15 +50,19 @@ class RedditScript:
                   + "/saved?limit=100&after=" + after_pagination
         headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)
-        current_datas = response.json()
-        all_datas.append(current_datas)
-        after_pagination = current_datas['data']['after']
-        saved_posts_current_dist = current_datas['data']['dist']
-        saved_posts_count += saved_posts_current_dist
-        if after_pagination is not None:
-            return self.get_saved_posts(token, after_pagination, saved_posts_count, all_datas)
-        else:
-            return all_datas, saved_posts_count
+        try:
+            response.raise_for_status()
+            current_datas = response.json()
+            all_datas.append(current_datas)
+            after_pagination = current_datas['data']['after']
+            saved_posts_current_dist = current_datas['data']['dist']
+            saved_posts_count += saved_posts_current_dist
+            if after_pagination is not None:
+                return self.get_saved_posts(token, after_pagination, saved_posts_count, all_datas)
+            else:
+                return all_datas, saved_posts_count
+        except requests.exceptions.HTTPError as e:
+            logging.warning("Error: " + str(e))
 
     def get_subscribed_subreddits(self, token, after_pagination=None, subreddits_count=0, all_datas=None):
         if all_datas is None:
@@ -102,11 +106,12 @@ class RedditScript:
             # processing of saved posts
             file.write("##### Saved posts of " + username + " reddit user (JSON) :")
             file.write("\n\n")
-            file.write(username + " reddit user have " + str(saved_posts[1]) + " saved posts")
-            file.write("\n\n")
-            for json in saved_posts[0]:
-                file.write(str(json))
-                file.write("\n\n\n\n")
+            if saved_posts is not None:
+                file.write(username + " reddit user have " + str(saved_posts[1]) + " saved posts")
+                file.write("\n\n")
+                for json in saved_posts[0]:
+                    file.write(str(json))
+                    file.write("\n\n\n\n")
             # processing of subreddits
             file.write("##### Suscribed subreddits of " + username + " reddit user (list) :")
             file.write("\n\n")
