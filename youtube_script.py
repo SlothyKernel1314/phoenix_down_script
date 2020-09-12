@@ -59,17 +59,20 @@ class YoutubeScript:
             part="snippet,contentDetails,statistics",
             id=channel_id
         )
-        response = request.execute()
-        items = response['items'][0]
-        playlists = items['contentDetails']['relatedPlaylists']
-        # remove useless playlists
-        playlists.pop('likes')
-        playlists.pop('uploads')
-        playlists.pop('watchHistory')
-        playlists.pop('watchLater')
-        # add a playlist that is not detected by the method get_playlists_by_channel_id_with_exceptions()
-        playlists["later"] = YOUTUBE_USER_PLAYLIST_LATER_ID
-        return playlists
+        try:
+            response = request.execute()
+            items = response['items'][0]
+            playlists = items['contentDetails']['relatedPlaylists']
+            # remove useless playlists
+            playlists.pop('likes')
+            playlists.pop('uploads')
+            playlists.pop('watchHistory')
+            playlists.pop('watchLater')
+            # add a playlist that is not detected by the method get_playlists_by_channel_id_with_exceptions()
+            playlists["later"] = YOUTUBE_USER_PLAYLIST_LATER_ID
+            return playlists
+        except HttpError as e:
+            logging.warning("Error: " + str(e))
 
     def get_playlist_items_by_playlist_id(self, playlist_id, next_page_token=None, all_datas=None):
         if all_datas is None:
@@ -129,27 +132,28 @@ class YoutubeScript:
             file.write("\n\n\n\n")
         # processing of youtube playlists
         file.write("##### Youtube playlists of BigBossFF user :")
-        for playlist in my_playlists:
-            file.write("\n\n")
-            file.write("### Playlist : " + playlist + " (list)")
-            file.write("\n\n")
-            playlist_content_all_datas = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
-            for json in playlist_content_all_datas[0]:
-                items = json['items']
-                for item in items:
-                    item_id = item['snippet']['resourceId']['videoId']
-                    item_title = item['snippet']['title']
-                    file.write(item_id + " ----- " + item_title)
-                    file.write("\n")
-            file.write("\n\n")
-            file.write("### Playlist : " + playlist + " (JSON)")
-            for json in playlist_content_all_datas[0]:
+        if my_playlists is not None:
+            for playlist in my_playlists:
                 file.write("\n\n")
-                file.write(str(json))
+                file.write("### Playlist : " + playlist + " (list)")
                 file.write("\n\n")
-            file.write("There are " + str(playlist_content_all_datas[1]) +
-                       " videos in " + playlist.capitalize() + " playlist")
-            file.write("\n\n\n\n")
+                playlist_content_all_datas = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
+                for json in playlist_content_all_datas[0]:
+                    items = json['items']
+                    for item in items:
+                        item_id = item['snippet']['resourceId']['videoId']
+                        item_title = item['snippet']['title']
+                        file.write(item_id + " ----- " + item_title)
+                        file.write("\n")
+                file.write("\n\n")
+                file.write("### Playlist : " + playlist + " (JSON)")
+                for json in playlist_content_all_datas[0]:
+                    file.write("\n\n")
+                    file.write(str(json))
+                    file.write("\n\n")
+                file.write("There are " + str(playlist_content_all_datas[1]) +
+                           " videos in " + playlist.capitalize() + " playlist")
+                file.write("\n\n\n\n")
 
         logging.info('writing in youtube log file done')
         file.close()
