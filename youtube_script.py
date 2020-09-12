@@ -6,6 +6,7 @@ from constants import *
 import os
 import googleapiclient.discovery
 import googleapiclient.errors
+from googleapiclient.errors import HttpError
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
@@ -39,15 +40,18 @@ class YoutubeScript:
             mine=True,
             pageToken=None if next_page_token is None else next_page_token
         )
-        response = request.execute()
-        all_datas.append(response)
-        if 'nextPageToken' in response:
-            next_page_token = response['nextPageToken']
-        nb_suscriptions = response['pageInfo']['totalResults']
-        if 'nextPageToken' in response and next_page_token is not None:
-            return self.get_my_subscriptions(next_page_token, all_datas)
-        else:
-            return all_datas, nb_suscriptions
+        try:
+            response = request.execute()
+            all_datas.append(response)
+            if 'nextPageToken' in response:
+                next_page_token = response['nextPageToken']
+            nb_suscriptions = response['pageInfo']['totalResults']
+            if 'nextPageToken' in response and next_page_token is not None:
+                return self.get_my_subscriptions(next_page_token, all_datas)
+            else:
+                return all_datas, nb_suscriptions
+        except HttpError as e:
+            logging.warning("Error: " + str(e))
 
     def get_playlists_by_channel_id_with_exceptions(self, channel_id):
         youtube = self.get_authenticated_service()
@@ -93,8 +97,6 @@ class YoutubeScript:
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         my_subscriptions = self.get_my_subscriptions()
-        my_subscriptions_all_datas = my_subscriptions[0]
-        my_subscriptions_count = my_subscriptions[1]
 
         my_playlists = self.get_playlists_by_channel_id_with_exceptions(YOUTUBE_USER_ID)
 
@@ -106,22 +108,25 @@ class YoutubeScript:
         # processing of youtube subscriptions
         file.write("##### Youtube subscriptions of BigBossFF user (list) :")
         file.write("\n\n")
-        for json in my_subscriptions_all_datas:
-            items = json['items']
-            for item in items:
-                channel_id = item['snippet']['resourceId']['channelId']
-                channel_title = item['snippet']['title']
-                file.write(channel_id + " ----- " + channel_title)
-                file.write("\n")
-        file.write("\n\n")
-        file.write("BigBossFF Youtube user have " + str(my_subscriptions_count) + " suscribed channels")
-        file.write("\n\n\n\n")
-        file.write("##### Youtube subscriptions of BigBossFF user (JSON) :")
-        file.write("\n\n")
-        for json in my_subscriptions_all_datas:
-            file.write(str(json))
+        if my_subscriptions is not None:
+            my_subscriptions_all_datas = my_subscriptions[0]
+            my_subscriptions_count = my_subscriptions[1]
+            for json in my_subscriptions_all_datas:
+                items = json['items']
+                for item in items:
+                    channel_id = item['snippet']['resourceId']['channelId']
+                    channel_title = item['snippet']['title']
+                    file.write(channel_id + " ----- " + channel_title)
+                    file.write("\n")
+            file.write("\n\n")
+            file.write("BigBossFF Youtube user have " + str(my_subscriptions_count) + " suscribed channels")
             file.write("\n\n\n\n")
-        file.write("\n\n\n\n")
+            file.write("##### Youtube subscriptions of BigBossFF user (JSON) :")
+            file.write("\n\n")
+            for json in my_subscriptions_all_datas:
+                file.write(str(json))
+                file.write("\n\n\n\n")
+            file.write("\n\n\n\n")
         # processing of youtube playlists
         file.write("##### Youtube playlists of BigBossFF user :")
         for playlist in my_playlists:
