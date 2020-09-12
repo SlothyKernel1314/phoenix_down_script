@@ -20,8 +20,7 @@ class YoutubeScript:
         api_service_name = "youtube"
         api_version = "v3"
         client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
-        # TODO : modifier le chemin + constante
-        credential_path = os.path.join(PD_SCRIPT_ROOT_APP_PATH + '/', 'credential_sample.json')
+        credential_path = os.path.join(PD_SCRIPT_ROOT_APP_PATH + '/', YOUTUBE_CREDENTIAL_JSON)
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:

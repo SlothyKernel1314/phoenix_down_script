@@ -67,16 +67,14 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # stms = SteamScript()
 # stms.run_script()
 #
-# TODO : EXCEPTIONS
-rs = RedditScript()
-rs.run_script()
+# rs = RedditScript()
+# rs.run_script()
 #
 # ps = PocketScript()
 # ps.run_script()
 #
-# TODO : EXCEPTIONS
-# ys = YoutubeScript()
-# ys.run_script()
+ys = YoutubeScript()
+ys.run_script()
 
 logging.info('Phoenix Down Script finished !')
 

@@ -15,8 +15,7 @@ def get_authenticated_service():
     api_service_name = "youtube"
     api_version = "v3"
     client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
-    # TODO : transformer en constante pour déploiement plus facile
-    credential_path = os.path.join('./', 'credential_sample.json')
+    credential_path = os.path.join('./', YOUTUBE_CREDENTIAL_JSON)
     store = Storage(credential_path)
     credentials = store.get()
     if not credentials or credentials.invalid:
