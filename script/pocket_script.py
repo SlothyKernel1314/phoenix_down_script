@@ -2,8 +2,8 @@
 # !/usr/bin/env python
 
 from utilities import *
-from constants import *
-from credentials import *
+from manager.constants_manager import *
+from manager.credentials_manager import *
 import requests
 import requests.auth
 import os

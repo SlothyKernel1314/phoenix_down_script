@@ -22,6 +22,7 @@
 # -*- coding: utf-8 -*-
 
 from mother_of_all_scripts import *
+from manager.alerts_manager import *
 
 logging.info(PD_SCRIPT_STARTING_MESSAGE)
 
@@ -34,5 +35,12 @@ except Exception as e:
 
 logger_script()
 
-als = AlertScript()
-als.run_script()
+alm = AlertsManager()
+alm.run_script()
+
+# TODO : constants_manager.py and #credentials_manager.py handler (POO)
+# TODO : unit tests (constants / credentials errors, files ok in case or fail script, errors / warnings messages when
+# logger throw e / w...)
+# TODO : discord implementation with discord.py
+# TODO : constants_manager.py and #credentials_manager.py example
+# TODO : github description

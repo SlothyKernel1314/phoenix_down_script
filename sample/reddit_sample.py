@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 
-from credentials import *
+from manager.credentials_manager import *
 import requests
 import requests.auth
 

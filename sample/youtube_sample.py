@@ -7,7 +7,7 @@ import googleapiclient.errors
 from oauth2client import client
 from oauth2client import tools
 from oauth2client.file import Storage
-from constants import *
+from manager.constants_manager import *
 
 
 def get_authenticated_service():

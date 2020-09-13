@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 
-from credentials import *
-from constants import *
+from manager.credentials_manager import *
+from manager.constants_manager import *
 import logging
 import os
 import time

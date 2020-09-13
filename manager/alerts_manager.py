@@ -5,7 +5,7 @@ import requests
 from utilities import *
 
 
-class AlertScript:
+class AlertsManager:
     def __init__(self):
         self.logger_sub_path = "/logger"
 

@@ -1,23 +1,15 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from trello_sample import *
-from twitter_sample import *
-from constants import *
-from trello_script import *
-from firefox_script import *
-from jdownloader_script import *
-from twitter_script import *
-from steam_sample import *
-from steam_script import *
-from reddit_sample import *
-from reddit_script import *
-from pocket_sample import *
-from pocket_script import *
-from youtube_sample import *
-from youtube_script import *
-from alert import *
-from setup_logger import *
+from script.trello_script import *
+from script.firefox_script import *
+from script.jdownloader_script import *
+from script.twitter_script import *
+from script.steam_script import *
+from script.reddit_script import *
+from script.pocket_script import *
+from script.youtube_script import *
+from logger_setup import *
 
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
@@ -27,8 +19,8 @@ def mother_of_all_scripts():
     logging.info("creating the root path directory of Phoenix Down Script...")
     create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 
-    # tlls = TrelloScript()
-    # tlls.run_script()
+    tlls = TrelloScript()
+    tlls.run_script()
 
     # fs = FirefoxScript()
     # fs.run_script()
@@ -48,8 +40,8 @@ def mother_of_all_scripts():
     # ps = PocketScript()
     # ps.run_script()
     #
-    ys = YoutubeScript()
-    ys.run_script()
+    # ys = YoutubeScript()
+    # ys.run_script()
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------

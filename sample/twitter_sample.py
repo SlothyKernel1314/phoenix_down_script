@@ -2,7 +2,7 @@
 # !/usr/bin/env python
 
 import tweepy
-from credentials import *
+from manager.credentials_manager import *
 
 auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
 auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
