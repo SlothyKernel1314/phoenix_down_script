@@ -44,16 +44,13 @@ from setup_logger import *
 
 # MAIN SCRIPT ----------------------------------------------------------------------------------------------------------
 
-# TODO : gérer exceptions (erreurs) + logs en conséquence
-# TODO : alertes en cas d'erreur + envoi de fichier de log (mail, trello), !200 (4xx & 5xx) warning
-
-logging.info('Phoenix Down Script started !')
+logging.info(PD_SCRIPT_STARTING_MESSAGE)
 
 logging.info("creating the root path directory of Phoenix Down Script...")
 create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 
-# tlls = TrelloScript()
-# tlls.run_script()
+tlls = TrelloScript()
+tlls.run_script()
 #
 # fs = FirefoxScript()
 # fs.run_script()
@@ -73,10 +70,10 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 # ps = PocketScript()
 # ps.run_script()
 #
-ys = YoutubeScript()
-ys.run_script()
+# ys = YoutubeScript()
+# ys.run_script()
 
-logging.info('Phoenix Down Script finished !')
+logging.info(PD_SCRIPT_ENDING_MESSAGE)
 
 logger_script()
 
