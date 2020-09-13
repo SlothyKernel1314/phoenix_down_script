@@ -84,15 +84,18 @@ class YoutubeScript:
             playlistId=playlist_id,
             pageToken=None if next_page_token is None else next_page_token
         )
-        response = request.execute()
-        all_datas.append(response)
-        if 'nextPageToken' in response:
-            next_page_token = response['nextPageToken']
-        nb_suscriptions = response['pageInfo']['totalResults']
-        if 'nextPageToken' in response and next_page_token is not None:
-            return self.get_playlist_items_by_playlist_id(playlist_id, next_page_token, all_datas)
-        else:
-            return all_datas, nb_suscriptions
+        try:
+            response = request.execute()
+            all_datas.append(response)
+            if 'nextPageToken' in response:
+                next_page_token = response['nextPageToken']
+            nb_suscriptions = response['pageInfo']['totalResults']
+            if 'nextPageToken' in response and next_page_token is not None:
+                return self.get_playlist_items_by_playlist_id(playlist_id, next_page_token, all_datas)
+            else:
+                return all_datas, nb_suscriptions
+        except HttpError as e:
+            logging.warning("Error: " + str(e))
 
     def run_script(self):
         logging.info('youtube script is running...')
@@ -138,22 +141,23 @@ class YoutubeScript:
                 file.write("### Playlist : " + playlist + " (list)")
                 file.write("\n\n")
                 playlist_content_all_datas = self.get_playlist_items_by_playlist_id(my_playlists[playlist])
-                for json in playlist_content_all_datas[0]:
-                    items = json['items']
-                    for item in items:
-                        item_id = item['snippet']['resourceId']['videoId']
-                        item_title = item['snippet']['title']
-                        file.write(item_id + " ----- " + item_title)
-                        file.write("\n")
-                file.write("\n\n")
-                file.write("### Playlist : " + playlist + " (JSON)")
-                for json in playlist_content_all_datas[0]:
+                if playlist_content_all_datas is not None:
+                    for json in playlist_content_all_datas[0]:
+                        items = json['items']
+                        for item in items:
+                            item_id = item['snippet']['resourceId']['videoId']
+                            item_title = item['snippet']['title']
+                            file.write(item_id + " ----- " + item_title)
+                            file.write("\n")
                     file.write("\n\n")
-                    file.write(str(json))
-                    file.write("\n\n")
-                file.write("There are " + str(playlist_content_all_datas[1]) +
-                           " videos in " + playlist.capitalize() + " playlist")
-                file.write("\n\n\n\n")
+                    file.write("### Playlist : " + playlist + " (JSON)")
+                    for json in playlist_content_all_datas[0]:
+                        file.write("\n\n")
+                        file.write(str(json))
+                        file.write("\n\n")
+                    file.write("There are " + str(playlist_content_all_datas[1]) +
+                               " videos in " + playlist.capitalize() + " playlist")
+                    file.write("\n\n\n\n")
 
         logging.info('writing in youtube log file done')
         file.close()
