@@ -48,7 +48,8 @@ def upload_file_to_server_ftp(file, filename, application_name):
         ftp.login(user=SEEDBOX_USER_NAME, passwd=SEEDBOX_PASSWD)  # login with credentials
         logging.info('ftp connection succeed !')
         try:
-            # TODO : se placer dans le bon repertoire (ok) du serveur et creer un dossier *nom application* s'il n'existe pas
+            # TODO : se placer dans le bon repertoire (ok) du serveur et
+            #  creer un dossier *nom application* s'il n'existe pas
             ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
             logging.info('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
             ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
@@ -67,7 +68,8 @@ def upload_file_to_server_ftp_without_logging_messages(file, filename, applicati
         ftp.login(user=SEEDBOX_USER_NAME, passwd=SEEDBOX_PASSWD)  # login with credentials
         print('ftp connection succeed !')
         try:
-            # TODO : se placer dans le bon repertoire (ok) du serveur et creer un dossier *nom application* s'il n'existe pas
+            # TODO : se placer dans le bon repertoire (ok) du serveur et
+            #  creer un dossier *nom application* s'il n'existe pas
             ftp.cwd(SEEDBOX_ROOT_PD_SCRIPT_PATH + "/" + application_name)  # Set the current directory on the server
             print('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
             ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
@@ -120,5 +122,5 @@ def zip_files(file_paths_to_zip, directory_log_path, zip_name):
         # writing each file one by one
         for file in file_paths_to_zip:
             zip.write(file)
-    logging.info('All files zipped successfully !')
+    logging.info('all files zipped successfully !')
     return zip

@@ -21,8 +21,6 @@
 # !/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import logging
-from logging.handlers import RotatingFileHandler
 from trello_sample import *
 from twitter_sample import *
 from constants import *
@@ -51,27 +49,27 @@ create_directory(PD_SCRIPT_ROOT_LOGS_PATH)
 
 tlls = TrelloScript()
 tlls.run_script()
-#
-# fs = FirefoxScript()
-# fs.run_script()
-#
-# js = JdownloaderScript()
-# js.run_script()
-#
-# twts = TwitterScript()
-# twts.run_script()
-#
-# stms = SteamScript()
-# stms.run_script()
-#
-# rs = RedditScript()
-# rs.run_script()
-#
-# ps = PocketScript()
-# ps.run_script()
-#
-# ys = YoutubeScript()
-# ys.run_script()
+
+fs = FirefoxScript()
+fs.run_script()
+
+js = JdownloaderScript()
+js.run_script()
+
+twts = TwitterScript()
+twts.run_script()
+
+stms = SteamScript()
+stms.run_script()
+
+rs = RedditScript()
+rs.run_script()
+
+ps = PocketScript()
+ps.run_script()
+
+ys = YoutubeScript()
+ys.run_script()
 
 logging.info(PD_SCRIPT_ENDING_MESSAGE)
 

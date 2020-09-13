@@ -12,7 +12,8 @@ class TrelloScript:
     def __init__(self):
         self.application_name = "trello"
 
-    def get_boards_shortlinks_as_keys_with_values(self, username):
+    @staticmethod
+    def get_boards_shortlinks_as_keys_with_values(username):
         url = "https://api.trello.com/1/members/" + username + "/boards"
         querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none",
                        "organization": "false", "organization_fields": "name,displayName",
@@ -32,7 +33,8 @@ class TrelloScript:
             shortlinks_as_keys_with_values = ""
         return shortlinks_as_keys_with_values
 
-    def get_open_cards_by_board_id(self, id):
+    @staticmethod
+    def get_open_cards_by_board_id(id):
         url = "https://api.trello.com/1/boards/" + id + "/lists"
         querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
                        "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
@@ -45,7 +47,8 @@ class TrelloScript:
             datas = ""
         return datas
 
-    def get_card_by_id(self, id):
+    @staticmethod
+    def get_card_by_id(id):
         url = "https://api.trello.com/1/cards/" + id + ""
         querystring = {"attachments": "false", "attachment_fields": "all", "members": "false", "membersVoted": "false",
                        "checkItemStates": "false", "checklists": "none", "checklist_fields": "all", "board": "false",

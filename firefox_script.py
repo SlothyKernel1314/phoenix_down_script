@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 
-import os
 import shutil
-from constants import *
 from utilities import *
 
 
@@ -24,8 +22,8 @@ class FirefoxScript:
 
         os.chdir(FIREFOX_PROFILE_DIRECTORY_PATH)
 
-        backup_directory_path = PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name + "/" \
-                                + str(timestamped_subdirectory)
+        backup_directory_path = PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name + "/" + str(
+            timestamped_subdirectory)
 
         logging.info('copying local places.sqlite (firefox profile) to phoenix down script firefox directory')
         shutil.copy(FIREFOX_PLACES_SQLITE_FILE_NAME, backup_directory_path)

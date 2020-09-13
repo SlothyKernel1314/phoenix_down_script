@@ -2,7 +2,6 @@
 # !/usr/bin/env python
 
 from credentials import *
-from constants import *
 import requests
 import time
 

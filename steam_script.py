@@ -11,7 +11,8 @@ class SteamScript:
     def __init__(self):
         self.application_name = "steam"
 
-    def get_user_name(self, id):
+    @staticmethod
+    def get_user_name(id):
         url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + STEAM_API_KEY + \
               "&steamids=" + id
         response = requests.request("GET", url)
@@ -43,7 +44,8 @@ class SteamScript:
             logging.warning("Error: " + str(e))
         return friends_dictionnary
 
-    def get_owned_games_ids(self):
+    @staticmethod
+    def get_owned_games_ids():
         url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
               "&steamid=" + STEAM_USER_ID + "&format=json"
         my_games_ids = []
@@ -58,7 +60,8 @@ class SteamScript:
             logging.warning("Error: " + str(e))
         return my_games_ids
 
-    def get_wishlist(self):
+    @staticmethod
+    def get_wishlist():
         # we set an arbitrarily high number of pages because...
         # ...the shitty Steam API doesn't provide methods to correctly get the wishlist of steam users
         number_of_pages_limit = 20

@@ -16,7 +16,8 @@ class YoutubeScript:
     def __init__(self):
         self.application_name = "youtube"
 
-    def get_authenticated_service(self):
+    @staticmethod
+    def get_authenticated_service():
         scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
         api_service_name = "youtube"
         api_version = "v3"

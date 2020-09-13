@@ -2,9 +2,6 @@
 # !/usr/bin/env python
 
 import requests
-import time
-from credentials import *
-from constants import *
 from utilities import *
 
 
@@ -12,7 +9,8 @@ class AlertScript:
     def __init__(self):
         self.logger_sub_path = "/logger"
 
-    def get_board_by_id(self, id):
+    @staticmethod
+    def get_board_by_id(id):
         url = "https://api.trello.com/1/boards/" + id + "/"
         querystring = {"actions": "all", "boardStars": "none", "cards": "none", "card_pluginData": "false",
                        "checklists": "none",
@@ -22,27 +20,31 @@ class AlertScript:
                        "membersInvited_fields": "all", "pluginData": "false", "organization": "false",
                        "organization_pluginData": "false", "myPrefs": "false",
                        "tags": "false", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
-        response = requests.request("GET", url, params=querystring)
+        requests.request("GET", url, params=querystring)
 
-    def get_lists_on_a_board(self, board_id):
+    @staticmethod
+    def get_lists_on_a_board(board_id):
         url = "https://api.trello.com/1/boards/" + board_id + "/lists"
         querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
-        response = requests.request("GET", url, params=querystring)
+        requests.request("GET", url, params=querystring)
 
-    def get_labels_on_a_board(self, board_id):
+    @staticmethod
+    def get_labels_on_a_board(board_id):
         url = "https://api.trello.com/1/boards/" + board_id + "/labels"
         querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
-        response = requests.request("GET", url, params=querystring)
+        requests.request("GET", url, params=querystring)
 
-    def create_a_new_card_with_alert_message(self, list_id, labels_id, alert_message):
+    @staticmethod
+    def create_a_new_card_with_alert_message(list_id, labels_id, alert_message):
         url = "https://api.trello.com/1/cards"
         name = time.strftime("%Y%m%d") + "_" + time.strftime("%H%M%S") + "_" + "Phoenix_Down_Script_ALERT"
         position = "top"
         querystring = {"key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN, "name": name, "desc": alert_message,
                        "pos": position, "idList": list_id, "idLabels": labels_id}
-        response = requests.request("POST", url, params=querystring)
+        requests.request("POST", url, params=querystring)
 
-    def parse_logger_file_and_create_alert_mail_message(self, logger_file_to_parse):
+    @staticmethod
+    def parse_logger_file_and_create_alert_mail_message(logger_file_to_parse):
         warnings_count = 0
         errors_count = 0
         script_starting_fail = True

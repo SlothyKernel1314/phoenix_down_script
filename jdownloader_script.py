@@ -32,7 +32,8 @@ class JdownloaderScript:
         logging.info('adding latest linkcollector*.zip file to files list to backup')
         self.files_list_to_backup.append(lnkcoll_file)
 
-        backup_directory_path = PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name + "/" + str(timestamped_directory)
+        backup_directory_path = PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name + "/" + str(
+            timestamped_directory)
 
         logging.info('copying local files (in order to backup) to phoenix down script firefox directory...')
         for file in self.files_list_to_backup:
