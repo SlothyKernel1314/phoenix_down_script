@@ -53,7 +53,6 @@ def upload_file_to_server_ftp(file, filename, application_name):
             logging.info('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
             ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
             logging.info(filename + ' uploaded successfully!')
-            ftp.retrlines('LIST') # TODO : remove in prod
         except ftplib.all_errors:
             logging.error('unable to make directories')
     except ftplib.all_errors:
@@ -73,7 +72,6 @@ def upload_file_to_server_ftp_without_logging_messages(file, filename, applicati
             print('sending ' + filename + ' file to the ftp server... (' + application_name + ' file)')
             ftp.storbinary('STOR ' + filename + '', file)  # uploading file to the server
             print(filename + ' uploaded successfully!')
-            ftp.retrlines('LIST') # TODO : remove in prod
         except ftplib.all_errors:
             print('unable to make directories')
     except ftplib.all_errors:
