@@ -2,7 +2,7 @@
 # !/usr/bin/env python
 
 from utilities import *
-from manager.constants_manager import *
+from constants import *
 import os
 import googleapiclient.discovery
 import googleapiclient.errors
