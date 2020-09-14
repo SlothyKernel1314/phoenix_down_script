@@ -15,8 +15,7 @@ class TwitterScript:
         self.auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
         self.api = tweepy.API(self.auth)
 
-    @staticmethod
-    def get_user_by_id(user_id, api):
+    def get_user_by_id(self, user_id, api):
         try:
             user_information = api.get_user(user_id)
         except tweepy.TweepError as e:
@@ -24,8 +23,7 @@ class TwitterScript:
             user_information = ""
         return user_information
 
-    @staticmethod
-    def get_followers_id(user_id, api):
+    def get_followers_id(self, user_id, api):
         try:
             user_followers = api.followers_ids(user_id)
         except tweepy.TweepError as e:
@@ -33,8 +31,7 @@ class TwitterScript:
             user_followers = ""
         return user_followers
 
-    @staticmethod
-    def get_friends_id(user_id, api):
+    def get_friends_id(self, user_id, api):
         try:
             user_friends = api.friends_ids(user_id)
         except tweepy.TweepError as e:

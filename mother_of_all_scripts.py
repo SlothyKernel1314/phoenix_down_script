@@ -22,26 +22,26 @@ def mother_of_all_scripts():
     tlls = TrelloScript()
     tlls.run_script()
 
-    # fs = FirefoxScript()
-    # fs.run_script()
-    #
-    # js = JdownloaderScript()
-    # js.run_script()
-    #
-    # twts = TwitterScript()
-    # twts.run_script()
-    #
-    # stms = SteamScript()
-    # stms.run_script()
-    #
-    # rs = RedditScript()
-    # rs.run_script()
-    #
-    # ps = PocketScript()
-    # ps.run_script()
-    #
-    # ys = YoutubeScript()
-    # ys.run_script()
+    fs = FirefoxScript()
+    fs.run_script()
+
+    js = JdownloaderScript()
+    js.run_script()
+
+    twts = TwitterScript()
+    twts.run_script()
+
+    stms = SteamScript()
+    stms.run_script()
+
+    rs = RedditScript()
+    rs.run_script()
+
+    ps = PocketScript()
+    ps.run_script()
+
+    ys = YoutubeScript()
+    ys.run_script()
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------

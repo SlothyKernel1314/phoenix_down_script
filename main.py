@@ -38,8 +38,8 @@ logger_script()
 alm = Alerts()
 alm.run_script()
 
-# TODO : unit tests (constants / credentials errors, files ok in case or fail script, errors / warnings messages when
-# logger throw e / w...)
 # TODO : discord implementation with discord.py
 # TODO : constants.py and #credentials.py example
 # TODO : github description
+# TODO : pass constants / credentials in parameters
+# TODO : use application name properties class in loggind

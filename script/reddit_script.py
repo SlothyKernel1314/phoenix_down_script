@@ -12,8 +12,7 @@ class RedditScript:
     def __init__(self):
         self.application_name = "reddit"
 
-    @staticmethod
-    def reddit_request_token():
+    def reddit_request_token(self):
         client_auth = requests.auth.HTTPBasicAuth(REDDIT_APP_CLIENT_KEY, REDDIT_API_SECRET_KEY)
         post_data = {"grant_type": "password", "username": REDDIT_USERNAME, "password": REDDIT_PASSWORD}
         headers = {"User-Agent": "phoenix-down/0.1 by IAmTerror"}
@@ -32,8 +31,7 @@ class RedditScript:
             token = ""
         return token
 
-    @staticmethod
-    def get_username(token):
+    def get_username(self, token):
         url = "https://oauth.reddit.com/api/v1/me"
         headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)

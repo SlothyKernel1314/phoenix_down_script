@@ -17,8 +17,7 @@ class PocketScript:
     def __init__(self):
         self.application_name = "pocket"
 
-    @staticmethod
-    def pocket_request_token():
+    def pocket_request_token(self):
         url = "https://getpocket.com/v3/oauth/request"
         payload = {"consumer_key": POCKET_CONSUMER_KEY, "redirect_uri": "pocketapp1234:authorizationFinished"}
         response = requests.request("POST", url, params=payload)
