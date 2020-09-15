@@ -16,7 +16,7 @@ class YoutubeScript:
     def __init__(self):
         self.application_name = "youtube"
         self.youtube_user_id = YOUTUBE_USER_ID
-        self.youtube_client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
+        self.youtube_client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE_PATH
         self.youtube_credential_json = YOUTUBE_CREDENTIAL_JSON
         self.youtube_user_playlist_later_id = YOUTUBE_USER_PLAYLIST_LATER_ID
 

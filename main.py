@@ -38,6 +38,5 @@ logger_script()
 alm = Alerts()
 alm.run_script()
 
-# TODO : discord implementation with discord.py
 # TODO : constants.py and credentials.py example
 # TODO : github description
