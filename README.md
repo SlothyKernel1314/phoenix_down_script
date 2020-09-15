@@ -22,8 +22,19 @@ Phoenix Down Script is not designed to be used on a "turnkey" basis, as it prima
 
 ## What data does the script backup ?
 
+This list may not be complete.
+
 * Firefox :
 
-    1.
+    1. backup of bookmarks (bookmarkbackups file)
+    2. backup of bookmark favicons (favicons.sqlite)
+    3. backup of the browsing history, downloads, bookmarks (places.sqlite)
+    
+* JDownloader :
+
+    1. backup of the download list (latest downloadList*.zip)
+    2. backup of the link collector (latest linkcollector*.zip)
+
+    
 
 ## How to run Phoenix Down Script ?

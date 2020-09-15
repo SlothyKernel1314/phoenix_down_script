@@ -35,7 +35,7 @@ class JdownloaderScript:
         backup_directory_path = PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name + "/" + str(
             timestamped_directory)
 
-        logging.info('copying local files (in order to backup) to phoenix down script firefox directory...')
+        logging.info('copying local files (in order to backup) to phoenix down script jdownloader directory...')
         for file in self.files_list_to_backup:
             shutil.copy(file, backup_directory_path)
 
