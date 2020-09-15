@@ -37,6 +37,3 @@ logger_script()
 
 alm = Alerts()
 alm.run_script()
-
-# TODO : constants.py and credentials.py example
-# TODO : github description
