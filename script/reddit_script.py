@@ -11,10 +11,14 @@ import requests.auth
 class RedditScript:
     def __init__(self):
         self.application_name = "reddit"
+        self.reddit_app_client_key = REDDIT_APP_CLIENT_KEY
+        self.reddit_api_secret_key = REDDIT_API_SECRET_KEY
+        self.reddit_username = REDDIT_USERNAME
+        self.reddit_password = REDDIT_PASSWORD
 
     def reddit_request_token(self):
-        client_auth = requests.auth.HTTPBasicAuth(REDDIT_APP_CLIENT_KEY, REDDIT_API_SECRET_KEY)
-        post_data = {"grant_type": "password", "username": REDDIT_USERNAME, "password": REDDIT_PASSWORD}
+        client_auth = requests.auth.HTTPBasicAuth(self.reddit_app_client_key, self.reddit_api_secret_key)
+        post_data = {"grant_type": "password", "username": self.reddit_username, "password": self.reddit_password}
         headers = {"User-Agent": "phoenix-down/0.1 by IAmTerror"}
         try:
             response = requests.post("https://www.reddit.com/api/v1/access_token",
@@ -48,9 +52,9 @@ class RedditScript:
         if all_datas is None:
             all_datas = []
         if after_pagination is None:
-            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() + "/saved?limit=100"
+            url = "https://oauth.reddit.com/user/" + self.reddit_username.lower() + "/saved?limit=100"
         else:
-            url = "https://oauth.reddit.com/user/" + REDDIT_USERNAME.lower() \
+            url = "https://oauth.reddit.com/user/" + self.reddit_username.lower() \
                   + "/saved?limit=100&after=" + after_pagination
         headers = {"Authorization": "bearer " + token, "User-Agent": "phoenix-down/0.1 by IAmTerror"}
         response = requests.get(url, headers=headers)

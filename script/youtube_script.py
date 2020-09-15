@@ -15,13 +15,17 @@ from oauth2client.file import Storage
 class YoutubeScript:
     def __init__(self):
         self.application_name = "youtube"
+        self.youtube_user_id = YOUTUBE_USER_ID
+        self.youtube_client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
+        self.youtube_credential_json = YOUTUBE_CREDENTIAL_JSON
+        self.youtube_user_playlist_later_id = YOUTUBE_USER_PLAYLIST_LATER_ID
 
     def get_authenticated_service(self):
         scopes = ["https://www.googleapis.com/auth/youtube.readonly"]
         api_service_name = "youtube"
         api_version = "v3"
-        client_secrets_file = YOUTUBE_CLIENT_SECRETS_FILE
-        credential_path = os.path.join(PD_SCRIPT_ROOT_APP_PATH + '/', YOUTUBE_CREDENTIAL_JSON)
+        client_secrets_file = self.youtube_client_secrets_file
+        credential_path = os.path.join(PD_SCRIPT_ROOT_APP_PATH + '/', self.youtube_credential_json)
         store = Storage(credential_path)
         credentials = store.get()
         if not credentials or credentials.invalid:
@@ -69,7 +73,7 @@ class YoutubeScript:
             playlists.pop('watchHistory')
             playlists.pop('watchLater')
             # add a playlist that is not detected by the method get_playlists_by_channel_id_with_exceptions()
-            playlists["later"] = YOUTUBE_USER_PLAYLIST_LATER_ID
+            playlists["later"] = self.youtube_user_playlist_later_id
             return playlists
         except HttpError as e:
             logging.warning("Error: " + str(e))
@@ -104,7 +108,7 @@ class YoutubeScript:
 
         my_subscriptions = self.get_my_subscriptions()
 
-        my_playlists = self.get_playlists_by_channel_id_with_exceptions(YOUTUBE_USER_ID)
+        my_playlists = self.get_playlists_by_channel_id_with_exceptions(self.youtube_user_id)
 
         logging.info('creating youtube log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)

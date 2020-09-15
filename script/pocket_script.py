@@ -16,10 +16,13 @@ import pandas
 class PocketScript:
     def __init__(self):
         self.application_name = "pocket"
+        self.pocket_consumer_key = POCKET_CONSUMER_KEY
+        self.pocket_username = POCKET_USERNAME
+        self.pocket_password = POCKET_PASSWORD
 
     def pocket_request_token(self):
         url = "https://getpocket.com/v3/oauth/request"
-        payload = {"consumer_key": POCKET_CONSUMER_KEY, "redirect_uri": "pocketapp1234:authorizationFinished"}
+        payload = {"consumer_key": self.pocket_consumer_key, "redirect_uri": "pocketapp1234:authorizationFinished"}
         response = requests.request("POST", url, params=payload)
         try:
             response.raise_for_status()
@@ -46,13 +49,13 @@ class PocketScript:
 
         driver = webdriver.Firefox()
         driver.get('https://getpocket.com/auth/authorize?request_token={}&redirect_uri={}'.format(code, redirect_uri))
-        driver.find_element_by_id('feed_id').send_keys(POCKET_USERNAME)
-        driver.find_element_by_id('login_password').send_keys(POCKET_PASSWORD)
+        driver.find_element_by_id('feed_id').send_keys(self.pocket_username)
+        driver.find_element_by_id('login_password').send_keys(self.pocket_password)
         driver.find_element_by_class_name('btn-authorize').click()
         driver.close()
 
         url = "https://getpocket.com/v3/oauth/authorize"
-        payload = {"consumer_key": POCKET_CONSUMER_KEY, "code": code}
+        payload = {"consumer_key": self.pocket_consumer_key, "code": code}
         response = requests.request("POST", url, params=payload)
         try:
             response.raise_for_status()

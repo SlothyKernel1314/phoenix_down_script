@@ -39,7 +39,5 @@ alm = Alerts()
 alm.run_script()
 
 # TODO : discord implementation with discord.py
-# TODO : constants.py and #credentials.py example
+# TODO : constants.py and credentials.py example
 # TODO : github description
-# TODO : pass constants / credentials in parameters
-# TODO : use application name properties class in loggind

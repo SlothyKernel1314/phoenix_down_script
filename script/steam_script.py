@@ -10,9 +10,11 @@ import requests
 class SteamScript:
     def __init__(self):
         self.application_name = "steam"
+        self.steam_api_key = STEAM_API_KEY
+        self.steam_user_id = STEAM_USER_ID
 
     def get_user_name(self, id):
-        url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + STEAM_API_KEY + \
+        url = "http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key=" + self.steam_api_key + \
               "&steamids=" + id
         response = requests.request("GET", url)
         try:
@@ -28,8 +30,8 @@ class SteamScript:
         return user_name
 
     def get_friend_list(self):
-        url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + STEAM_API_KEY + \
-              "&steamid=" + STEAM_USER_ID + "&relationship=friend"
+        url = "http://api.steampowered.com/ISteamUser/GetFriendList/v0001/?key=" + self.steam_api_key + \
+              "&steamid=" + self.steam_user_id + "&relationship=friend"
         friends_dictionnary = {}
         response = requests.request("GET", url)
         try:
@@ -44,7 +46,7 @@ class SteamScript:
         return friends_dictionnary
 
     def get_owned_games_ids(self):
-        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + STEAM_API_KEY + \
+        url = "http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001/?key=" + self.steam_api_key + \
               "&steamid=" + STEAM_USER_ID + "&format=json"
         my_games_ids = []
         response = requests.request("GET", url)
@@ -85,7 +87,7 @@ class SteamScript:
 
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
-        username = self.get_user_name(STEAM_USER_ID)
+        username = self.get_user_name(self.steam_user_id)
 
         friends = self.get_friend_list()
 

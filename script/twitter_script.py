@@ -11,8 +11,13 @@ class TwitterScript:
 
     def __init__(self):
         self.application_name = "twitter"
-        self.auth = tweepy.OAuthHandler(TWITTER_API_KEY, TWITTER_API_SECRET_KEY)
-        self.auth.set_access_token(TWITTER_ACCESS_TOKEN, TWITTER_ACCESS_TOKEN_SECRET)
+        self.twitter_api_key = TWITTER_API_KEY
+        self.twitter_api_secret_key = TWITTER_API_SECRET_KEY
+        self.twitter_access_token = TWITTER_ACCESS_TOKEN
+        self.twitter_access_token_secret = TWITTER_ACCESS_TOKEN_SECRET
+        self.twitter_user_id = TWITTER_USER_ID
+        self.auth = tweepy.OAuthHandler(self.twitter_api_key, self.twitter_api_secret_key)
+        self.auth.set_access_token(self.twitter_access_token, self.twitter_access_token_secret)
         self.api = tweepy.API(self.auth)
 
     def get_user_by_id(self, user_id, api):
@@ -47,11 +52,11 @@ class TwitterScript:
 
         api = self.api
 
-        user = self.get_user_by_id(TWITTER_USER_ID, api)
+        user = self.get_user_by_id(self.twitter_user_id, api)
 
-        followers = self.get_followers_id(TWITTER_USER_ID, api)
+        followers = self.get_followers_id(self.twitter_user_id, api)
 
-        friends = self.get_friends_id(TWITTER_USER_ID, api)
+        friends = self.get_friends_id(self.twitter_user_id, api)
 
         logging.info('creating twitter log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)

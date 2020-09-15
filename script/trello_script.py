@@ -11,12 +11,15 @@ class TrelloScript:
 
     def __init__(self):
         self.application_name = "trello"
+        self.trello_api_key = TRELLO_API_KEY
+        self.trello_server_token = TRELLO_SERVER_TOKEN
+        self.trello_member_username = TRELLO_MEMBER_USERNAME
 
     def get_boards_shortlinks_as_keys_with_values(self, username):
         url = "https://api.trello.com/1/members/" + username + "/boards"
         querystring = {"filter": "all", "fields": "all", "lists": "none", "memberships": "none",
                        "organization": "false", "organization_fields": "name,displayName",
-                       "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+                       "key": self.trello_api_key, "token": self.trello_server_token}
         response = requests.request("GET", url, params=querystring)
         try:
             response.raise_for_status()
@@ -35,7 +38,7 @@ class TrelloScript:
     def get_open_cards_by_board_id(self, id):
         url = "https://api.trello.com/1/boards/" + id + "/lists"
         querystring = {"cards": "open", "card_fields": "all", "filter": "open", "fields": "all",
-                       "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+                       "key": self.trello_api_key, "token": self.trello_server_token}
         response = requests.request("GET", url, params=querystring)
         try:
             response.raise_for_status()
@@ -50,7 +53,7 @@ class TrelloScript:
         querystring = {"attachments": "false", "attachment_fields": "all", "members": "false", "membersVoted": "false",
                        "checkItemStates": "false", "checklists": "none", "checklist_fields": "all", "board": "false",
                        "list": "false", "pluginData": "false", "stickers": "false", "sticker_fields": "all",
-                       "customFieldItems": "false", "key": TRELLO_API_KEY, "token": TRELLO_SERVER_TOKEN}
+                       "customFieldItems": "false", "key": self.trello_api_key, "token": self.trello_server_token}
         response = requests.request("GET", url, params=querystring)
         try:
             response.raise_for_status()
@@ -66,7 +69,7 @@ class TrelloScript:
         create_directory(PD_SCRIPT_ROOT_LOGS_PATH + "/" + self.application_name)
 
         shortlinks_as_keys_with_values = self.get_boards_shortlinks_as_keys_with_values(
-            TRELLO_MEMBER_USERNAME)
+            self.trello_member_username)
 
         logging.info('creating trello log file')
         file_name = create_timestamped_and_named_file_name(self.application_name)
