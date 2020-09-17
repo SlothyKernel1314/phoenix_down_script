@@ -18,7 +18,7 @@ The logs offer for this purpose your saved data in human readable form, but also
 
 ## How can Phoenix Down Script help you ?
 
-Phoenix Down Script is not designed to be used on a "turnkey" basis, as it primarily meets my own needs. Nevertheless, a developer could adapt it relatively easily to his own needs. In addition, the highly modular nature of this application facilitates the execution of each script independently of the others ; and independently of the application itself. Finally, as this application uses many APIs, it is an appropriate study object to analyze the basic functioning of these APIs. The developer will be able to see it as an easy way to get started with them.
+Phoenix Down Script is not designed to be used on a "turnkey" basis, as it primarily meets my own needs. Nevertheless, a developer could adapt it relatively easily to his own needs. In addition, the highly modular nature of this application facilitates the execution of each script independently of the others ; and independently of the application itself. Finally, as this application uses many APIs, it is an appropriate study object to analyze the basic functioning of these APIs (cf. script folder). The developer will be able to see it as an easy way to get started with them (cf. sample folder).
 
 ## What data does the script backup ?
 
@@ -34,6 +34,26 @@ This list may not be complete.
 
     1. backup of the download list (latest downloadList*.zip)
     2. backup of the link collector (latest linkcollector*.zip)
+    
+* Pocket :
+    
+    1. backup of articles (ids, titles, URLs + all data in JSON format)
+    
+* Reddit : 
+    
+    1. backup of subscribed subreddits (names + all data in JSON format)
+    2. backup of saved posts (all data in JSON format)
+    
+* Steam :
+
+    1. backup of friends list (ids, usernames)
+    2. backup of owned games (ids)
+    3. backup of wishlist (all data in JSON format)
+    
+* Trello :
+    
+    1. backup of all boards (all data in JSON format)
+    2. backup of your favorite cards (all data in JSON format)
 
     
 
