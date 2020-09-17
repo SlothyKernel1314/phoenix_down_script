@@ -61,9 +61,56 @@ This list may not be complete.
     2. backup of your friends (ids)
     
 * Youtube :
+
     1. backup of your suscribed channels (ids, youtuber usernames + all data in JSON format)
     2. backup of your playlists (names, video ids, video titles + all data in JSON format)
 
-    
-
 ## How to run Phoenix Down Script ?
+
+The following instructions are not a step-by-step process. Phoenix Down Script is a pure back-end application, which you may need to adapt to your work environment and your needs.
+
+List (not exhaustive) of dependencies needed to run Phoenix Down Script (if you want to run ALL scripts) :
+    
+* [Selenium](https://selenium-python.readthedocs.io/)
+* [Tweepy](https://www.tweepy.org/)
+
+Phoenix Down Script was developed under Ubuntu 18.04, in the Python 3 programming language.
+
+To run Phoenix Down Script, you will need to :
+
+* copy `constants_example.py` and `credentials_example.py` in `phoenix_down_script/example` folder and paste them into the root of the application ;
+* rename `constants_example.py` and `credentials_example.py` respectively into `constants.py` and `credentials.py` ;
+* set values into `constants.py` and `credentials.py` (follow the instructions inside them). For credentials, You will have to use the respective APIs of each of the scripts. This usually requires the opening of a developer account. Each site will propose you the steps to follow to obtain the tokens or other necessary authorizations ;
+* comment or uncomment the instances of each of the scripts in `mother_of_all_scripts.py` file, depending on which ones you want to execute or not. Phoenix Dow Script is designed to be modular ;
+* create on your server (if you want to make a remote backup of your logs) a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `youtube` folder for the Youtube script ;
+* run `main.py` and pray for the application to launch properly.
+
+```    
+       tlls = TrelloScript()
+       tlls.run_script()
+   
+       fs = FirefoxScript()
+       fs.run_script()
+   
+       js = JdownloaderScript()
+       js.run_script()
+   
+       twts = TwitterScript()
+       twts.run_script()
+   
+       stms = SteamScript()
+       stms.run_script()
+   
+       rs = RedditScript()
+       rs.run_script()
+   
+       ps = PocketScript()
+       ps.run_script()
+   
+       ys = YoutubeScript()
+       ys.run_script()
+```
+
+Warning: the authentication of a user on Youtube is a rather nebulous process in itself, made here even more complex by the need to bypass browser authentication (generally used method), for a purpose of total automation (purely back end and silent process). You may have to study the Youtube API by yourself and choose an authentication method that suits your needs, to use this script specifically.
+
+
