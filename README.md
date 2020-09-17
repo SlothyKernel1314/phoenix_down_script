@@ -37,23 +37,32 @@ This list may not be complete.
     
 * Pocket :
     
-    1. backup of articles (ids, titles, URLs + all data in JSON format)
+    1. backup of your articles (ids, titles, URLs + all data in JSON format)
     
 * Reddit : 
     
-    1. backup of subscribed subreddits (names + all data in JSON format)
-    2. backup of saved posts (all data in JSON format)
+    1. backup of your subscribed subreddits (names + all data in JSON format)
+    2. backup of your saved posts (all data in JSON format)
     
 * Steam :
 
-    1. backup of friends list (ids, usernames)
-    2. backup of owned games (ids)
-    3. backup of wishlist (all data in JSON format)
+    1. backup of your friends list (ids, usernames)
+    2. backup of your owned games (ids)
+    3. backup of your wishlist (all data in JSON format)
     
 * Trello :
     
-    1. backup of all boards (all data in JSON format)
+    1. backup of all your boards (all data in JSON format)
     2. backup of your favorite cards (all data in JSON format)
+    
+* Twitter :
+
+    1. backup of your followers (ids)
+    2. backup of your friends (ids)
+    
+* Youtube :
+    1. backup of your suscribed channels (ids, youtuber usernames + all data in JSON format)
+    2. backup of your playlists (names, video ids, video titles + all data in JSON format)
 
     
 
