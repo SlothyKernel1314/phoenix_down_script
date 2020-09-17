@@ -83,7 +83,6 @@ To run Phoenix Down Script, you will need to :
 * set values into `constants.py` and `credentials.py` (follow the instructions inside them). For credentials, You will have to use the respective APIs of each of the scripts. This usually requires the opening of a developer account. Each site will propose you the steps to follow to obtain the tokens or other necessary authorizations ;
 * comment or uncomment the instances of each of the scripts in `mother_of_all_scripts.py` file, depending on which ones you want to execute or not. Phoenix Dow Script is designed to be modular ;
 * create on your server (if you want to make a remote backup of your logs) a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `youtube` folder for the Youtube script ;
-* run `main.py` and pray for the application to launch properly.
 
 ```    
        tlls = TrelloScript()
@@ -110,6 +109,8 @@ To run Phoenix Down Script, you will need to :
        ys = YoutubeScript()
        ys.run_script()
 ```
+
+* run `main.py` and pray for the application to launch properly.
 
 Warning: the authentication of a user on Youtube is a rather nebulous process in itself, made here even more complex by the need to bypass browser authentication (generally used method), for a purpose of total automation (purely back end and silent process). You may have to study the Youtube API by yourself and choose an authentication method that suits your needs, to use this script specifically.
 
