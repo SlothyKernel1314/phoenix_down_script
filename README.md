@@ -4,6 +4,8 @@
   <img src="https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/esper_phoenix.png" />
 </p>
 
+[![GNU GPL v3.0](https://img.shields.io/badge/licence-GNU%20GPL%20v3.0-blue)](https://github.com/IAmTerror/phoenix_down_script/blob/master/LICENSE) ![python v3.6](https://img.shields.io/badge/python-v3.6-blue)
+
 Phoenix Down Script is a back-end application whose goal is to manage many scripts, intended to save some user information for certain sites (Trello, Steam, Youtube, Reddit, Twitter, Pocket...), via their respective APIs.
 
 This application also allows you to save Firefox profiles and JDownloader link collectors.
@@ -22,7 +24,7 @@ The logs offer for this purpose your saved data in human readable form, but also
 
 ## How can Phoenix Down Script help you ?
 
-Phoenix Down Script is not designed to be used on a "turnkey" basis, as it primarily meets my own needs. Nevertheless, a developer could adapt it relatively easily to his own needs. In addition, the highly modular nature of this application facilitates the execution of each script independently of the others ; and independently of the application itself. Finally, as this application uses many APIs, it is an appropriate study object to analyze the basic functioning of these APIs (cf. script folder). The developer will be able to see it as an easy way to get started with them (cf. sample folder).
+Phoenix Down Script is not designed to be used on a "turnkey" basis, as it primarily meets my own needs. Nevertheless, a developer could adapt it relatively easily to his own needs. In addition, the highly modular nature of this application facilitates the execution of each script independently of the others ; and independently of the application itself. Finally, as this application uses many APIs, it is an appropriate study object to analyze the basic functioning of these APIs (cf. `/script` folder). The developer will be able to see it as an easy way to get started with them (cf. `/sample` folder).
 
 ## What data does the script backup ?
 
@@ -86,7 +88,7 @@ To run Phoenix Down Script, you will need to :
 * rename `constants_example.py` and `credentials_example.py` respectively into `constants.py` and `credentials.py` ;
 * set values into `constants.py` and `credentials.py` (follow the instructions inside them). For credentials, You will have to use the respective APIs of each of the scripts. This usually requires the opening of a developer account. Each site will propose you the steps to follow to obtain the tokens or other necessary authorizations ;
 * comment or uncomment the instances of each of the scripts in `mother_of_all_scripts.py` file, depending on which ones you want to execute or not. Phoenix Dow Script is designed to be modular ;
-* create on your server (if you want to make a remote backup of your logs) a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `youtube` folder for the Youtube script ;
+* create on your server (if you want to make a remote backup of your logs) a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `/youtube` folder for the Youtube script ;
 
 ```    
        tlls = TrelloScript()
