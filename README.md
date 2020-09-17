@@ -1,6 +1,8 @@
 # Phoenix Down Script
 
-!["Phoenix Down Script Logo"](https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/esper_phoenix.png)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/esper_phoenix.png" />
+</p>
 
 Phoenix Down Script is a back-end application whose goal is to manage many scripts, intended to save some user information for certain sites (Trello, Steam, Youtube, Reddit, Twitter, Pocket...), via their respective APIs.
 
@@ -116,6 +118,6 @@ To run Phoenix Down Script, you will need to :
 
 Warning: the authentication of a user on Youtube is a rather nebulous process in itself, made here even more complex by the need to bypass browser authentication (generally used method), for a purpose of total automation (purely back end and silent process). You may have to study the Youtube API by yourself and choose an authentication method that suits your needs, to use this script specifically.
 
-!["Phoenix Down Script Logo 2"](https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/phoenix_ff6.png)
-
-
+<p align="center">
+  <img src="https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/phoenix_ff6.png" />
+</p>
