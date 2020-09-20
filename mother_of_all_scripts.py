@@ -22,12 +22,6 @@ def mother_of_all_scripts():
     tlls = TrelloScript()
     tlls.run_script()
 
-    fs = FirefoxScript()
-    fs.run_script()
-
-    js = JdownloaderScript()
-    js.run_script()
-
     twts = TwitterScript()
     twts.run_script()
 
@@ -42,6 +36,12 @@ def mother_of_all_scripts():
 
     ys = YoutubeScript()
     ys.run_script()
+
+    js = JdownloaderScript()
+    js.run_script()
+
+    fs = FirefoxScript()
+    fs.run_script()
 
 
 # SAMPLE REQUESTS ------------------------------------------------------------------------------------------------------

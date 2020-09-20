@@ -122,5 +122,6 @@ def zip_files(file_paths_to_zip, directory_log_path, zip_name):
         # writing each file one by one
         for file in file_paths_to_zip:
             zip.write(file)
+        zip.close()
     logging.info('all files zipped successfully !')
     return zip

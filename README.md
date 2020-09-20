@@ -79,6 +79,7 @@ List (not exhaustive) of dependencies needed to run Phoenix Down Script (if you 
     
 * [Selenium](https://selenium-python.readthedocs.io/)
 * [Tweepy](https://www.tweepy.org/)
+* [Geckodriver](https://github.com/mozilla/geckodriver/releases)
 
 Phoenix Down Script was developed under Ubuntu 18.04, in the Python 3 programming language.
 
