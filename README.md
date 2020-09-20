@@ -32,14 +32,14 @@ This list may not be complete.
 
 * Firefox :
 
-    1. backup of bookmarks (bookmarkbackups file)
-    2. backup of bookmark favicons (favicons.sqlite)
-    3. backup of the browsing history, downloads, bookmarks (places.sqlite)
+    1. backup of bookmarks (`bookmarkbackups` file)
+    2. backup of bookmark favicons (`favicons.sqlite`)
+    3. backup of the browsing history, downloads, bookmarks (`places.sqlite`)
     
 * JDownloader :
 
-    1. backup of the download list (latest downloadList*.zip)
-    2. backup of the link collector (latest linkcollector*.zip)
+    1. backup of the download list (latest `downloadList*.zip`)
+    2. backup of the link collector (latest `linkcollector*.zip`)
     
 * Pocket :
     
@@ -118,7 +118,7 @@ To run Phoenix Down Script, you will need to :
 
 * run `main.py` and pray for the application to launch properly.
 
-Warning: the authentication of a user on Youtube is a rather nebulous process in itself, made here even more complex by the need to bypass browser authentication (generally used method), for a purpose of total automation (purely back end and silent process). You may have to study the Youtube API by yourself and choose an authentication method that suits your needs, to use this script specifically.
+Warning: the authentication of a user on Youtube is a rather nebulous process in itself, made here even more complex by the need to bypass browser authentication (generally used method), for a purpose of total automation (purely back end and silent process). You may have to study the Youtube API by yourself and choose an authentication method that suits your needs, to use this script specifically. Same observation for Pocket script.
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/IAmTerror/phoenix_down_script/master/img/phoenix_ff6.png" />

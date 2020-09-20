@@ -5,7 +5,7 @@
 
 # where you run this application
 PD_SCRIPT_ROOT_APP_PATH = "../"
-# where you localy save logs
+# where you locally save logs
 PD_SCRIPT_ROOT_LOGS_PATH = "../"
 
 # where you upload logs
@@ -16,9 +16,6 @@ PD_SCRIPT_ENDING_MESSAGE = 'Phoenix Down Script finished !'
 
 TRELLO_MEMBER_USERNAME = ""
 TRELLO_CARDS_IDS = ['', '', '']
-TRELLO_CH_CARD_ID = ""
-TRELLO_MBL_BOARD_ID = ""
-TRELLO_ALERT_BOARD_ID = ""
 TRELLO_MBL_BOARD_ADMIN_LIST_ID = ""
 TRELLO_ALERT_BOARD_ALERT_LIST_ID = ""
 TRELLO_MBL_URGENT_CUSTOM_LABEL_ID = ""
@@ -38,7 +35,6 @@ TWITTER_USER_ID = ""
 STEAM_USER_ID = ""
 
 YOUTUBE_USER_ID = ""
-YOUTUBE_USER_PLAYLIST_FAVORITES_ID = ""
-YOUTUBE_USER_PLAYLIST_LATER_ID = ""
+YOUTUBE_USER_PLAYLIST_LATER_ID = ""  # a custom playlist
 YOUTUBE_CREDENTIAL_JSON = 'youtube_credential.json'
 YOUTUBE_CLIENT_SECRETS_FILE_PATH = "../client_secret.json"

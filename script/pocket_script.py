@@ -34,6 +34,7 @@ class PocketScript:
             request_token = ""
         return request_token
 
+    # Customized authentication, in order to bypass the authentication via the opening of a web browser
     def authorize_app_and_get_access_token(self):
         code = self.pocket_request_token()
         redirect_uri = "pocketapp1234:authorizationFinished"
