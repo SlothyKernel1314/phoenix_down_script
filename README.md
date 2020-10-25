@@ -12,6 +12,8 @@ This application also allows you to save Firefox profiles and JDownloader link c
 
 The data is then saved as log files, saved locally, and uploaded to a server.
 
+In case of a script execution error, a Trello alert is generated.
+
 ## Why I developed Phoenix Down Script ?
 
 No one is safe from the loss or/and theft of their accounts on the Internet. If Phoenix Down Script won't allow you to recover them, this application will at least make it easier for you to recover your data, by regularly saving them in log files.
@@ -116,7 +118,9 @@ To run Phoenix Down Script, you will need to :
        ys.run_script()
 ```
 
-* create on your server (if you want to make a remote backup of your logs) a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `/youtube` folder for the Youtube script ;
+* create on your server a directory at your convenience for the Phoenix Down Script application. In this directory, you will have to create a folder for each script used, according to the name of the `application_name` variable present in each sub-script. For example, a `/youtube` folder for the Youtube script ;
+
+* Do the same on your computer (or any other storage medium) for local backup (depending on the paths you set in `constants_example.py`)
 
 * run `main.py` and pray for the application to launch properly.
 
