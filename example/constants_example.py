@@ -1,19 +1,19 @@
 # -*- coding: utf-8 -*-
 # !/usr/bin/env python
 
-# SCRIPT CONSTANTS -----------------------------------------------------------------------------------------------------
+# CONFIGURATION VARIABLES (Requires a choice by the user !) ------------------------------------------------------------
 
-# where you run this application
+# Directory where you run this application
 PD_SCRIPT_ROOT_APP_PATH = "../"
-# where you locally save logs
+# Directory where you want to save (locally) your logs
 PD_SCRIPT_ROOT_LOGS_PATH = "../"
 
-# where you upload logs
+# Directory where you upload logs
 SEEDBOX_ROOT_PD_SCRIPT_PATH = "../"
 
-PD_SCRIPT_STARTING_MESSAGE = 'Phoenix Down Script started !'
-PD_SCRIPT_ENDING_MESSAGE = 'Phoenix Down Script finished !'
-
+# Examples of boards and Trello labels. Rename according to your own needs, or disable alerts.py if...
+# ... you don't want to be alerted via Trello of a script execution error.
+# Read the Trello API documentation for more information.
 TRELLO_MEMBER_USERNAME = ""
 TRELLO_CARDS_IDS = ['', '', '']
 TRELLO_MBL_BOARD_ADMIN_LIST_ID = ""
@@ -29,6 +29,9 @@ FIREFOX_ZIP_FILE_BASENAME = "firefox_backup"
 
 JDOWNLOADER_CFG_DIRECTORY_PATH = "../jd2/cfg"
 JDOWNLOADER_ZIP_FILE_BASENAME = "jdownloader_cfg_partial_backup"
+
+PD_SCRIPT_STARTING_MESSAGE = 'Phoenix Down Script started !'
+PD_SCRIPT_ENDING_MESSAGE = 'Phoenix Down Script finished !'
 
 TWITTER_USER_ID = ""
 
